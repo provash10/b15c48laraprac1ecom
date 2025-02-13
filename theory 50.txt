@@ -1,0 +1,46 @@
+Class 50 (Laravel-3)
+-----------------------
+###Mastering 
+
+copy the zip file asset and paste in the laravel project
+>>> public folder (b15c48Lara-ecom public folder)
+
+*****Note: All asset file public folder a rakte hobe.
+keep mouse in index + ctrl click >>> HomeController
+
+Copy Asset >>> css, fonts, images, js, plugins folder and paste 
+laravel project public folder as asset folder.
+------------------------------------------
+Delete >>> Home Controller
+Create a controller from git bese 
+$ php artisan make:controller FrontendController
+
+Delete Welcome and contact blade file...
+
+Now New Cotroller make like -FrontendController
+create index.blade.php file...............
+
+web.php 
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+Route::get('/',[FrontendController::class, 'index']);
+/*
+---------From Laravel Pack ------
+<?php
+
+use App\Http\Controllers\FrontendController;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/',[FrontendController])  
+
+resources >>. Views >> index.blade.php
+
+Route Change hole Command this git bese>>>> php artisan optimize
+
+*****use the design folder code to practice....
+copy the index.html code and paste it project resources >>> views >>> index.blade.php file.
+>>> ok
+
+------------------------------------------------------------------
