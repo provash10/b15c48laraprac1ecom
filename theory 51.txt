@@ -1,0 +1,173 @@
+Class-51 (Laravel-4)
+---------------------------------------------------
+working part list
+@include('includes.style/script/header/footer') ****common template needed all pages..........
+****common template ke master file a rakte hobe. views>>> master.blade.php
+
+From >>> index.blade.php
+1. css & js code  common use includes folder 
+2. header & footer  code common use includes folder 
+3. body tag >>> main section >>>
+a. link gulo laravel structure dite hobe. like as img.
+
+4. index.blade.php ar common file -views>>> master.blade.php create without main section And cut & paste korte hobe.
+now master file index.blade.php te linking korte hobe.
+index.blade.php >>>> @include('master')
+all pages ar jonno master file use hobe....
+
+5. main content send korte hobe index.blade.php theke 
+master.blade.php >>> @yield('content')   according to selectrd location
+
+     <main>
+         @yield('content')
+    </main>
+
+6.index.blade.php
+{{-- @include('master') --}}
+@extends('master')
+ 
+@section('content')
+
+@endsection
+------------------------------------------------------
+Mastering>>>>
+Without http link all *****href & src link {{asset()}} Laravel structure korte hobe.
+Head Tag
+>>>> 
+{{-- <!-- Pavicon ICon --> {{asset()}} --}}
+	{{-- <link rel="shortcut icon" href="./assets/images/logo.png" type="image/x-icon"> --}}
+	<link rel="shortcut icon" href="{{asset('/assets/images/Provash logo.png')}}" type="image/x-icon">
+	
+Check ::: Ctrl + U >>> click the link >>> ok
+If not show >>> showing not found >>>. Ok
+--------------------
+Body Tag
+Without http link all href link {{asset()}} Laravel structure korte hobe.
+Ok
+Check ::: Ctrl + U >>> click the link >>> ok >> 
+*****check korle shudu href link dekhabe ... {{asset('')}} aita dekhai na....
+
+
+-------------------------------------------------------------------------------
+Common link like Header and Footer keep in one file and use it auto for all pages.
+
+Go >>> resources >>> views >>> create folder >> includes folder >>>create css file>>> style.blade.php >>>Keep all  the style css file in it.
+Go >>> resources >>> views >>> create folder >> includes folder >>>create css file>>> script.blade.php >>>Keep all  the style css file in it.                                                        
+
+Head tag >>> For css
+connetection with inclueds file >>> head tag >>> @include('includes.style') 
+Body tag >>> For js css
+connetection with inclueds file >>> head tag >>> @include('includes.script') 
+
+----------------------------------------------------------------------------
+Common link like Header and Footer keep in one file and use it auto for all pages.
+
+###Header and Footer Common 
+Go >>> resources >>> views >>> create folder >> includes folder >>>create header file>
+connetection with inclueds file >>> header >>> @include('includes.header')
+
+Go >>> resources >>> views >>> create folder >> includes folder >>>create footer file>
+connetection with inclueds file >>> footer >>> @include('includes.footer')
+-------------------------------------------------------------------------
+Note : All image link gulo k {{asset()}} Laravel structure korte hobe.
+Body Tag a main section a img gulor link change korte hobe
+img link gulo k {{asset()}} Laravel structure korte hobe.
+
+Without http link all href link {{asset()}} Laravel structure korte hobe.
+
+Like as {{-- <!-- Pavicon ICon --> {{asset()}} --}}
+	{{-- <link rel="shortcut icon" href="./assets/images/logo.png" type="image/x-icon"> --}}
+	<link rel="shortcut icon" href="{{asset('/assets/images/Provash logo.png')}}" type="image/x-icon">
+	
+Note : All image link gulo k {{asset()}} Laravel structure korte hobe.
+Like as >>> Header and Footer 
+................................
+All Page a Header,Footer and Link gulo commmon
+Common Template all page a lagbe.
+ Tai akey master file or master layout bole 
+Akon Resources >>> views>>> master.blade.php >>> keep common template
+
+akon master.blade.php k index.blade.php file nia aste hobe .....
+ar jonon >>> index.blade.php >>> @include('master')
+
+
+index.blade.php >>> 
+@include('master') >>> Own asset
+
+@extends('master') >>> lend others asset
+
+index.blade.php >>> 
+@extends('master')
+@section('content')
+Main Section Code >>> Own Asset (body)
+@endsection
+
+
+master.blade.php
+ header
+@yield('content')
+
+footer
+==========================
+Main words Section remove from index.blade.php
+
+-----------------------
+Now New Page >>> Shop Page
+Create web.php >>> url >>> 
+Route::get('/shop',[FrontendController::class,'shop'])
+
+includes >>>header
+ <li class="dynamic-page-list-item">
+                            {{-- <a href="shop.html" class="dynamic-page-list-item-link">
+                                Shop
+                            </a> --}}
+
+                            {{-- for laravel --}}
+                            <a href="{{url('/shop')}}" class="dynamic-page-list-item-link">
+                                Shop
+                            </a>
+
+
+shop function create korte hobe.........
+FrontendController theke >>>> 
+
+
+Shop Page >>> Header footer korar jonno master.blade.php file copy paste korte hobe
+shop.blade.php >>> @extends('master')
+
+Now System Middle or main content >>> Find old file >>> shop.html >>> copy and paste ok
+
+shop.blade.php >>>
+@extends('master')
+
+shop file main part/section >>>> <section> </section>
+@section('content')
+
+@endsection
+
+---------------------
+
+index.html >>> Home Page not found >>>
+ Use Base url ('/')
+Home Page ar url hosse just a slash(/)
+header.php >>>anchor tag/Link>>> logo (image click) 
+>>> {{-- <a href="index.html" class="brand-logo-outer"> --}}
+                <a href="{{url('/')}}" class="brand-logo-outer">
+
+Again,Home Page /Home button >>>>
+
+{{-- <a href="index.html" class="dynamic-page-list-item-link">
+                                Home
+                            </a> --}}
+
+                            {{-- For Laravel  --}}
+                            <a href="{{url('/')}}" class="dynamic-page-list-item-link">
+                                Home
+                            </a>
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;
+====================
+
+	
