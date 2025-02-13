@@ -1,0 +1,39 @@
+Class-48 (Laravel Installation)
+================================
+Laravel (Framework-PHP)
+laravel.com
+laravel 10 by default -DB MySQL
+laravel 11 by default -DB sqlight
+
+https://laravel.com/docs/10.x/installation
+https://laravel.com/docs/10.x/installation?fbclid=IwZXh0bgNhZW0CMTAAAR1tj9TpvvbEaqCx3dLaHzuV-zjhaZ2EayM43UsOiwkaifJMF76dTqDz31A_aem_HoEw7rfIsc1RNysc6VGFog
+-----------------------------------------------
+1. E-commerce
+2. 
+
+========
+laravel 10 by default -DB MySQL
+Databases and Migrations
+//DB_CONNECTION=sqlite  for laravel 11
+DB_CONNECTION=mysql 
+DB_HOST=127.0.0.1 
+DB_PORT=3306 
+DB_DATABASE=laravel 
+DB_USERNAME=root 
+DB_PASSWORD= 
+
+
+github >>> no need to readme file and add gitignore>>>> Laravel/none/No Need*****
+========================
+now install laravel 10.x
+
+Creating a Laravel Project >>> composer create-project laravel/laravel:^10.0 example-app
+cut the folder and paste main folder and delete exam-app folder.... ok
+
+php artisan serve
+http://127.0.0.1:8000
+>>> open browser >>> with XAMPP Apache -Start , MySQL- Start & admin ok
+
+>>> Show Laravel Home Page. 
+Laravel installation is ok
+==========================
