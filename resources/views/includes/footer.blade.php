@@ -16,22 +16,22 @@
                         </h4>
                         <ul class="footer__list">
                             <li class="footer__list-item">
-                                <a href="privacy-policy.html" class="footer__list-item-link">
+                                <a href="{{url('/privacy-policy')}}" class="footer__list-item-link">
                                     Privacy Policy
                                 </a>
                             </li>
                             <li class="footer__list-item">
-                                <a href="#" class="footer__list-item-link">
+                                <a href="{{url('/terms-conditions')}}" class="footer__list-item-link">
                                     Terms & Conditions
                                 </a>
                             </li>
                             <li class="footer__list-item">
-                                <a href="#" class="footer__list-item-link">
+                                <a href="{{url('/refund-policy')}}" class="footer__list-item-link">
                                     Refund Policy
                                 </a>
                             </li>
                             <li class="footer__list-item">
-                                <a href="#" class="footer__list-item-link">
+                                <a href="{{url('/payment-policy')}}" class="footer__list-item-link">
                                     Payment Policy
                                 </a>
                             </li>
@@ -49,7 +49,7 @@
                                     Address:                                   
                                 </p>
                                 <p class="footer__contact-info-list-item-value">
-                                    Uttara, Dhaka                                 
+                                    Dhaka,Bangladesh                                
                                 </p>
                             </li>
                             <li class="footer__contact-info-list-item">
@@ -78,12 +78,12 @@
                         </h4>
                         <ul class="footer__list">
                             <li class="footer__list-item">
-                                <a href="#" class="footer__list-item-link">
+                                <a href="{{url('/about-us')}}" class="footer__list-item-link">
                                     About Us
                                 </a>
                             </li>
                             <li class="footer__list-item">
-                                <a href="#" class="footer__list-item-link">
+                                <a href="{{url('/contact-us')}}" class="footer__list-item-link">
                                     Contact Us
                                 </a>
                             </li>
@@ -135,7 +135,7 @@
     <div class="footer__bottom-wrapper">
         <div class="container">
             <p class="footer__bottom-text">
-                © 2024, All rights reserved
+                © 2025, All rights reserved !!!
                 <strong class="text-brand">Nitto Mart</strong>
             </p>
         </div>

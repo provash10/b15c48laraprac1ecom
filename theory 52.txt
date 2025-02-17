@@ -1,0 +1,119 @@
+Class-52 (Laravel-5)…
+--------------------
+
+
+working part
+1. return-process mastering ok
+2. category-products mastering ok
+3. subcategory-products mastering ok
+4. view-cart mastering ok
+5. checkout mastering ok
+
+2. web.php >>>Route>>> url >> category-products   class>>>categoryProducts
+url >> category-products  >> setup header.blade.php   
+class setup >>> FrontController  
+
+3. view-cart and checkout page 
+
+4. Product Details  Page >>> link in index.blade.php
+
+5. view all (type-products) link in index.blade.php
+
+Policy Pages
+Privacy Policy
+Terms & Conditions
+Refund Policy
+Payment Policy
+
+
+About Us
+
+View All Ok
+
+Contact Us 
+--------------------------------------
+now footer >>> 
+policy Pages Mastering ...ok
+37min
+productDetails page mastering
+home page linking>>>> index.blade.php >>
+<a href="{{url('product-details')}}" class="product__item-image-inner">
+							<img src="{{asset('/assets/images/product.png')}}" alt="Product Image" />
+						</a>
+
+--
+{{url('product-details')}} for product-details >>>url
+
+image link change >> /assets/images/product.png >
+>> "{{asset('/assets/images/product.png')}}"
+
+
+categories >>> link up >>> categories slider >>>
+
+<h1 class="title">
+					Categories
+				</h1>
+			</div>
+			<div class="categoris-items-wrapper owl-carousel">
+				<a href="{{url('/category-products')}}" class="categoris-item">
+					<img src="{{asset('/assets/images/product.png')}}" alt="category" />
+					<h6 class="categoris-name">
+
+
+
+index.blade.php >>>> categories url change >>> 
+
+Category te clcik korle category page a nia asbe >>> 
+
+
+Route::get('/type-products', [FrontendController::class, 'typeProducts']);
+
+link up all >>> view all option
+
+---Frontend Mastering Done
+
+
+
+
+
+------------------------------------
+
+Again Mastering >>>
+1. create url from web.php and cash clear php artisan optimize and clear.
+Route::get('/return-process',[FrontendController::class,'returnProcess']);
+url return-process >>> return process Page a setup korte hobe
+class,'returnProcess' >>> FrontendController Page a setup korte hobe
+FrontendController Page >>  a return-process function likte hobe 
+and resources>>>views >>> return-process.blade.php file create korte hobe and check it.
+
+return-process.blade.php >>>Mastering korte hobe common template theke. @extends('master')
+
+@extends('master')
+@section('content')
+copy the return-process code file and paste (<section></section>)
+@endsection
+ Mastering korte hobe >>>first>> Header and Footer nia aste hobe.
+ Mastering korte hobe >>>2nd main pages (return process page ante hobe>> 
+---------------------------------------------------------------------------
+2. web.php >>>Route>>> url >> category-products   class>>>categoryProducts
+url >> category-products  >> setup header.blade.php   
+class setup >>> FrontController  
+
+3. view-cart and checkout page 
+
+4. Product Details  Page >>> link in index.blade.php
+
+5. view all (type-products) link in index.blade.php
+
+Policy Pages
+Privacy Policy
+Terms & Conditions
+Refund Policy
+Payment Policy
+
+
+About Us
+
+View All Ok
+
+Contact Us 

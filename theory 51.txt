@@ -27,9 +27,11 @@ master.blade.php >>> @yield('content')   according to selectrd location
 @extends('master')
  
 @section('content')
-
+  main content copy and paste with out <main> words
 @endsection
 ------------------------------------------------------
+now shop page new page >>>> ok {{url('/shop')}}
+---------------------
 Mastering>>>>
 Without http link all *****href & src link {{asset()}} Laravel structure korte hobe.
 Head Tag
@@ -112,6 +114,7 @@ footer
 Main words Section remove from index.blade.php
 
 -----------------------
+/////////////////////////////
 Now New Page >>> Shop Page
 Create web.php >>> url >>> 
 Route::get('/shop',[FrontendController::class,'shop'])
