@@ -1,0 +1,134 @@
+Class-53 (Laravel-6)
+Backend
+-------------------
+Working Part
+1. create db >>>> b15c48laraprac1ecom   and Collation >>> Blank
+2. DB connect with Project by vs code >>>env file   >>> b15c48laraprac1ecom
+
+3. DB Model Create as like Controller :
+a. Create Model like as controller >>> php artisan make:model Category -m (for model)
+  php artisan make:controller Category -m (for controller)
+
+b. Create Model like as controller >>> php artisan make:model SubCategory -m (for model)
+  php artisan make:controller SubCategory -m (for controller)
+
+$ php artisan optimize for .env file
+
+4. DB>>>Migration >>> Schema>> 
+
+
+rujnu@DESKTOP-21VQR3R MINGW64 /c/xampp/htdocs/B15/b15c48laraprac1ecom (main)
+$ php artisan migrate
+
+   WARN  The database 'laravel' does not exist on the 'mysql' connection.
+
+  Would you like to create it? (yes/no) [no]
+
+>>> yes
+delete any DB easily from phpmyadmin if wrong.
+
+
+---------------------------------------------
+Database >>> php>>> mylocalhost >>> Create DB
+name >>>batch_15_ecom_1  blank
+
+http://127.0.0.1:8000
+127.0.0.1 >>> Main IP Address
+     8000 >>> Port
+DB_DATABASE=batch_15_ecom_1
+Database >>> No Need Password
+Server >>>  Need Password
+
+database project ar sathe connect korar jonno >>> vs >>> .env 
+
+vs>>>.env >>>
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel/batch_15_ecom_1
+DB_USERNAME=root
+DB_PASSWORD=
+
+command run korte hobe (any change) php artisan optimize
+Database Connecttion with Project OK
+-------->>>
+Now Database>>>( No Need create table from database)
+Create Table for Category by following MVC 
+MVC = Model View Controller
+
+Model ===>> Database (Datatable)
+
+Crate a model
+
+git bese >>> php artisan make:model Category -m (Ki ki file/field thakbe>>> -m hosse migration file jekhane bole deya jabe ki ki file thakbe
+
+Go to vs >> App>> Models >>> Category.php
+
+vs>>database >>> migratios>> date_create_categories_table.php
+
+Category te ki ki thakbe 
+
+id, name, slug, image
+
+ public function up(): void
+    {
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('slug');
+            $table->string('image');
+            $table->timestamps();
+        });
+    }
+
+
+comand >>> php artisan migrate
+
+http://localhost/phpmyadmin*****
+migration table >>>ok
+
+
+31.50 min
+***Class >>> Captial Letter like SubCategory 
+Sub Category te ki ki thakbe (kon category r under e)
+name, slug, cat_id
+
+Crate a model
+
+git bese >>> php artisan make:model SubCategory -m (Ki ki file/field thakbe>>> -m hosse migration file jekhane bole deya jabe ki ki file thakbe
+jehetu subcategory kono akti main category ar under e thake sehetu tar akta id use korte hobe.
+category tracking like
+cat_id
+
+public function up(): void
+    {
+        Schema::create('sub_categories', function (Blueprint $table) {
+            $table->id();
+
+            $table->unsignedBigInteger('cat_id');
+            $table->string('name');
+            $table->string('slug');
+            
+
+          
+
+            $table->timestamps();
+        });
+
+Go to vs >> App>> Models >>> SubCategory.php
+
+comand >>> php artisan migrate
+
+39.00 minutes >>
+
+****Model a alltime For Secure
+protected $guarded = [];
+
+public/private/protected = protected 
+variable = $guarded = [];
+38.55 min
+42.00 min
+
+Admin Panel 
+Admin Panel Template
+Next Class >>>
