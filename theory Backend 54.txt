@@ -1,0 +1,184 @@
+Class 54 Laravel 7
+--------------------
+working part  
+1. Route (url) ar name add kora jai
+base url ar replace hisebe ->name('') use kora hoyese/hobe
+2. Rules of name use *****->name('') "How can use it?"
+a. name unique hote hobe
+b. for    url   "{{url('/')}}"  and
+   for    name "{{route('base')}}"
+
+3.For Admin Panel (Authentication)
+ a. Laravel Auth >>>Best 
+ b. breeze
+ c. jetstream
+
+a. Laravel Auth >>>Best >>>AdminLTE 3
+
+4. install composer ok then>>> 
+  command >>> composer require laravel/ui >>> ok
+
+5. http://127.0.0.1:8000/login 
+ command >>> npm install
+command >>> npm run dev (running alltime)
+Reload this page >>> http://127.0.0.1:8000/login >>>ok
+
+For migration >>> create_password_resets_table
+>>>> php artisan migrate
+
+3.a or 6. Laravel Auth >>>Best >>>AdminLTE 3
+Login page >>>>
+
+phpmyadmin >>> users >>> insert >>> account signup by email...
+
+Test 02
+prac02@gmail.com
+pass: Prac02test
+password >>> (encrypted thake) - Google>>>Hash Method use >>> 
+hash method for password (https://bcrypt.online/)
+>>>  encrypted password
+>>> Go >>> OK 
+
+Not Manually >>> register system >>>>
+
+Test 03
+prac03@gmail.com
+Prac03test
+
+
+
+..................................
+Route >>> web.php
+------------------
+Route/url  a name o deya jabe.
+
+Route::get('/',[FrontendController::class,'index']);
+Route::get('/products-details',[FrontendController::class,'productsDetails']);
+Route::get('/shop',[FrontendController::class,'shop']);
+
+*****Name ar jonno dot use kora hoi(->name('products.details');
+
+Route::get('/',[FrontendController::class,'index'])->name('base');
+Route::get('/products-details',[FrontendController::class,'productsDetails'])->name('products.details');
+Route::get('/shop',[FrontendController::class,'shop'])->name('shop');
+
+*****Route a new name gulo header.blade.php te setup korte hobe  
+name use korar jonno ... now vs>>>header.blade.php
+<a href="{{url('/')}}" class="brand-logo-outer">
+<a href="{{route('base')}}" class="brand-logo-outer">
+<a href="{{route('shop')}}" class="brand-logo-outer">
+<a href="{{route('products.details')}}" class="brand-logo-outer">
+=========================================
+Now Admin Panel 
+-----------------------
+google>>> Lravel Auth ui, breeze, jetstream
+
+Lravel Auth ui
+>>>  easy
+
+Admin Panel Design 
+Free Admin template design bootstrap 5
+google >>> https://dashboardpack.com/live-demo-preview/?livedemo=290?utm_source=colorlib&utm_medium=reactlist&utm_campaign=architecthtml
+       >>> https://dashboardpack.com/live-demo-preview/?livedemo=290
+We Have google >>> admin lte v3
+https://adminlte.io/themes/v3/  free version
+https://github.com/ColorlibHQ/AdminLTE
+>>> https://github.com/colorlibhq/AdminLTE
+download zip file and copy paste htdocs.
+
+admin lte v3 >>> from zip file 
+Data Table Absent
+
+admin lte v3 mastering korte hobe.....
+
+*****57.00 min
+local host >>> email create for user admin
+localhost/phpmyadmin >>>DB>>>batch_15_ecom_1 >>> users>>> insert >>>
+name >>> admin
+email >>> admin@adm25.com
+password >>> (encrypted thake) - Google>>>Hash Method use >>> 
+hash method for password (https://bcrypt.online/)
+>>>  encrypted password
+>>> Go >>> OK
+
+
+
+*****Laravel Auth ui installation process
+google >>> Lravel Auth ui >>>laravel>>
+>> https://laravel.com/docs/10.x/authentication
+
+from medium.com >>> 
+>>> https://medium.com/@online-web-tutor/laravel-10-authentication-with-laravel-ui-tutorial-ce163cce0af7
+Steps To Install Laravel UI >>> $ composer require laravel/ui
+
+***from git beshe >>>command >>> $ composer require laravel/ui
+
+***Generate Basic Scaffolding & with Authentication Using Bootstrap
+$ php artisan ui bootstrap $ php artisan ui bootstrap --auth
+
+yes/no for replace >>> no >>> enter.
+
+vs>>> Auth>>>Controllers>>> Controller.php>>>
+
+yes/no for replace >>> no >>> enter.  "No" kora hoyese.
+
+****web.php teo kisu file like Auth Routes create hobe.............
+Auth edit korle auto Name Space create hobe.
+like use Illuminate\Support\Facades\Auth;
+
+ Please run [npm install && npm run dev] to compile your fresh scaffoldi
+ng.
+ npm= nodejs package manager
+
+command  git bese >>> npm install
+command  git bese >>> npm run dev
+
+Show laravel login page....
+Installation Done.
+web.php te extra 2 ta line add hobe....ok
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+use Illuminate\Support\Facades\Auth; >>auto add when edit/write again>>> Auth::routes();
+
+php artisan optimize
+
+ Please run [npm install && npm run dev] to compile your fresh scaffoldi
+ng.
+
+44.22 min
+--------
+*****Hidden File Laravel UI
+
+Route => login(2), registration(2), forgetPassword(2), verification(2)
+check >> http://127.0.0.1:8000/login           *****npm run dev  korte bolbe.
+
+http://127.0.0.1:8000/login dekhar jonno 2 ta command run korte hobe
+ 1. npm install     -----check >> http://127.0.0.1:8000/login  And
+and 2. npm run dev  ---------
+
+not work after npm run dev
+------------------------------------
+55.00 min
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+HomeController >>> Showing >>> home.blade.php
+
+
+LocalHost/phpmyadmin
+users>>>>insert >>>
+password >>> Hash Method >>> hash password generator >>> https://bcrypt.online/
+
+*****57.00 min
+local host >>> email create for user admin
+localhost/phpmyadmin >>>DB>>>batch_15_ecom_1 >>> users>>> insert >>>
+name >>> admin
+email >>> admin@adm25.com
+password >>> (encrypted thake) - Google>>>Hash Method use >>> 
+hash method for password (https://bcrypt.online/)
+>>>  encrypted password
+>>> Go >>> OK
