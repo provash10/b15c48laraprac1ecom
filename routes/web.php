@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -51,6 +53,13 @@ Route::get('/product-details',[FrontendController::class, 'productDetails'])->na
 Route::get('/type-products', [FrontendController::class, 'typeProducts']);
 
 // ----------------when composer and bootstrap install by command
+
+//Admin Login
+// Before login
+Route::get('/admin/login',[AdminController::class, 'adminLogin']);
+
+// after login
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/admin/dashboard',[DashboardController::class, 'adminDashboard']);
