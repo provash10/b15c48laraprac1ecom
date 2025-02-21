@@ -44,7 +44,7 @@ check >>> http://127.0.0.1:8000/admin/login >>>  ***1 issue create hote pare so 
       >>> http://127.0.0.1:8000/admin/dashboard >>> ok
 
 home.blade.php >>> no need (delete) delete >>> HomeController 
-backend >>> dashboard.blade.php >>need >>>ok for use adminLTE 3 Design >>>>ok
+views >>>backend >>> dashboard.blade.php >>need >>>ok for use adminLTE 3 Design >>>>ok
 
 
 **** check Provider >>>> Route service provider >>>/home

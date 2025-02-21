@@ -1,0 +1,129 @@
+Class-56 (Laravel-9)…
+-------------------
+q. model & controller
+q. logout>>> Auth::logout();
+
+working part
+1. logout url create >>>from Route 
+<<under #auth>>> Route::get('/admin/logout',[AdminController::class, 'adminLogout']);
+
+public function adminLogout(){
+        Auth::logout();
+        return redirect('admin/login');
+
+http://127.0.0.1:8000/admin/logout convert >>> http://127.0.0.1:8000/admin/login
+
+2. admin dashboard >>> adminLTE3 design
+a. copy the adminLTE3 build,dist, docs and plugins file and paste it in ***projects ***public folder in ***backend folder.
+
+b. Now
+linkup according to folder>>>> plugins/fontawesome-free/css/all.min.css    like as >>>
+                          >>>> {{asset('backend/plugins/fontawesome-free/css/all.min.css')}}
+
+<img---->>>
+src="dist/img/AdminLTELogo.png >>>>>>>>> src="{{asset('backend/dist/img/AdminLTELogo.png')}}"
+
+3. dashboard.blade.php >>>39.00 min
+Sidebar Menu <li> </li> Copy and paste >>> edit for Credentials (logout)
+>>>> setup logout url {{-- <a href="./index.html" class="nav-link"> --}}
+                    >>>  <a href="{{url('/admin/logout')}}" class="nav-link">
+check logout >> done...
+
+4. Now Mastering as like as frontend>>>>
+
+views>>> backend>>> includes >>> 
+a. header.blade.php
+
+
+
+
+
+
+
+
+--------------------
+admin lte v3.2 #using
+file:///C:/xampp/htdocs/B15/AdminLTE%20v3.2.0/ColorlibHQ-AdminLTE-bd4d9c7/index.html
+
+Logout Option
+
+Must Login Thakte hobe 
+web.php >>>For Logout
+>>>Route::get('/admin/logout',[AdminController::class, 'adminLogout']);
+
+
+AdminController.php>>> for Function
+
+------------ 20.00 min
+admin lte v3.2 #using build, dist, docs, plugin >> copy and paste project public folder.
+
+Now create a folder>>> backend >>> keep in it - build, dist, docs, plugin file.
+*** use version/dashboard 1/2 or 3 form admin lte 3.2
+copy version 2 code and paste adminDashboard
+
+Route::get('/admin/dashboard',[DashboardController::class, 'adminDashboard']);
+
+'adminDashboard'>>> paste the code index2html.com
+
+**** Http >>> Controllers >>> Backend >>> DashboardController.php >>> DashboardController 
+>>>>backend.dashboard or(dashboard.blade.php) >>> paste the code index2html.com here.
+Now Cheeck >>> http://127.0.0.1:8000/admin/dashboard >>ok and link up by edit laravel...
+
+25.00 min - 30.53 min  edit ok by "{{asset('backend/....')}}"  >>> ok
+
+37.00 min>>>
+Now create a new folder in admin panel like >>>> Credentials>> Logout >>> 
+check it >>> login and Logout....
+
+Now _----------------Mastering 41.00 min- 47.00 min-----------------
+backend >>> includes 
+resources >>> views >>> backend >>>includes >>> header.blade.php
+
+dashboard.blade.php >>>> Head Tag under title css link cut/copy and paste >>> 
+>>>backend>> includes >>> header.blade.php
+
+check admin panel >>> design break hobe .
+
+dashboard.blade.php >>>> Head Tag under title css link >>> For Mastering 
+use >>> @include('backend.includes.header')
+check admin panel >>> design Ok. 
+
+Again 
+dashboard.blade.php >>>> script js file cut and paste >>> backend>> folder >>>script.blade.php
+>>> and paste the script js file code
+
+dashboard.blade.php >>>> under the body js script link >>> For Mastering 
+use >>> @include('backend.includes.script')
+check admin panel >>> design Ok. 
+
+
+********navbar -47.00 min >>>>>>>>>>
+dashboard.blade.php >>>> nav bar code cut and paste >>> backend>> folder >>>navbar.blade.php
+>>> and paste nav bar code
+
+dashboard.blade.php >>>> under the body navbar >>> For Mastering 
+use >>> @include('backend.includes.navbar')
+check admin panel >>> navbar Ok. 
+
+********side bar - 51.00 min >>>>>>>>>>
+Same.........
+********footer - 53.00 min >>>>>>>>>>
+Same
+
+-----------------
+********57.00 min >>> admin panel main content change >>> needed topics
+---------------------------
+dashboard.blade.php >>> @yield('content')
+
+@yield('content')
+
+>>>> copy the dashboard.blade.php code and paste it backend folder>>>create >>> master.blade.php file >>>
+>> and paste the dashboard.blade.php ar code. 
+
+Now >> dashboard.blade.php >>> @extends('backend.master') 
+
+@extends('backend.master') 
+
+@section('content')
+   main content keep in copy from dashboard.blade.php  full code
+@endsection
