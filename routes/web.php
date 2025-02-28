@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Auth;
@@ -64,3 +65,8 @@ Auth::routes();
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/admin/dashboard',[DashboardController::class, 'adminDashboard']);
 Route::get('/admin/logout',[AdminController::class, 'adminLogout']);
+
+// For Categories phpmyadmin
+
+Route::get('/admin/category/list',[CategoryController::class, 'categoryList']); 
+

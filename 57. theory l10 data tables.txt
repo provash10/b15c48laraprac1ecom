@@ -1,0 +1,213 @@
+Class-57 (Laravel-10)…
+-----------------------
+Working Part
+1. delete something of dashboard which not need
+
+2. delete something of sidebar which not need
+
+3. navbar edit
+
+4. sidebar edit and create new option
+
+5. phpmyadmin >>>categories >>>> insert list 
+
+6.  Create Route >>> 
+>>>Route::get('/admin/category/list',[CategoryController::class, 'categoryList']); 
+
+7. backend>>>list.blade.php >> table code from adminLTE3 design >>>pages>>> 
+>>  <!-- Content Wrapper. Contains page content --> just main content
+check>>> http://127.0.0.1:8000/admin/category/list
+
+23.52 min
+**** backend>>> header.blade.php te datatables links linkup kore dite hobe
+<!-- DataTables -->
+  <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <!-- Theme style -->
+
+28.00 min
+<!-- DataTables  & Plugins --> link up backend/script.blade.php
+
+>>> linkup admin/dashboard in sidebar
+
+
+*****37.00 min >>>> *****@stack and @push*****
+8. backend/master.blade.php 
+
+>>>@stack('script')
+
+and  list.blade.php >>>
+@push('script')
+  <!-- Page specific script -->
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+@endpush
+
+9.  select only one table from list.blade.php
+
+
+10. Change the Heading Title (if / Which Needed)
+
+need only one data >> td and tr
+remove others....ok
+
+<table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Rendering engine</th>
+                  <th>Browser</th>
+                  <th>Platform(s)</th>
+                  <th>Engine version</th>
+                  <th>CSS grade</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>Trident</td>
+                  <td>Internet
+                    Explorer 4.0
+                  </td>
+                  <td>Win 95+</td>
+                  <td> 4</td>
+                  <td>X</td>
+                </tr>
+                </tbody>
+                
+              </table>
+
+
+
+
+-------------------------
+Admin Panel >>> Remove >>> Monthly Recap Report >>>ok
+
+backend>>> includes >>> sidebar >>> change >>> keep needed Topics 
+like >>> keep just Credentials>>> Logout
+
+>>> Dashboard name change from backend
+
+>>> admin name change from backend
+
+Now>>> Sidebar
+
+New Side Bar
+Credentials >>>
+a. Logout
+b. Update Credentials
+-------------------------------------------------------------------------------------
+ <li class="nav-item menu-open">
+                <a href="#" class="nav-link active">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>
+                    Credentials
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    {{-- <a href="./index.html" class="nav-link"> --}}
+                      <a href="{{url('/admin/logout')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Logout</p>
+                    </a>
+                  </li>
+
+                  {{-- for update --}}
+
+                  <li class="nav-item">
+                    {{-- <a href="./index.html" class="nav-link"> --}}
+                      <a href="#" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Update Credentials</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+----------------------------------------------------------------------------------------
+***** copy credentials <li> and change name >>> categories, list & add.
+Categiries 
+a. List
+b. Add
+
+----------
+http://localhost/phpmyadmin >>> batch_15ecom_1 >>> Categories >>>
+>>> Electronics
+   >> Category Name >>> Electronics
+   >> Slug           >> electronics
+   >> Image          >>> feue.png
+Create_at >>>>ok
+update_at >>> ok
+
+>>> Category Name >>> Organic Food
+   >> Slug           >> organic-food
+   >> Image          >>> feue.png
+Create_at >>>>ok
+update_at >>> ok
+--------------------------
+Data watch ar jonno akon akta table lagbe.........
+create Route controller from backend.......
+$ php artisan make:controller Backend/CategoryController
+Route::get('/admin/category/list',[CategoryController::class, 'categoryList']); 
+
+list =>>> use url {{url('/admin/category/list')}}
+
+Create backend >>>category folder>>>
+Resources >>> Views>>> backend>>>caregory>>>list.blade.php >>> 
+
+ public function categoryList(){
+        return view('backend.category.list');
+    }
+}
+
+check list >>> http://127.0.0.1:8000/admin/category/list >>> blank page showing
+-----------------------------------------
+list.blade.php >>
+@extends('backend.master')
+
+@section('content')
+  
+Main Content Dite Hobe  (table collect form adminlte 3.2- 20.00 min)
+<!-- Content Wrapper. Contains page content -->
+
+@endsection
+
+*****resources > views >backend > includes>header.blade.php >>> 
+>>>table code link collect form adminlte 3.2 and paste >>> resources > views >backend > includes>header.blade.php
+
+*****resources > views >backend > includes>script.blade.php>>> 
+>>>table js code link collect form adminlte 3.2 and paste >>> resources > views >backend > includes>script.blade.php
+30.00 min
+---------
+35.00 min
+backend>>>includes>>> sidebar.blade.php >>> link up >>> Admain/Provash >>> "{{url('/admin/dashboard')}}"
+----------
+35.30 min
+<!-- DataTables Function #collect from adminlte3.2 js data.html--> 
+Function Script code ti Admin and Provash Both space a ase.
+ai function ti just je page a table ase sei page a dorkar. So, amra script file ar baire aro script rakte chaile
+backend>>>master.blade.php >>> use >>> @stack('')
+
+list.blade.php te 
+@push('script')
+ extra js script code like as Function 
+@endpush
+
+backend>>>master.blade.php >>> use >>> @stack('script')
+-------------------------------------------------------
+
+Edit the admin Panel >>> backend>>> list.blade.php >>> CRUD System Use....OK 

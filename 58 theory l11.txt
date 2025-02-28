@@ -1,0 +1,185 @@
+Class-58 (Laravel-11)
+------------------------
+ backend>>> CategoryContrller
+
+class CategoryController extends Controller
+{
+    public function categoryList(){
+        return view('backend.category.list');
+    }
+}
+
+All Category Showing >>> backend>>> CategoryContrller
+
+class CategoryController extends Controller
+{
+    public function categoryList(){
+        $categories = Category::get();
+        return view('backend.category.list',compact('$categories'));
+    }
+}
+
+###Check Data use >>> dd('$categories');
+class CategoryController extends Controller
+{
+    public function categoryList(){
+        $categories = Category::get();
+        dd('$categories');
+        return view('backend.category.list',compact('$categories'));
+    }
+}
+
+list.blade.php>>>
+
+<tbody> 
+      @foreach ($categories as $category)
+
+       <tr>
+       </tr>
+      @endforeach
+
+</tbody>
+
+
+----------------
+<tbody>
+                                        @foreach($categories as $category)
+
+                                        <tr>
+                                            {{-- <td>01</td> --}}
+                                            <td>{{$loop->index+1}}</td>
+                                            <td>{{$category->name}}</td>
+                                            <td>
+                                                <img src="{{$category->image}}">
+                                            </td>
+                                            <td>
+                                                <a href="#" class="btn btn-primary">Edit</a>
+                                                <a href="#" class="btn btn-danger">Delete</a>
+                                            </td>
+                                        </tr>
+
+                                        @endforeach
+                                    </tbody>
+===================--------------------------------------
+
+Now admin panel >>>Category >>> ADD
+---------------------30.00 min----------
+web.php 
+Create Route 
+sidebar linkup >> ADD option
+create >>> backend>>> category >>> create.blade.php 
+>> Collect FORM from Adminlte3.2 version
+
+>>>>>>>>Image 50.00 min<<<<<<<<<<<<<<<<<<<<<<<<
+
+image upload dile image er name show kore na .....tahole Fix it
+
+missing 
+<!-- bs-custom-file-input -->
+<script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+collect from Adminlte3.2 general.html >>>
+>> copy and paste resources >>> views >>> backend>>> includes>>>script.blade.php
+
+And 
+<!-- Page specific script -->
+<script>
+$(function () {
+  bsCustomFileInput.init();
+});
+</script>
+
+Note: bsCustomFileInput >>> it is a id  >>> so use create.blade.php >>> input id="image"
+<!-- Page specific script -->
+<script>
+$(function () {
+  //bsCustomFileInput.init();
+    image.init();
+});
+</script>
+copy and paste in backend >>> create.blade.php by @push...
+
+not working>>>>
+go to console >>> and fix it........next class Class-59 (Laravel-12)… Fix it ok....
+--------------
+>>>>>>>>>1.02 min<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+Now Fill up this Form
+
+Category Name : Gadgets 
+Category Image : ok. 
+>>> Submit >> ok 
+
+Note: Submit Dile Database a jabe >>> Database a jaoar jonno 
+kono media /Controller ar maddome jabe >>> So need a url>>>
+web.php >>> Create Route >>>
+
+Jokon form submit korbo takon database onno page dekhabe naki data insert korbe?
+Ans: data insert korbe. Database a insert kora hole normally -take "store" bole 
+
+// For Data insert/store after submit the Form
+// Route::get('/admin/category/create',[CategoryController::class, 'categoryCreate']);
+   Route::post('/admin/category/store',[CategoryController::class, 'categoryStore']);
+
+
+admin/category/store  >>hit hobe >> 
+>>>jokon  And image ar jonno must ###****encryption/enctype use korte hobe. and security token @csrf use korte hobe jekhane form submit hobe (under first <form> tag)
+
+create.blade.php >>> form tag action="{{url('')" use hobe  and method="POST" 
+create.blade.php >>> <form action="{{url('/admin/category/store')}}" method="POST" enctype="multipart/form-data">
+                                @csrf
+
+[CategoryController::class >>> function create korte hobe 
+Note: Form theke data dorte hobe... form ar input theke name="name", image theke image dorbo 
+means Form theke Akta Data Request asbe  ... 
+
+data insert jonno table ar je model/class ase class 
+Models >>>category.php >>> 
+class Category extends Model
+{
+    use HasFactory;
+}
+
+****use this Category word to object...
+Now,
+CategoryController
+
+Laravel Str name space >>> https://laravel.com/docs/11.x/strings >>>
+use Illuminate\Support\Str;
+ 
+$slice = Str::afterLast('App\Http\Controllers\Controller', '\\');
+ 
+// 'Controller'
+--------->>>.
+
+public function categoryStore (Request $request){
+        $category = new Category();
+        // object hosse $category
+        $category->name = $request->name;
+        $category->image = $request->image;
+
+         //For slug
+        //slug auto create hobe  and depends on $request->name , use Str::slug();
+        //Str ar namespace nia aste hobe Google theke...Laravel Str name space >>
+         //and save korar jonno laravel rules $category->save(); .....
+
+         //Slug
+        // $category->slug = $request->name;
+          $category->slug = Str::slug($request->name);
+
+          $category-> save();
+
+        //   after save showing list page
+
+        return redirect ('admin/category/list');
+    }
+
+--------------> 114.00 Min----------->>>
+Now Check and insert Data From Admin Panel>>>
+Before Submit >>> http://127.0.0.1:8000/admin/category/create
+after Submit  >>> http://127.0.0.1:8000/admin/category/store
+
+check the adding data >>> http://localhost/phpmyadmin  >>> categories
+http://localhost/phpmyadmin/index.php?route=/sql&db=batch_15_ecom_1&table=categories&pos=0
+
+return redirect ('admin/category/list'); >>> showing list page from admin panel lte 3.2 >>>Ok Done....
+==================================================================================
