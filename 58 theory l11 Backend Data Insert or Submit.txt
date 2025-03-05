@@ -1,0 +1,383 @@
+Class-58 (Laravel-11)
+------------------------
+prac03@gmail.com 
+
+Working Part
+1. Bring Data from phpmyadmin to Project Data Table... Model = Controller
+CategoryController >>>>
+   public function categoryList(){
+        // category::get();  (for bring data from database to project)
+        $categories = Category::get();
+        // return view('backend.category.list');
+        dd($categories);
+        return view('backend.category.list', compact('categories'));
+    }
+
+>>> Reload this link >>> http://127.0.0.1:8000/admin/category/list >>>
+>>> use dd($categories);
+
+******for work duplicate dd in new tab
+
+>>>backend >>>list.blade.php>>> run a loop in <tr> tag 
+
+<tr>
+                  <td>01</td>
+                  <td>Test Name</td>
+                  <td>
+                    <img src="">
+                  </td>
+                  <td>
+                    <a href="#" class="btn btn-primary">Edit</a>
+                    <a href="#" class="btn btn-danger">Delete</a>
+                  </td>
+                </tr>
+
+-------->24.00 min >>> use  variables $categories   single data $category
+<tbody>
+                @foreach ($categories as $category)
+                <tr>
+                  <td>01</td>
+                  <td>Test Name</td>
+                  <td>
+                    <img src="">
+                  </td>
+                  <td>
+                    <a href="#" class="btn btn-primary">Edit</a>
+                    <a href="#" class="btn btn-danger">Delete</a>
+                  </td>
+                </tr>
+                @endforeach
+                </tbody>
+ 
+a. all data bring by only one query
+
+******for work duplicate dd in new tab
+
+2. 30.00 minutes >>> For Categories>>> Add 
+ Route::get('/admin/category/create',[CategoryController::class, 'categoryCreate']); 
+
+a. url linkup with blade page
+> /admin/category/create  >>linkup in >>> backend >>>includes >>>sidebar >>>
+> categories >> add >>>> url >>> /admin/category/create
+>>> "{{url('/admin/category/create')}}"
+
+b. route function ok korte hobe.... >>>ok
+collect form from AdminLTE Forms >>> General Elemwnts design >>>>ok
+
+c. Category Name >>>> input>>> name="" DB ar Name ar sathe match hote hobe.
+
+d. image upload fixing >>>>51.00 min
+<!-- bs-custom-file-input -->
+<script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+
+*****for extra js
+master.blade.php >>> @stack('script/css/etc')
+
+input file like create.blade.php 
+{{-- jquery --}}
+@push('script')
+    <!-- Page specific script -->
+<script>
+    $(function () {
+    //   bsCustomFileInput.init();
+        // input file ar id >>>image
+         image.init();
+    });
+    </script>
+@endpush
+
+
+e. product add submit korle new url lagbe ....
+Route::post.............
+now work form action & method and enctype for image or file
+<form action="{{url('/admin/category/store')}}" method="POST" enctype="multipart/form-data">
+                                @csrf
+
+public function >>> Form theke Data dorte hobe tai Laravel a Request option ase.
+
+
+f. for insert Data.............
+public function categoryStore(Request $request){
+        $category = new Category();
+
+        $category->name= $request->name;
+        $category->slug= Str::slug($request->name);
+        $category->image= $request->image;
+
+        $category->save();
+        return redirect('admin/category/list');
+        
+    }
+}
+
+
+.............................................
+/////////////////////////////////////////////
+ backend>>> CategoryContrller
+
+class CategoryController extends Controller
+{
+    public function categoryList(){
+        return view('backend.category.list');
+    }
+}
+
+All Category Showing >>> backend>>> CategoryContrller
+
+class CategoryController extends Controller
+{
+    public function categoryList(){
+        $categories = Category::get();
+        return view('backend.category.list',compact('$categories'));
+    }
+}
+
+###Check Data use >>> dd('$categories');
+class CategoryController extends Controller
+{
+    public function categoryList(){
+        $categories = Category::get();
+        dd('$categories');
+        return view('backend.category.list',compact('$categories'));
+    }
+}
+
+list.blade.php>>>
+
+<tbody> 
+      @foreach ($categories as $category)
+
+       <tr>
+       </tr>
+      @endforeach
+
+</tbody>
+
+
+----------------
+<tbody>
+                                        @foreach($categories as $category)
+
+                                        <tr>
+                                            {{-- <td>01</td> --}}
+                                            <td>{{$loop->index+1}}</td>
+                                            <td>{{$category->name}}</td>
+                                            <td>
+                                                <img src="{{$category->image}}">
+                                            </td>
+                                            <td>
+                                                <a href="#" class="btn btn-primary">Edit</a>
+                                                <a href="#" class="btn btn-danger">Delete</a>
+                                            </td>
+                                        </tr>
+
+                                        @endforeach
+                                    </tbody>
+===================--------------------------------------
+
+Now admin panel >>>Category >>> ADD
+---------------------30.00 min----------
+web.php 
+Create Route 
+sidebar linkup >> ADD option
+create >>> backend>>> category >>> create.blade.php 
+>> Collect FORM from Adminlte3.2 version
+
+>>>>>>>>Image 50.00 min<<<<<<<<<<<<<<<<<<<<<<<<
+
+image upload dile image er name show kore na .....tahole Fix it
+
+missing 
+<!-- bs-custom-file-input -->
+<script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+collect from Adminlte3.2 general.html >>>
+>> copy and paste resources >>> views >>> backend>>> includes>>>script.blade.php
+
+And 
+<!-- Page specific script -->
+<script>
+$(function () {
+  bsCustomFileInput.init();
+});
+</script>
+
+Note: bsCustomFileInput >>> it is a id  >>> so use create.blade.php >>> input id="image"
+<!-- Page specific script -->
+<script>
+$(function () {
+  //bsCustomFileInput.init();
+    image.init();
+});
+</script>
+copy and paste in backend >>> create.blade.php by @push...
+
+not working>>>>
+go to console >>> and fix it........next class Class-59 (Laravel-12)… Fix it ok....
+--------------
+>>>>>>>>>1.02 min<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+Now Fill up this Form
+
+Category Name : Gadgets 
+Category Image : ok. 
+>>> Submit >> ok 
+
+Note: Submit Dile Database a jabe >>> Database a jaoar jonno 
+kono media /Controller ar maddome jabe >>> So need a url>>>
+web.php >>> Create Route >>>
+
+Jokon form submit korbo takon database onno page dekhabe naki data insert korbe?
+Ans: data insert korbe. Database a insert kora hole normally -take "store" bole 
+
+// For Data insert/store after submit the Form
+// Route::get('/admin/category/create',[CategoryController::class, 'categoryCreate']);
+   Route::post('/admin/category/store',[CategoryController::class, 'categoryStore']);
+
+
+admin/category/store  >>hit hobe >> 
+>>>jokon  And image ar jonno must ###****encryption/enctype use korte hobe. and security token @csrf use korte hobe jekhane form submit hobe (under first <form> tag)
+
+create.blade.php >>> form tag action="{{url('')" use hobe  and method="POST" 
+create.blade.php >>> <form action="{{url('/admin/category/store')}}" method="POST" enctype="multipart/form-data">
+                                @csrf
+
+[CategoryController::class >>> function create korte hobe 
+Note: Form theke data dorte hobe... form ar input theke name="name", image theke image dorbo 
+means Form theke Akta Data Request asbe  ... 
+
+data insert jonno table ar je model/class ase class 
+Models >>>category.php >>> 
+class Category extends Model
+{
+    use HasFactory;
+}
+
+****use this Category word to object...
+Now,
+CategoryController
+
+Laravel Str name space >>> https://laravel.com/docs/11.x/strings >>>
+use Illuminate\Support\Str;
+ 
+$slice = Str::afterLast('App\Http\Controllers\Controller', '\\');
+ 
+// 'Controller'
+--------->>>.
+
+public function categoryStore (Request $request){
+        $category = new Category();
+        // object hosse $category
+        $category->name = $request->name;
+        $category->image = $request->image;
+
+         //For slug
+        //slug auto create hobe  and depends on $request->name , use Str::slug();
+        //Str ar namespace nia aste hobe Google theke...Laravel Str name space >>
+         //and save korar jonno laravel rules $category->save(); .....
+
+         //Slug
+        // $category->slug = $request->name;
+          $category->slug = Str::slug($request->name);
+
+          $category-> save();
+
+        //   after save showing list page
+
+        return redirect ('admin/category/list');
+    }
+
+--------------> 114.00 Min----------->>>
+Now Check and insert Data From Admin Panel>>>
+Before Submit >>> http://127.0.0.1:8000/admin/category/create
+after Submit  >>> http://127.0.0.1:8000/admin/category/store
+
+check the adding data >>> http://localhost/phpmyadmin  >>> categories
+http://localhost/phpmyadmin/index.php?route=/sql&db=batch_15_ecom_1&table=categories&pos=0
+
+return redirect ('admin/category/list'); >>> showing list page from admin panel lte 3.2 >>>Ok Done....
+==================================================================================
+
+
+backend.create.blade.php >>> code of Form
+
+@extends('backend.master')
+
+@section('content')
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>General Form</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">General Form</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-12">
+                        <!-- general form elements -->
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Quick Example</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <form>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Email address</label>
+                                        <input type="email" class="form-control" id="exampleInputEmail1"
+                                            placeholder="Enter email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Password</label>
+                                        <input type="password" class="form-control" id="exampleInputPassword1"
+                                            placeholder="Password">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputFile">File input</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">Upload</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /.card -->
+
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+@endsection

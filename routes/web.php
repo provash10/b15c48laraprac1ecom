@@ -57,6 +57,7 @@ Route::get('/type-products', [FrontendController::class, 'typeProducts']);
 
 //Admin Login
 // Before login
+
 Route::get('/admin/login',[AdminController::class, 'adminLogin']);
 
 // after login
@@ -70,3 +71,11 @@ Route::get('/admin/logout',[AdminController::class, 'adminLogout']);
 
 Route::get('/admin/category/list',[CategoryController::class, 'categoryList']); 
 
+// Class-58 (Laravel-11) 30.00 minutes
+Route::get('/admin/category/create',[CategoryController::class, 'categoryCreate']); 
+// For data insert/submit Post Method 
+Route::post('/admin/category/store',[CategoryController::class,'categoryStore']);
+Route::get('/admin/category/delete/{id}',[CategoryController::class, 'categoryDelete']);
+// Data Edit need 2 url
+Route::get('/admin/category/edit/{id}',[CategoryController::class, 'categoryEdit']);
+Route::post('/admin/category/update/{id}',[CategoryController::class, 'categoryUpdate']);

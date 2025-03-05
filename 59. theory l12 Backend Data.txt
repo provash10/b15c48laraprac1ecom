@@ -1,0 +1,274 @@
+Class-59 (Laravel-12)
+Backend CRUD >>> Delete and Update
+---------------------
+Q****name attribute input field
+Test 02
+prac02@gmail.com
+pass: Prac02test
+Test 03
+prac03@gmail.com
+Prac03test
+
+Working Part >>>>
+1. Login Admin Panel >>> 
+a. http://127.0.0.1:8000/admin/category/list
+b. http://127.0.0.1:8000/admin/category/create
+
+2.  backend / CategoryController.php
+public function categoryStore(Request $request){
+        $category = new Category();
+
+        $category->name= $request->name;
+        $category->slug= Str::slug($request->name);
+        // $category->image= $request->image;
+
+        if (isset($request->image)){
+            // rand().'-category-'.'.'.$request->image->extension();
+
+            //check spelling extention() or ****extension()
+
+            $imageName = rand().'-category-'.'.'.$request->image->extention();
+            
+            // public folder image save
+            $request->image->move('backend/images/category',$imageName);
+            $category->image =$imageName;
+        }
+
+        $category->save();
+        return redirect ('admin/category/list');
+        
+    }
+
+
+3. views >>>backend>>>category>>>list.blade.php
+
+4. database theke auto image setup ar jonno
+ a.                <td>
+                    {{-- <img src="{{$category->image}}"> --}}
+
+                    <img src="{{asset('backend/images/category/'.$category->image)}}" height="100" width="100">
+                    </td>
+b. check http://127.0.0.1:8000/admin/category/list >>> ok 
+c. data create/upload and list ok
+
+
+5. Data Delete >>> 2 Method get or post
+a. Create Route >>> Route::get('/admin/category/delete/{id}',[CategoryController::class, 'categoryDelete']);
+b. linkup backend/list.blade.php....>>>>  {{-- <a href="{{url('/admin/category/delete/{id}')}}" class="btn btn-danger">Delete</a> --}}
+                    <a href="{{url('/admin/category/delete/'.$category->id)}}" class="btn btn-danger">Delete</a>
+
+>>> ok
+
+
+c. CategoryController 
+****laravel function for delete
+public function categoryDelete($id){
+        $category = category::find($id);
+        // dd($category);
+        $category->delete();
+        return redirect()->back();   // laravel function
+    }
+d. image check use if
+now image delete from all section or public folder.....
+
+public folder image delete
+
+        if($category->image && file_exists('backend/images/category/'.$category->image)){
+            unlink('backend/images/category/'.$category->image);
+
+check by delete ...
+
+e. delete click confirmation sms Are You Sure
+<a href="{{url('/admin/category/delete/'.$category->id)}}" onclick="return confirm('Are You Sure!!!')" class="btn btn-danger">Delete</a>
+
+6. 39.00 min >>> Edit
+a. // Data Edit need 2 url
+Route::get('/admin/category/edit/{id}',[CategoryController::class, 'categoryEdit']);
+Route::post('/admin/category/update/{id}',[CategoryController::class, 'categoryUpdate']);
+*****Create all function >>>ok
+
+b. linkup with banckecnd/ list.balde.php
+{{-- <a href="{{url('/admin/category/edit/{id}')}}" class="btn btn-primary">Edit</a> --}}
+                    <a href="{{url('/admin/category/edit/'.$category->id)}}" class="btn btn-primary">Edit</a>
+
+***** edit ar jonno alada akta page lagbe means view page >>> create page>>
+backend>>>category>>>edit.blade.php
+
+*****edit.blade.php same as create.blade.php >>>> 
+so copy the code and paste and change needed.
+
+**** http://127.0.0.1:8000/admin/category/edit/2 edit korle edit form astese
+but old data show kortese na .... old data show korar jonno compact korte hobe...
+
+48.00 min
+*****edit.blade.php >>>name ar input tag a value setup korte hobe>> 
+<input type="text" class="form-control" value="{{$category->name}}" id="name" placeholder="Enter Category Name*" required>
+
+***** for image 
+a. no required option.
+b. edit.blade.php >>> category image section
+ {{-- add a image link --}}
+   <img src="{{asset('backend/images/category/'.$category->image)}}" height="100" weight="100">
+
+use bootstrap class= mt-3
+
+c. now click on update ...........continue >>>
+The POST method is not supported for route admin/category/edit/8. Supported methods: GET, HEAD.
+
+
+*****For Update     *****create all function
+a. linkup update url 
+{{-- <form action="{{url('/admin/category/store')}}" method="post" enctype="multipart/form-data"> --}}
+                                <form action="{{url('/admin/category/update/'.$category->id)}}" method="post" enctype="multipart/form-data">
+                                @csrf
+
+****input filed>>> name="name"
+     <label for="name">Category Name*</label>
+     <input type="text" class="form-control" value="{{$category->name}}" name="name" id="name" placeholder="Enter Category Name*" required>
+                                   
+
+***** CategoryController.php >>>> Upadate use 2 parameter 
+form theke data asbe >>> a.Request $request, b. $id
+
+*****
+
+****name change hole slug o change hobe.
+
+        $category->name= $request->name;
+        $category->slug= Str::slug($request->name);
+
+        $category->save();
+        return redirect()->back();
+
+
+
+       ******  59.00 minutes
+ For image>>> Database and public folder theke update korte hobe. >>> 2 way
+move >>> means public folder.
+
+
+1. first old image delete korte hobe (old image delete and new image insert)
+2. 2nd image unlink korte hobe
+*****image delete 
+if(isset($request->image)){
+            if($category->image && file_exists('backend/images/category/'.$category->image)){
+                unlink('backend/images/category/'.$category->image);
+            }
+        }
+
+
+$imageName = rand().'-categoryUpdate-'dot(.)+dot(.)for name +(.)for catenition extension
+Image insert******
+        
+        public function categoryUpdate (Request $request, $id){
+        $category = Category::find($id);
+
+        $category->name= $request->name;
+        $category->slug= Str::slug($request->name);
+
+        if(isset($request->image)){
+            if($category->image && file_exists('backend/images/category/'.$category->image)){
+                unlink('backend/images/category/'.$category->image);
+            }
+            //  image insert
+
+            $imageName = rand().'-categoryUpdate-'.'.'.$request->image->extension();
+            $request->image->move('backend/images/category/',$imageName);
+           
+            $category->image = $imageName;
+
+        }
+
+        $category->save();
+        return redirect()->back();
+    }
+
+
+
+#########################################################################
+///////////////////////////////////////////////////////////
+-------------------------
+Iamge Upload.....
+Database kono text file asle normally upload hoi.
+But Image Upload korte chaile 
+a. image ar name text hisebe and
+b. image onno kono store a save korte hobe.
+
+Now. Image asbe Form theke/create.blade.php >>>> Image k public folder e save korte hobe.
+
+
+app>>>Http>>>Controllers>>>Backend >>>CategoryController.php
+
+public function categoryStore (Request $request){
+        $category = new Category();
+
+        $category->name = $request->name;
+        $category->image = $request->image;
+
+        
+        $category->slug = Str::slug($request->name);
+
+          //   For Public Folder Image Saving
+
+          if(isset($request->image)){
+            // rand().'-category-'.'.'.$request->image->extension();
+            $imageName = rand().'-category-'.'.'.$request->image->extension();
+            $request->image->move('backend/images/category',$imageName);
+            
+            // For Database Panel Image Saving
+            $category->image = $imageName;
+
+        $category-> save();
+
+        return redirect ('admin/category/list');
+    }
+
+backend/list.blade.php
+
+<td>
+     {{-- <img src="{{$category->image}}"> --}}
+     <img src="{{asset('backend/images/category/'.$category->image)}}" heigh="100" width="100">
+      </td>
+-------------------------22.00 min---------------------ok
+
+Now Delete >>> No need delete.blade.php pages.
+
+Delete korte hole image thakle 2 way te delete korte hobe...
+Delete korar jonno web.php te url create korte hobe.. .
+Delete korar jonno POST/Get and others method ase.
+
+
+Use "get"
+---------
+Delete korar jonno ID dora best
+list.blade.php >> delete button a url setup korte hobe....
+
+36.00 min
+CategoryController.php
+// For Delete
+    public function categoryDelete ($id){
+        $category = Category::find($id);
+         
+        if ($category->image && file_exists('backend/images/category/'.$category->image)){
+            unlink('backend/images/category/'.$category->image);
+        }
+        // dd($category);
+        $category->delete();
+        return redirect()->back();
+    }
+
+Delete Button Click korle Confirmation asbe>>> 
+>>>On click use korte hobe,,,,
+list.blade.php
+ <a href="{{url('/admin/category/delete/'.$category->id)}}" onclick="return confirm('Are you sure!!!')"" class="btn btn-danger">Delete</a>
+
+
+backend >> Category >>> create a file for edit >>>>
+resource>>>views>>>backend >>>category >>>edit.blade.php
+
+****edit korar jonno create page ar code copy paste korte hobe 
+create.blade.php code copy and paste edit.blade.php
+And Change it ......
+edit update korar somoy image and text file a required rakha jabe na.
+--------------- 55.00 min
+ok

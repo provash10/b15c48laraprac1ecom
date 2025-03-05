@@ -57,7 +57,7 @@
 
                   <li class="nav-item">
                     {{-- <a href="./index.html" class="nav-link"> --}}
-                      <a href="#" class="nav-link">
+                      <a href="{{url('/admin/category/create')}}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Add</p>
                     </a>

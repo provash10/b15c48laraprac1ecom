@@ -484,17 +484,25 @@
                 </tr>
                 </thead>
                 <tbody>
+                @foreach ($categories as $category)
                 <tr>
-                  <td>01</td>
-                  <td>Test Name</td>
+                  {{-- <td>01</td> --}}
+                  <td>{{$loop->index+01}}</td>
+                  <td>{{$category->name}}</td>
                   <td>
-                    <img src="">
+                    {{-- <img src="{{$category->image}}"> --}}
+                    <img src="{{asset('backend/images/category/'.$category->image)}}" height="100" width="100">
                   </td>
                   <td>
-                    <a href="#" class="btn btn-primary">Edit</a>
-                    <a href="#" class="btn btn-danger">Delete</a>
+                    {{-- <a href="{{url('/admin/category/edit/{id}')}}" class="btn btn-primary">Edit</a> --}}
+                    <a href="{{url('/admin/category/edit/'.$category->id)}}" class="btn btn-primary">Edit</a>
+                   
+                    {{-- <a href="{{url('/admin/category/delete/{id}')}}" class="btn btn-danger">Delete</a> --}}
+                    {{-- <a href="{{url('/admin/category/delete/'.$category->id)}}" class="btn btn-danger">Delete</a> --}}
+                    <a href="{{url('/admin/category/delete/'.$category->id)}}" onclick="return confirm('Are You Sure!!!')" class="btn btn-danger">Delete</a>
                   </td>
                 </tr>
+                @endforeach
                 </tbody>
                 
               </table>
