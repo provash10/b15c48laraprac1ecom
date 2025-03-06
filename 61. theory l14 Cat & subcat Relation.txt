@@ -1,0 +1,110 @@
+Class-61 (Laravel-14)
+-----------------------
+Working Part >>>
+*****Eloquent Relationship >>> Belongs to  And Has Many
+***** >>> Category Model and Sub Category Model Relation with code (without database)
+For Relation Go To Model  >>> Category Model and Sub Category Model
+****id k primary ki bola hoi
+
+category.php Model
+public function subCategory (){
+        return $this->hasMany(SubCategory::class, 'cat_id', 'id');
+    }
+
+
+subCategory.php Model
+public function category (){
+        return $this->belongsTo(category::class, 'cat_id','id');
+    }
+
+*** http://127.0.0.1:8000/admin/sub-category/list 
+After Relation >>>> show category name.........
+
+a. Route::get('/admin/sub-category/list',[SubCategoryController::class, 'subCategoryList']);
+b. SubCategoryController
+c. backend.sub-category.list
+
+d. public function subCategoryList (){
+        $subCategories = SubCategory::get();
+        // dd($subCategories);
+        return view ('backend.sub-category.list', compact('subCategories'));
+    }
+
+new>>> 
+public function subCategoryList (){
+        $subCategories = SubCategory::with('category')->get();
+        // dd($subCategories);
+        return view ('backend.sub-category.list', compact('subCategories'));
+    }
+
+e.For data collect>>>  views >>>backend>>> sub-category >>>list.blade.php >>>>
+
+ {{-- <td>01</td> --}}
+                                                <td>{{ $loop->index + 01 }}</td>
+                                                <td>{{ $subcategory->name }}</td>
+                                                
+                                                {{-- <td>{{ $subcategory->cat_id }}</td> --}}
+                                                {{-- after dd checking --}}
+                                                <td>{{ $subcategory->category->name}}</td>
+                                                <td>
+
+>>>>>>>>>>>>>>>>>>>>>ok done>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+--------------------------------------------------------------------------------
+================================================================================
+--------------------------------------------------------------------------------
+
+
+One Data Table to another Data Table Relation
+Belongs to  And Has Many
+
+*****Eloquent Relationship
+
+>>>> For Relation >>> Go To vs code >>> Models >>> 
+>>> Category and Sub Category
+
+
+***Foreign Key 
+***Local Key
+Note:
+SubCategory <=> Category
+SubCategory Category R Undere thake. Jar table se 1st a thakbe.
+
+under = BelongsTo 
+
+>>>(SubCategory BelongsTo Category)
+
+Models >>>SubCategory >>> 
+
+
+public function category(){
+        return $this->belongsTo(Category::class,'cat_id','id');
+    }
+
+***** cat_id, id from phpmyadmin
+30.00min
+-----------
+>>>(Category Has Many SubCategory)
+Models >>>Category >>> 
+
+public function subcategory(){
+        return $this->hasMany(SubCategory::class, 'cat_id','id');
+    }
+
+--------------------------------
+Now showing Category Name with Category id...
+
+50.00 min >>>
+
+backend>>> subcategory>>>list.blade.php>>>
+{{-- <td>01</td> --}}
+                                            <td>{{$loop->index+1}}</td>
+                                            <td>{{$subcategory->name}}</td>
+                                            {{-- <td>{{$subcategory->cat_id}}</td> 60 No Class--}}
+                                            <td>{{$subcategory->category->name}}</td>
+                                            <td>
+
+------------------------------------------------
+================================================

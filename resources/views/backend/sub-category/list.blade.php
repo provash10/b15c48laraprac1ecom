@@ -488,7 +488,9 @@
                                                 {{-- <td>01</td> --}}
                                                 <td>{{ $loop->index + 01 }}</td>
                                                 <td>{{ $subcategory->name }}</td>
-                                                <td>{{ $subcategory->cat_id }}</td>
+                                                {{-- <td>{{ $subcategory->cat_id }}</td> --}}
+                                                {{-- after dd checking --}}
+                                                <td>{{ $subcategory->category->name}}</td>
                                                 <td>
                                                     {{-- <a href="{{url('/admin/category/edit/{id}')}}" class="btn btn-primary">Edit</a> --}}
                                                     <a href="#" class="btn btn-primary">Edit</a>

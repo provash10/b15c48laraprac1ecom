@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 class SubCategoryController extends Controller
 {
     public function subCategoryList (){
-        $subCategories = SubCategory::get();
+        $subCategories = SubCategory::with('category')->get();
         // dd($subCategories);
         return view ('backend.sub-category.list', compact('subCategories'));
     }
