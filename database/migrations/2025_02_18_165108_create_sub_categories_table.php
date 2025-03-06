@@ -19,8 +19,6 @@ return new class extends Migration
             $table->string('slug');
             
 
-          
-
             $table->timestamps();
         });
     }

@@ -1,0 +1,222 @@
+Class-60 (Laravel-13)
+-------------------------------------
+Before Work Backend (class59 l-12)
+Category>>> a. create.blade.php  b. edit.blade.php  c. list.blade.php
+Working Part
+1. Admin Panel >>>> backend >>> includes >>> sidebar >>>>
+>>>Create Subcategory under of Category >>>
+2. SubCategory  create kora ase....
+
+Create SubCategory Model >>
+>>>  php artisan make:model SubCategory -m 
+
+3. Go to sub_category migration file >>> table ok (before)
+4. check phpmyadmin >>> sub_categories
+5. Create Model >>>> $ php artisan make:controller Backend/SubCategoryController
+Create Route >>>> 
+Route::get('/admin/sub-category/list',[SubCategoryController::class, 'subCategoryList']); 
+
+6. linkup sidebar.blade.php >>>> 
+'/admin/sub-category/list'  and 
+'/admin/sub-category/create'
+7. work Add >>> backend>>sub-category>>>> a. create.blade.php 
+*****copy from category>>>create.bladephp and paste sub-category>>>create.bladephp and edit.
+
+8. loop run>>> 
+ <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="name">Select Category Name*</label>
+                                        {{-- <input type="text" class="form-control" name="name" id="name" placeholder="Enter Category Name*" required> --}}
+                                        <select name="cat_id" class="form-control">
+                                            <option selected disabled>Select Category</option>
+                                            @foreach ($categories as $category)
+                                            {{-- <option value="">Category1</option> --}}
+                                            <option value="{{$category->id}}">{{$category->name}} </option>
+                                            @endforeach
+                                            
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="name">Sub Category Name*</label>
+                                        <input type="text" class="form-control" name="name" id="name" placeholder="Enter Sub-Category Name*" required>
+                                    </div>
+
+----------and SubCategoryController.php
+public function subCategoryCreate (){
+        $categories = Category::get();
+        // dd($categories);
+        return view('backend.sub-category.create', compact('categories'));
+    }
+
+9. 31.42 min >>> asc or desc
+public function subCategoryCreate (){
+        $categories = Category::orderBy('name','asc')->get();
+        // dd($categories);
+        return view('backend.sub-category.create', compact('categories'));
+    }
+
+10. For Store create url >>>Route::post('/admin/sub-category/store',[SubCategoryController::class,'subCategoryStore']);
+
+form jokon submit hobe takon /admin/sub-category/store a hit korbe
+action ="/admin/sub-category/store"
+
+11. 
+public function subCategoryStore (Request $request){
+        $subCategory = new SubCategory();
+
+        $subCategory->cat_id = $request->cat_id;
+        $subCategory->name = $request->name;
+        $subCategory->slug = Str::slug($request->name);
+
+        
+        $subCategory->save();
+        return redirect()->back();
+    }
+
+**** check the cat_id from categories & sub categories of phpmyadmin.
+12. Route::get('/admin/sub-category/list',[SubCategoryController::class, 'subCategoryList']); 
+Create all sector.....ok
+public function subCategoryList (){
+        $subCategories = SubCategory::get();
+        // dd($subCategories);
+        return view ('backend.sub-category.list', compact('subCategories'));
+    }
+
+***blade page >>> backend.sub-category.list
+
+13. list.blade.php >>> edit (needed)
+
+<thead>
+                                        <tr>
+                                            <th>Serial No</th>
+                                            <th>Sub-Category Name</th>
+                                            <th>Category Name</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($subCategories as $subcategory)
+                                            <tr>
+                                                {{-- <td>01</td> --}}
+                                                <td>{{ $loop->index + 01 }}</td>
+                                                <td>{{ $subcategory->name }}</td>
+                                                <td>{{ $subcategory->cat_id }}</td>
+                                                <td>
+                                                    {{-- <a href="{{url('/admin/category/edit/{id}')}}" class="btn btn-primary">Edit</a> --}}
+                                                    <a href="#" class="btn btn-primary">Edit</a>
+
+                                                    {{-- <a href="{{url('/admin/category/delete/{id}')}}" class="btn btn-danger">Delete</a> --}}
+                                                    {{-- <a href="{{url('/admin/category/delete/'.$category->id)}}" class="btn btn-danger">Delete</a> --}}
+                                                    <a href="#" onclick="return confirm('Are You Sure!!!')"
+                                                        class="btn btn-danger">Delete</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////
+--------------------------------------------------------------------------------
+
+SubCategory
+
+Create SubCategory Model >>
+>>>  php artisan make:model SubCategory -m
+
+Database >>> Migration file >>>subcategory table >>
+public function up(): void
+    {
+        Schema::create('sub_categories', function (Blueprint $table) {
+            $table->id();
+
+            $table->unsignedBigInteger('cat_id');
+            $table->string('name');
+            $table->string('slug');
+
+            $table->timestamps();
+        });
+    }
+
+web.php >>> create Route
+vs code >>> Cretae Controller SubCategory >>> 
+>>>app>>>Http>>>Controllers>>>Backend >>>> create >>> SubCategoryController.php >>>Ok
+
+resources>>>views>>>backend>> includes
+>>>>sidebar.blade.php >>> linkup from web.php route
+
+SubCategory Controller>>> Create Function
+
+for function Create SubCategory Folder and file>>>
+Backend >>> Create SubCategory Folder >>> Create file like as Category Folder & file.
+Backend >>> SubCategory Folder >>> create.blade.php
+a. create.blade.php >>> @extends('') >>> and copy category create.blad.php code and paste 
+sub-category >>>create.blade.php
+
+1. Create Category Option for Select Category
+2. And Than Sub Category 
+25 min
+
+SubCategory Folder >>> create.blade.php>>>
+<div class="form-group">
+                                        <label for="name">Select Category*</label>
+                                        {{-- for select --}}
+                                        <select name="cat_id" class="form-control">
+                                            {{-- <option value="">Category 1</option> --}}
+                                            @foreach ($categories as $category)
+                                                     <option value="{{$category->id}}">{{$category->name}}</option>
+                                            @endforeach
+                                            
+                                        </select>
+                                    </div>
+
+------------------------------------------------------
+
+
+34.00 min >>>> data insert into subcategory under Category
+POST Method>>>.
+Create Route 
+and setup the url form action="/admin/sub-category/store"....
+
+ //  For data come Request $request
+    public function subCategoryStore(Request $request){
+        $subCategory = new SubCategory();
+        $subCategory->cat_id = $request->cat_id;
+        $subCategory->name = $request->name;
+        $subCategory->slug = Str::slug($request->name);
+
+        $subCategory->save();
+        // return redirect('admin/sub-category/list'); ******will be wrong
+        return redirect()->back();
+
+-----------------------------------------------------OKKK 
+Now check it phpmyadmin subcategory (insert data)
+------------------------------------------------------------
+and
+Create subcategory List and showing....................
+ showing this >>>>create>>> SubCategoryController function ----------ok
+App\Http\Controllers\Backend\SubCategoryController::subCategoryList
+
+
+Create Backend>> Subcategory >>> list.blade.php file>>> ok
+*****copy and paste from Category list and edit >>ok
+
+
+ErrorException
+PHP 8.2.12
+10.48.25
+compact(): Undefined variable $subcategories
+
+### Admin Dashboard >>>Testing>>>
+ SubCategory >>> Add >>> form fillup
+
+
+40.00 min >>>> add product check.....
+
+b.
+c. 

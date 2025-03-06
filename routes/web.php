@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -79,3 +80,9 @@ Route::get('/admin/category/delete/{id}',[CategoryController::class, 'categoryDe
 // Data Edit need 2 url
 Route::get('/admin/category/edit/{id}',[CategoryController::class, 'categoryEdit']);
 Route::post('/admin/category/update/{id}',[CategoryController::class, 'categoryUpdate']);
+
+
+// For SubCategories phpmyadmin
+Route::get('/admin/sub-category/list',[SubCategoryController::class, 'subCategoryList']); 
+Route::get('/admin/sub-category/create',[SubCategoryController::class, 'subCategoryCreate']);
+Route::post('/admin/sub-category/store',[SubCategoryController::class,'subCategoryStore']);
