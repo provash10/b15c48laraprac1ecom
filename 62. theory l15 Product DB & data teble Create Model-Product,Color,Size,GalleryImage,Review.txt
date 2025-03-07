@@ -1,0 +1,245 @@
+Class-62 (Laravel-15)
+---------------------
+Create Model >>>> Product.php, Color.php, Size.php, GalleryImage.php, Review.php
+ Create Model-Product,Color,Size,GalleryImage,Review
+Working Part>>>>
+***** Category, SubCategory na thakle Product Upload Impossible. 
+*****Product Database Design 
+1. Create a Model : php artisan make:model Product -m
+Model : product.php
+protected $guarded = [];
+
+2. work with Product migration file 
+*****optional >>>> nullable
+*****Design ar upore base kore DB sajate hobe.
+*****Database a table create/insert korte command>>>
+>> php artisan migrate
+
+****model >>>> migration file >>> db migrate >>>
+
+public function up(): void
+    {
+        Schema::create('products', function (Blueprint $table) {
+            $table->id();
+
+            $table->string('name');
+            $table->string('slug');
+
+            $table->unsignedBigInteger('cat_id');
+            $table->unsignedBigInteger('sub_cat_id')->nullable();
+            $table->double('regular_price');
+            $table->double('discount_price')->nullable();
+            //  For Owner 
+            $table->double('buying_price');
+
+            $table->integer('qty_price');
+            $table->string('sku_code');
+            $table->longText('description');
+            $table->longText('policy');
+            
+            //what type of product like as hot, new,arrivel etc
+            $table->string('product_type');
+
+            //
+            $table->string('image');
+            
+
+            $table->timestamps();
+        });
+    }
+
+
+
+*****Product Category and SubCategory R under e Thakbe.
+>>>>>  php artisan migrate
+28.00 min
+
+3. For Color new table means new model 
+php artisan make:model Color -m
+****Model Create : Color.php
+ protected $guarded = [];
+
+
+Got to Migration File >>>Color.php
+public function up(): void
+    {
+        Schema::create('colors', function (Blueprint $table) {
+            $table->id();
+
+            $table->unsignedBigInteger('product_id');
+            $table->string('color_name');
+
+            $table->timestamps();
+        });
+    }
+
+Command >>> php artisan migrate >>>>>ok
+Check DB Color Option >>> ok
+
+4. For Size new table means new model 
+php artisan make:model Size -m
+****Model Create : Size.php
+ protected $guarded = [];
+
+public function up(): void
+    {
+        Schema::create('sizes', function (Blueprint $table) {
+            $table->id();
+
+            $table->unsignedBigInteger(product_id);
+            $table->string('size_name');
+
+            $table->timestamps();
+        });
+    }
+
+
+Command >>> php artisan migrate >>>>>ok
+Check DB Color Option >>> ok
+
+5. For Images new table means new model 
+php artisan make:model GalleryImage -m
+****Model Create : GalleryImage.php
+ protected $guarded = [];
+
+public function up(): void
+    {
+        Schema::create('gallery_images', function (Blueprint $table) {
+            $table->id();
+
+            $table->unsignedBigInteger('product_id');
+            $table->string('image');
+            
+            $table->timestamps();
+        });
+    }
+Command >>> php artisan migrate >>>>>ok
+Check DB Color Option >>> ok
+
+6. For Reviews new table means new model 
+php artisan make:model Review -m
+****Model Create : Review.php
+ protected $guarded = [];
+
+public function up(): void
+    {
+        Schema::create('reviews', function (Blueprint $table) {
+            $table->id();
+
+            $table->unsignedBigInteger('product_id');
+            $table->string('customer_name');
+            $table->string('message');
+            $table->integer('rating');
+            $table->string('image');
+            $table->timestamps();
+        });
+    }
+
+Command >>> php artisan migrate >>>>>ok
+Check DB Color Option >>> ok
+
+******DB Ready >>>> Now Upload Product >>> ok
+
+--------------------------------------------------------------
+=============================================================
+-----------------------------------------------------------------
+*****Product Upload >>>> What type of data/coding need.
+----------
+Product Upload ar jonno new phpmyadmin a new db create korte hobe means
+vs code new Models create korte hobe.
+
+Models means Class so 1st Letter use Capital Letter like as "Product"
+php artisan make:model Product -m
+*****every Models Protected korte hobe.
+
+----------------------------------
+php artisan make:model Product -m
+app>>>Models>>>Product.php >ok
+protected $guarded =[];
+
+>>> Migration file >>>Products >>> what type of field including
+
+ public function up(): void
+    {
+        Schema::create('products', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->id('slug');
+            
+            $table->unsignedBigInteger('cat_id'); //for category
+            $table->unsignedBigInteger('sub_cat_id'); ////for sub category
+
+            $table->timestamps();
+        });
+    }
+
+*****each product kono na kono category r under e thake.
+*****category r subcategory nao thake pare.
+sub category tai optional rakte hobe >>>->nullable(); use korte hobe.
+
+##Price ar jonno 2 ta option akta regular and arek ta discounr price
+Price type: double hobe ... 10.30 taka
+$table->double('regular_price');
+            $table->double('discount_price')->nullable();
+
+***discount price thakte pare nao pare tai ->nullable(); use korte hobe.
+*******
+Company Ownerer personaly hiseb rakar jonno >>
+buying cost profit >>> loss/profir janar jonno.
+
+and stock /quantity >>
+
+ $table->double('buying_price'); //for only buyer - not showing website.
+
+            $table->integer('qty');
+
+$table->string('sku_code');
+
+For Description, Review , Product Policy
+---------------------For Product Single Data------------------
+  public function up(): void
+    {
+        Schema::create('products', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->id('slug');
+            
+            $table->unsignedBigInteger('cat_id');
+            $table->unsignedBigInteger('sub_cat_id')->nullable();
+            
+            $table->double('regular_price');
+            $table->double('discount_price')->nullable();
+
+            $table->double('buying_price');
+
+            $table->integer('qty');
+
+            $table->string('sku_code');
+
+            $table->longText('description');
+            $table->longText('policy');
+
+            $table->string('product_type');
+
+            $table->string('image');
+
+            $table->timestamps();
+        });
+    }
+---------------------------
+now insert the data table/migration file>>> in DB...phpmyadmin
+---------------------------------------------------------------27.00 Min
+***sub_categories table ta database e giye manually delete koren
+Then php artisan migrate command chalan
+
+phpmyadmin>>> sub_categoeries>>>drop >>ok
+na hole new commad fail dekhabe....****
+
+Now Command >>php artisan migrate
+
+
+
+---------------------
+ public function category(){
+        return $this->belongsTo(Category::class,'cat_id','id');
+    }
