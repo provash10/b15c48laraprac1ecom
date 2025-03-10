@@ -1,0 +1,87 @@
+Class-63 (Laravel-16)
+------------------------
+Working Part
+edit ar jonno create.blade.php use kore edit.blade.php korte hobe.
+SubCategory Edit and Delete Method
+1. Create route >>> Route::get('/admin/sub-category/edit/{id}',[SubCategoryController::class, 'subCategoryEdit']);
+link up >>>resource >>>views>>>includes>>>> sub-category >>>list.blade.php
+linkup >>>>edit.blade.php
+
+20.00 min >>> subcategory >>> list >>> edit
+@foreach ($categories as $category)
+  {{-- <option value="">Category1</option> --}}
+  <option value="{{ $category->id }}">{{ $category->name }} </option>
+@endforeach
+
+25 min >>
+                                           @foreach ($categories as $category)
+                                            {{-- <option value="">Category1</option> --}}
+                                            <option value="{{$category->id}}" @if ($category->id == $subCategory->cat_id)
+                                                selected
+                                                
+                                            @endif>{{$category->name}} </option>
+                                            @endforeach
+
+now>> Route::post('/admin/sub-category/update/{id}',[SubCategoryController::class, 'subCategoryUpdate']);
+write function >>>. form theke data dorte Request Class lagbe.... and url ar sate update korar jonno id asbe.  
+
+ public function subCategoryUpdate (Request $request, $id){
+        $subCategory = SubCategory::find($id);
+
+        $subCategory->cat_id = $request->cat_id;
+        $subCategory->name = $request->name;
+        $subCategory->slug = Str::slug($request->name);
+
+        $subCategory->save();
+        //return redirect()->back();
+
+    }
+
+Submit deyar por >>> http://127.0.0.1:8000/admin/sub-category/list link asbe...
+
+public function subCategoryUpdate (Request $request, $id){
+        $subCategory = SubCategory::find($id);
+
+        $subCategory->cat_id = $request->cat_id;
+        $subCategory->name = $request->name;
+        $subCategory->slug = Str::slug($request->name);
+
+        $subCategory->save();
+        // return redirect()->back();
+        return redirect('http://127.0.0.1:8000/admin/sub-category/list');
+
+
+Delete >>> 29.00 min 
+Route::get('/admin/sub-category/delete/{id}',[SubCategoryController::class, 'subcategoryDelete']);
+list.blade.php >>>  <a href="{{url('/admin/sub-category/delete/'.$subcategory->id)}}" onclick="return confirm('Are You Sure!!!')"
+
+
+ public function subCategoryDelete ($id){
+
+        $subCategory = SubCategory::find($id);
+
+        $subCategory->delete();
+
+        return redirect()->back();
+    }
+
+okkk====================>done
+
+--------------------------------------
+
+
+
+
+
+---------------------------
+
+1. Ecommerce a product  related Minimum 5 ta data table korte hoyese.
+Create Model >>>> Product.php, Color.php, Size.php, GalleryImage.php, Review.php
+ Create Model/data table-
+a.Product, b.Color, c.Size, d.GalleryImage, e.Review  (data table)
+
+*****First Product ar single data nia kaj korte hobe....
+
+*****sidebar.blade.php >>> subcategory li copy kore paste kore Product a convert korbo.
+Go to >>> resource >>>views >>>backend>>> includes>>> sidebar.blade.php >>>
+============

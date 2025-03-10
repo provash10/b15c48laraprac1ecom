@@ -492,12 +492,9 @@
                                                 {{-- after dd checking --}}
                                                 <td>{{ $subcategory->category->name}}</td>
                                                 <td>
-                                                    {{-- <a href="{{url('/admin/category/edit/{id}')}}" class="btn btn-primary">Edit</a> --}}
-                                                    <a href="#" class="btn btn-primary">Edit</a>
-
-                                                    {{-- <a href="{{url('/admin/category/delete/{id}')}}" class="btn btn-danger">Delete</a> --}}
-                                                    {{-- <a href="{{url('/admin/category/delete/'.$category->id)}}" class="btn btn-danger">Delete</a> --}}
-                                                    <a href="#" onclick="return confirm('Are You Sure!!!')"
+                                                    {{-- <a href="{{url('/admin/sub-category/edit/{id}')}}" class="btn btn-primary">Edit</a> --}}
+                                                    <a href="{{url('/admin/sub-category/edit/'.$subcategory->id)}}" class="btn btn-primary">Edit</a>
+                                                    <a href="{{url('/admin/sub-category/delete/'.$subcategory->id)}}" onclick="return confirm('Are You Sure!!!')"
                                                         class="btn btn-danger">Delete</a>
                                                 </td>
                                             </tr>
