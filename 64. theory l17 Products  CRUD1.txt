@@ -1,0 +1,200 @@
+Class-64 (Laravel-17)
+=======================
+1. Sidebar 
+backend>>> includes >>> sidebar >>>
+
+2. create route and controller for products
+controller :  php artisan make:controller Backend/ProductController
+
+route: Route::get('/admin/product/list',[ProductController::class, 'productList']);
+All function ok
+
+
+ProductController.php >>>
+public function productCreate (){
+        $categories = Category::get();
+        $subCategories = SubCategory::get();
+        return view ('backend.product.create', compact ('categories','subCategories'));
+    }
+
+3. first product add. 
+resource>>>views>>>> backend >>> product folder >>> product file >>>create.blade.php
+>>>
+**** akta product add korle aksathe sobgulo/5 ta table data insert hobe...
+
+****copy the backend/category>>> create.blade.php and paste it product/create.blade.php And
+edit for product....
+
+*****Work first product single data
+*****input filed matching must database
+*****keep Product Category Selection Option
+
+***** Product Code, Category*, SubCategory*, Product Quantity*, Buying Price*,Regular Price*, Discoubt Price,
+Product Image (single image), Description,Policy
+
+
+***** fillup input  fill name, placeholder,
+*****must check input fill type, name etc..........
+***** For Product Description use a text editor >>> 
+>>> Go To AdminLTE >>>Forms>>>Editors >>>summernote >>>pages/forms/editors.html >>> 
+>>>search & copy only textarea option >>> and paste it Description.
+>>> Use summernote style link>>> backend >>>includes>>>header.blade.php >>>> css linkup
+<!-- summernote css-->
+  <link rel="stylesheet" href="../../plugins/summernote/summernote-bs4.min.css">
+
+>>> Use summernote style link>>> backend >>>includes>>>script.blade.php >>>> css linkup
+<!-- Summernote js-->
+<script src="../../plugins/summernote/summernote-bs4.min.js"></script>
+
+Product >>>create.blade.php
+<!-- Page specific script -->
+<script>
+  $(function () {
+    // Summernote
+    $('#summernote').summernote()
+
+    // CodeMirror
+    CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+      mode: "htmlmixed",
+      theme: "monokai"
+    });
+  })
+</script>
+
+
+a. first copy and paste the input form...
+b. 2nd 
+
+
+*****copy subcategory/create.blade.php >>> selection code and paste it (Under Product Name)  product/create.blade.php >>>> selection ....
+                                                    @csrf
+
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="name">Product Name*</label>
+                                        <input type="text" class="form-control" name="name" id="name" placeholder="Enter Product Name*" required>
+                                    </div>
+
+                                    {{-- Product Code --}}
+                                    <div class="form-group">
+                                        <label for="name">Product Code</label>
+                                        <input type="text" class="form-control" name="sku_code" id="name" placeholder="Enter Product Code">
+                                    </div>
+
+                                    {{-- copy from subcat/create for category--}}
+                                    <div class="form-group">
+                                        <label for="name">Select Category Name*</label>
+                                        {{-- <input type="text" class="form-control" name="name" id="name" placeholder="Enter Category Name*" required> --}}
+                                        <select name="cat_id" class="form-control">
+                                            <option selected disabled>Select Category</option>
+                                            @foreach ($categories as $category)
+                                            {{-- <option value="">Category1</option> --}}
+                                            <option value="{{$category->id}}">{{$category->name}} </option>
+                                            @endforeach
+                                            
+                                        </select>
+                                    </div>
+
+                                    {{-- for subcategory --}}
+                                    <div class="form-group">
+                                        <label for="name">Select Sub-Category Name</label>
+                                        {{-- <input type="text" class="form-control" name="name" id="name" placeholder="Enter Category Name*" required> --}}
+                                        <select name="sub_cat_id" class="form-control">
+                                            <option selected disabled>Select Sub-Category</option>
+                                            @foreach ($subCategories as $subCategory)
+                                            {{-- <option value="">Category1</option> --}}
+                                            <option value="{{$subcategory->id}}">{{$subcategory->name}} </option>
+                                            @endforeach
+                                            
+                                        </select>
+                                    </div>
+
+                                    {{-- Product Quantity --}}
+                                    <div class="form-group">
+                                        <label for="name">Product Quantity*</label>
+                                        <input type="number" class="form-control" name="qty" id="name" placeholder="Enter Product Quantity" required>
+                                    </div>
+
+                                    {{-- Product Buying Price --}}
+                                    <div class="form-group">
+                                        <label for="name">Product Buying Price*</label>
+                                        <input type="number" class="form-control" name="buying_prixe" id="name" placeholder="Enter Product Buying Price" required>
+                                    </div>
+
+                                    {{-- Product Regular Price --}}
+                                    <div class="form-group">
+                                        <label for="name">Product Regular Price*</label>
+                                        <input type="number" class="form-control" name="regular_prixe" id="name" placeholder="Enter Product Regular Price" required>
+                                    </div>
+
+                                    {{-- Product Discount Price --}}
+                                    <div class="form-group">
+                                        <label for="name">Product Discount Price</label>
+                                        <input type="number" class="form-control" name="discount_prixe" id="name" placeholder="Enter Product Discount Price" required>
+                                    </div>
+
+                                    {{-- Product Image --}}
+                                    <div class="form-group">
+                                        <label for="exampleInputFile">Product Image*</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="image" id="image" accept="image/*" required>
+                                                <label class="custom-file-label" for="image">Choose file</label>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">Upload</span>
+                                            </div>
+                                        </div>
+                                    </div>
+-------------------
+
+23.00 min
+***** For Product Description use a text editor >>> 
+>>> Go To AdminLTE >>>Forms>>>Editors >>>summernote >>>pages/forms/editors.html >>> 
+>>>search & copy only textarea option >>> 
+              <textarea id="summernote">
+                Place <em>some</em> <u>text</u> <strong>here</strong>
+              </textarea>
+-------------------->>>
+
+37.00 min >>> For Product Type like HOT New Arrival 
+--------->>>>
+1. copy 
+ {{-- copy from subcat/create for category --}}
+                                    <div class="form-group">
+                                        <label for="name">Select Category Name*</label>
+                                        {{-- <input type="text" class="form-control" name="name" id="name" placeholder="Enter Category Name*" required> --}}
+                                        <select name="cat_id" class="form-control">
+                                            <option selected disabled>Select Category</option>
+                                            @foreach ($categories as $category)
+                                                {{-- <option value="">Category1</option> --}}
+                                                <option value="{{ $category->id }}">{{ $category->name }} </option>
+                                            @endforeach
+
+                                        </select>
+                                    </div>
+and paste for Product_type
+and edit...........
+{{-- copy from category for product_type --}}
+                                     <div class="form-group">
+                                        <label for="name">Select Product Type*</label>
+                                        {{-- <input type="text" class="form-control" name="name" id="name" placeholder="Enter Category Name*" required> --}}
+                                        <select name="product_type" class="form-control">
+                                            <option selected disabled>Select Type*</option>
+                                            {{-- <option value="">Category1</option> --}}
+                                            <option value="hot">Hot Products</option>
+                                            <option value="new">New Products</option>
+                                            <option value="regular">Regular Products</option>
+                                            <option value="discount">Discount Products</option>
+                                        </select>
+                                    </div>
+-----------------------
+Now Submit >>>
+Route::post('/admin/product/store',[ProductController::class, 'productStore']);
+
+/admin/product/store link up to Form action="/admin/product/store"
+
+Next Class..............
+
+
+

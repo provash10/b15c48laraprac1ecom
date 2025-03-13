@@ -39,3 +39,6 @@
 
 <!-- bs-custom-file-input -->
 <script src="{{asset('backend/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
+
+<!-- Summernote js-->
+<script src="{{asset('plugins/summernote/summernote-bs4.min.js')}}"></script>
