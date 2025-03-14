@@ -1,16 +1,20 @@
-<?php
+Class-65 (Laravel-18)
+=======================
+Route::post('/admin/product/store',[ProductController::class, 'productStore']);
+*****Form Theke Data asbe so (Request $request)
+*****Data Insert Hobe PhpmyAdmin >>> products a ..
+*****Products Model ar akti Object Create korte hobe.
 
-namespace App\Http\Controllers\Backend;
+use to copy paste from category controller for image.
+        if (isset($request->image)){
+            $imageName = rand().'-category-'.'.'.$request->image->extension();
+            $request->image->move('backend/images/category',$imageName);
+            $category->image =$imageName;
+        }
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Product;
-use App\Models\SubCategory;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-
+>>>>>>>>>>
 class ProductController extends Controller
-{ 
+{
     public function productCreate (){
         $categories = Category::get();
         $subCategories = SubCategory::get();
@@ -45,3 +49,7 @@ class ProductController extends Controller
         return redirect()->back();
     }
 }
+ check phpmyadmin >>> product table>>>> insert data ok
+-------------------------------------------------------------
+
+ok >>> 

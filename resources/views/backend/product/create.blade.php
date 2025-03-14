@@ -88,35 +88,35 @@
                                     {{-- Product Buying Price --}}
                                     <div class="form-group">
                                         <label for="name">Product Buying Price*</label>
-                                        <input type="number" class="form-control" name="buying_prixe" id="name"
+                                        <input type="number" class="form-control" name="buying_price" id="name"
                                             placeholder="Enter Product Buying Price" required>
                                     </div>
 
                                     {{-- Product Regular Price --}}
                                     <div class="form-group">
                                         <label for="name">Product Regular Price*</label>
-                                        <input type="number" class="form-control" name="regular_prixe" id="name"
+                                        <input type="number" class="form-control" name="regular_price" id="name"
                                             placeholder="Enter Product Regular Price" required>
                                     </div>
 
                                     {{-- Product Discount Price --}}
                                     <div class="form-group">
                                         <label for="name">Product Discount Price</label>
-                                        <input type="number" class="form-control" name="discount_prixe" id="name"
+                                        <input type="number" class="form-control" name="discount_price" id="name"
                                             placeholder="Enter Product Discount Price" required>
                                     </div>
 
                                     {{-- Product Description --}}
                                     <div class="form-group">
                                         <label for="name">Product Description*</label>
-                                        {{-- <input type="number" class="form-control" name="discount_prixe" id="name" placeholder="Enter Product Discount Price" required> --}}
+                                        {{-- <input type="number" class="form-control" name="discount_price" id="name" placeholder="Enter Product Discount Price" required> --}}
                                         <textarea id="summernote" name="description" class="form-control" required></textarea>
                                     </div>
 
                                     {{-- Product Policy --}}
                                     <div class="form-group">
                                         <label for="name">Product Policy*</label>
-                                        {{-- <input type="number" class="form-control" name="discount_prixe" id="name" placeholder="Enter Product Discount Price" required> --}}
+                                        {{-- <input type="number" class="form-control" name="discount_price" id="name" placeholder="Enter Product Discount Price" required> --}}
                                         <textarea id="summernote2" name="policy" class="form-control" required></textarea>
                                     </div>
 

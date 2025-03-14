@@ -13,4 +13,4 @@
  <link rel="stylesheet" href="{{asset('backend/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
 
  <!-- summernote css-->
- <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css')}}">
+ <link rel="stylesheet" href="{{asset('backend/plugins/summernote/summernote-bs4.min.css')}}">
