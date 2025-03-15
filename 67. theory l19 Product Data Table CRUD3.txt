@@ -1,3 +1,325 @@
+Class-67 (Laravel-19)
+======================
+*****Product more parameter like as color,size, gallary image etc
+
+*****backend>>>>includes>>> create.blade.php
+***** there is no option of color id in phpmyadmin
+***** need js for many color
+
+>>>copy quantity and paste before quanty and edit for color.
+1. 
+{{-- Product Color --}}
+ <div class="form-group">
+      <label for="name">Product Color (Optional)</label>
+      <input type="text" class="form-control" name="color" id="color" placeholder="Enter Product Color">
+ </div>
+
+2. div id="color_fields", button id="add_color, input-> name="color[]" use button->  <button type="button" class="btn btn-primary" id="add_color">Add More</button>
+
+{{-- Product Color --}}
+ <div class="form-group" id="color_fields">
+      <label for="name">Product Color (Optional)</label>
+      <input type="text" class="form-control" name="color" id="color" placeholder="Enter Product Color">
+ </div>
+ <button type="button" class="btn btn-primary" id="add_color">Add More</button>
+
+OR----------------------OR-------------------------OR
+                                    {{-- Product Color --}}
+                                    <div class="form-group" id="color_fields">
+                                        <label for="name">Product Color (Optional)</label>
+                                        <input type="text" class="form-control" name="color[]" id="color" placeholder="Enter Product Color">
+                                        //<button type="button" class="btn btn-primary" id="add_color">Add More</button>
+                                    </div>
+                                     <button type="button" class="btn btn-primary" id="add_color">Add More</button>
+
+3. write js in under specific js code.... *****13.00 min important
+***** add color by js/jquery add more click korle barbar color div auto incrise hobe
+*****jquery structure
+<script>
+        $(document).ready(function(){
+            
+        })
+    </script>
+----------------
+3.1. Use div id="color_fields", button id="add_color, input-> name="color[]" use button->  <button type="button" class="btn btn-primary" id="add_color">Add More</button>
+
+ {{-- Add Color -> use jquery/js--}}
+    <script>
+        $(document).ready(function(){
+            $("#add_color").click(function(){
+                $("#color_fields").append('<input type="text" class="form-control" name="color[]" id="color" placeholder="Enter Product Color">')
+            })
+        })
+    </script>
+-------------
+*****23.00 min
+
+                   {{-- For Size  --}}
+                                    {{-- Product Size --}}
+                                    <div class="form-group" id="color_fields">
+                                        <label for="name">Product Color (Optional)</label>
+                                        <input type="text" class="form-control" name="color[]" id="color" placeholder="Enter Product Color">
+                                        {{-- <button type="button" class="btn btn-primary" id="add_color">Add More</button> --}}
+                                    </div>
+                                    <button type="button" class="btn btn-primary" id="add_color">Add More</button>
+                                    
+For Size copy Color Code For Size
+
+{{-- Add Size -> use jquery/js--}}
+    <script>
+        $(document).ready(function(){
+            $("#add_size").click(function(){
+                $("#size_fields").append('<input type="text" class="form-control" name="size[]" id="size" placeholder="Enter Product Size">')
+            })
+        })
+    </script>
+
+>>>>>>>>>>>Check product >>> add field >>>>ok
+
+
+5. For Multiple Image >>> Copy the product image code for multiple image 
+**** no need add more
+**** use variable - input >>> name="galleryImage[]" , use ****multiple attributes
+
+ {{-- For Multiple Product Image --}}
+                                      <div class="form-group">
+                                        <label for="exampleInputFile">Product Gallery Image*</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="galleryImage[]" multiple
+                                                    id="galleryImage" accept="image/*" required>
+                                                <label class="custom-file-label" for="image">Choose file</label>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">Upload</span>
+                                            </div>
+                                        </div>
+                                    </div
+
+---------------------------------------
+31.00 Min
+Now this create.blade.php design k database add korte hobe.....
+****Database a insert korar jonno got to >>> ProductController.php
+So,
+productStore a kaj korte hove ....Form submite hole 
+******<form action="{{ url('/admin/product/store')}}" method="post" enctype="multipart/form-data">
+                                @csrf
+action="{{ url('/admin/product/store')}}" url a hit korbe and productStore call hobe
+
+*****color, size alada alada table add hobe According to Database .......
+*****color ti kon product ar jonno and color name?
+*****kono product upload korle DB Color ar under a thake hobe.
+*****$color->product_id = $product->id; product id Form theke asbe na ... jeti save hobe seti back hoye asbe.
+*****  // $product->save();
+
+        // Add Color
+        dd($request->color);
+        $color = new Color();
+
+        $color->product_id = $product->id;
+        $color->color_name = $request->color;
+
+
+        return redirect()->back();
+
+*****use foreach loop of Color and size
+
+
+ // $product->save();
+
+        // Add Color
+        // dd($request->color);
+        // $color = new Color();
+
+        foreach($request->color as $color_name){
+            $color = new Color();
+
+            $color->product_id = $product->id;
+            // $color->color_name = $request->color;
+            $color->color_name = $color_name;
+
+            $color->save();
+        }
+
+        // $color->product_id = $product->id;
+        // $color->color_name = $request->color;
+
+        // Add Size 
+        foreach($request->size as $size_name){
+            $size = new Size();
+
+            $size->product_id = $product->id;
+            // $size->size_name = $request->size;
+            $size->size_name = $size_name;
+
+            $size->save();
+        }
+
+        return redirect()->back();
+    }
+-------------------> 44.00 min--------------
+***** Keu color choose korlei form ar code ta run korbe 
+So, use a condition....
+
+if(isset($request->color) && $request->color[0] != null){
+            
+        }
+
+-------->>>>
+
+  // $product->save();
+
+        // Add Color
+        // dd($request->color);
+        // $color = new Color();
+
+        if(isset($request->color) && $request->color[0] != null){
+            foreach($request->color as $color_name){
+                $color = new Color();
+    
+                $color->product_id = $product->id;
+                // $color->color_name = $request->color;
+                $color->color_name = $color_name;
+    
+                $color->save();
+            }
+        }
+
+
+        // $color->product_id = $product->id;
+        // $color->color_name = $request->color;
+
+        // Add Size 
+        if(isset($request->size) && $request->size[0] != null){
+            foreach($request->size as $size_name){
+                $size = new Size();
+    
+                $size->product_id = $product->id;
+                // $size->size_name = $request->size;
+                $size->size_name = $size_name;
+    
+                $size->save();
+            }
+        }
+        
+        return redirect()->back();
+    }
+--------------------------condition ok------------------
+
+ // $product->save();
+uncomment >>>  ok
+ $product->save();
+--------------->>>Check phpmyadmin/database >>> products and colors table >>>>ok
+
+50.00min>>>>>>>>>>>
+
+Gallery Image>>>>
+
+//Gallery Image
+            if(isset($request->galleryImage)){
+                foreach($request->galleryImage as $image){
+                    $galleryImage = new GalleryImage();
+
+                    $galleryImage->product_id =$product->id;
+
+                    $imageName = rand().'-galleryimage-'.'.'.$image->extension();
+                    $image->move('backend/images/galleryImage',$imageName);
+
+                    $galleryImage->image =$imageName;
+
+                    $galleryImage->save();
+
+                }
+            }
+        }
+        
+        return redirect()->back();
+=================================================ok
+productcontroller>>>>
+class ProductController extends Controller
+{ 
+    public function productCreate (){
+        $categories = Category::get();
+        $subCategories = SubCategory::get();
+        return view ('backend.product.create', compact ('categories','subCategories'));
+    }
+
+    public function productStore (Request $request){
+        $product = new Product();
+
+        // for image
+        
+        if (isset($request->image)){
+            $imageName = rand().'-product-'.'.'.$request->image->extension();
+            $request->image->move('backend/images/product',$imageName);
+
+            $product->image =$imageName;
+        }
+
+        $product->name = $request->name;
+        $product->slug = Str::slug ($request->name);
+        $product->cat_id = $request->cat_id;
+        $product->sub_cat_id = $request->sub_cat_id;
+        $product->sku_code = $request->sku_code;
+        $product->buying_price = $request->buying_price;
+        $product->regular_price = $request->regular_price;
+        $product->discount_price = $request->discount_price;
+        $product->qty = $request->qty;
+        $product->description = $request->description;
+        $product->policy = $request->policy;
+        $product->product_type = $request->product_type;
+
+        $product->save();
+
+        if(isset($request->color) && $request->color[0] != null){
+            foreach($request->color as $color_name){
+                $color = new Color();
+    
+                $color->product_id = $product->id;
+                // $color->color_name = $request->color;
+                $color->color_name = $color_name;
+
+                $color->save();
+            }
+        }
+
+        // $color->product_id = $product->id;
+        // $color->color_name = $request->color;
+
+        // Add Size 
+        if(isset($request->size) && $request->size[0] != null){
+            foreach($request->size as $size_name){
+                $size = new Size();
+    
+                $size->product_id = $product->id;
+                // $size->size_name = $request->size;
+                $size->size_name = $size_name;
+    
+                $size->save();
+            }
+
+            //Gallery Image
+            if(isset($request->galleryImage)){
+                foreach($request->galleryImage as $image){
+                    $galleryImage = new GalleryImage();
+
+                    $galleryImage->product_id =$product->id;
+
+                    $imageName = rand().'-galleryimage-'.'.'.$image->extension();
+                    $image->move('backend/images/galleryImage',$imageName);
+
+                    $galleryImage->image =$imageName;
+
+                    $galleryImage->save();
+
+                }
+            }
+        }
+        
+        return redirect()->back();
+    }
+==========================================
+Product Data Table >>> backend >>>product>>>create.blade.php
 @extends('backend.master')
 
 @section('content')
@@ -253,3 +575,10 @@
     </script>
 
 @endpush
+
+
+
+
+
+
+
