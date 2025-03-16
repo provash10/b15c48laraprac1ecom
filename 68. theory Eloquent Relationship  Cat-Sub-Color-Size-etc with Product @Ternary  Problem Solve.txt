@@ -1,0 +1,224 @@
+Class-68 (Laravel-20)
+=======================
+Eloquent Relationship  Cat-Sub-Color-Size-etc with Product @Ternary  Problem Solve
+==================================================================================
+Product List >>>
+
+web.php >>> 
+Route::get('/admin/product/list',[ProductController::class, 'productList']);
+
+create a blade >>>backend>>> product >>> list.blade.php
+
+copy from category >>>list.blade.php code and paste >>>
+backend>>> product >>> list.blade.php >>> and edit.
+
+ProductController.php
+public function productList(){
+        $products = Product::orderBy('id', 'desc')->get();
+
+        // dd($products);
+        return view ('backend.product.list', compact('products'));
+    }
+--------------------
+17.00min  
+Eloquent Relationship of Product (Product & Category)
+
+Go To Models >>>
+
+Models >>>Category.php
+public function product(){
+        return $this->hasMany(Product::class,'cat_id', 'id');
+    }
+
+Models >>>Product.php
+ public function category(){
+        return $this->belongsTo(Category::class,'cat_id', 'id');
+    }
+}
+-----------------------
+27.00 min
+Eloquent Relationship of Product (Product & Sub Category)
+
+Go To Models >>>
+
+Models >>>SubCategory.php
+public function product (){
+        return $this->hasMany(product::class, 'cat_id','id');
+    }
+
+Models >>>Product.php
+public function subCategory(){
+        return $this->belongsTo(SubCategory::class,'cat_id', 'id');
+    }
+--------------------------------------
+35.00 min
+*****Models >>> Color, Size, GalleryImage ar satheo Product table ar relation korte hobe.
+   Eloquent Relationship of Product (Product & Color)
+
+Models >>>Color.php
+public function product (){
+        return $this->belongsTo(product::class, 'product_id','id');
+    }
+
+Models >>>Product.php
+ public function color (){
+        return $this->hasMany(Color::class, 'product_id','id');
+    }
+
+---------------------------
+39.00 Min
+Eloquent Relationship of Product (Product & Size)
+
+
+Models >>>Size.php
+public function product (){
+        return $this->belongsTo(product::class, 'product_id','id');
+    }
+
+Models >>>Product.php
+public function size (){
+        return $this->hasMany(Size::class, 'product_id','id');
+    }
+
+-------------------------------------
+Eloquent Relationship of Product (Product & GalleryImage)
+
+Models >>>GalleryImage.php
+public function product (){
+        return $this->belongsTo(Product::class, 'product_id','id');
+    }
+
+Models >>>Product.php
+
+public function galleryImage (){
+        return $this->hasMany(GalleryImage::class, 'product_id','id');
+    }
+-----------------------------
+45.00 min
+Eloquent Relationship of Product (Product & Review)
+
+Models >>>Review.php
+    public function product (){
+        return $this->belongsTo(Product::class, 'product_id','id');
+
+Models >>>Product.php
+public function review (){
+        return $this->hasMany(Review::class, 'product_id','id');
+    }
+------------------------------------------------
+49.00 min
+****prosuct table a product ar sathe Category and SubCategory Name show korate hobe.
+
+**** Product Model e Category and SubCategory R jonno kono Relation ase kina.
+****For Category >>>  public function category(){
+****For SubCategory >>>  public function subCategory(){
+****For Color >>>  public function color(){ ....etc
+
+Controllers>>>Backend >>> ProductController.php
+
+*****Before
+ public function productList(){
+        $products = Product::orderBy('id', 'desc')->get();
+
+        // dd($products);
+        return view ('backend.product.list', compact('products'));
+    }
+
+*****After
+
+public function productList(){
+        $products = Product::orderBy('id', 'desc')->with('category','subCategory')->get();
+
+        // dd($products);
+        return view ('backend.product.list', compact('products'));
+    }
+-------------check by // dd($products); >>> http://127.0.0.1:8000/admin/product/list >> dd ok....
+53.00 Min
+backend>>>>product>>>>list.blade.php
+
+*****before
+@foreach ($products as $product)
+                <tr>
+                  {{-- <td>01</td> --}}
+                  <td>{{$loop->index+01}}</td>
+                  <td>
+                    {{-- <img src="{{$category->image}}"> --}}
+                    <img src="{{asset('backend/images/product/'.$product->image)}}" height="100" width="100">
+                  </td>
+                  <td>{{$product->name}}</td>
+                  <td>{{$product->cat_id}}</td>
+                  <td>{{$product->sub_cat_id}}</td>
+                  <td>{{$product->buying_price}}</td>
+                  <td>{{$product->regular_price}}</td>
+                  <td>{{$product->discount_price}}</td>
+                  <td>{{$product->qty}}</td>
+                  
+                  <td>
+                    {{-- <a href="{{url('/admin/category/edit/{id}')}}" class="btn btn-primary">Edit</a> --}}
+                    <a href="#" class="btn btn-primary">Edit</a>
+                   
+                    {{-- <a href="{{url('/admin/category/delete/{id}')}}" class="btn btn-danger">Delete</a> --}}
+                    {{-- <a href="{{url('/admin/category/delete/'.$category->id)}}" class="btn btn-danger">Delete</a> --}}
+                    <a href="#" onclick="return confirm('Are You Sure!!!')" class="btn btn-danger">Delete</a>
+                  </td>
+                </tr>
+                @endforeach
+
+*****after
+
+                  <td>{{$product->name}}</td>
+                  <td>{{$product->cat_id}}</td>
+                  <td>{{$product->sub_cat_id}}</td>
+                  <td>{{$product->buying_price}}</td>
+                  <td>{{$product->regular_price}}</td>
+                  <td>{{$product->discount_price}}</td>
+                  <td>{{$product->qty}}</td>
+                  <td>
+
+>>>
+
+<td>{{$product->name}}</td>
+                  
+                  {{-- For Catgory & subCategory Name showing --}}
+                  {{-- <td>{{$product->cat_id}}</td> --}}
+                  <td>{{$product->catgory->name}}</td>
+                  {{-- <td>{{$product->sub_cat_id}}</td> --}}
+                  <td>{{$product->subCategory->name}}</td>
+                  <td>{{$product->buying_price}}</td>
+                  <td>{{$product->regular_price}}</td>
+                  <td>{{$product->discount_price}}</td>
+                  <td>{{$product->qty}}</td>
+                  <td>
+
+check >>>http://127.0.0.1:8000/admin/product/list 
+*****error aste pare >>> Attempt to read property "name" on null
+means >>> category or subcategory name passe na.
+
+Again Solution >>>
+                  <td>{{$product->cat_id}}</td>
+                  <td>{{$product->sub_cat_id}}</td>
+
+                  <td>{{$product->catgory->name}}</td>
+                  <td>{{$product->subCategory->name}}</td>
+
+                      *****Ternary Problem >>solution
+                   <td>{{$product->catgory->name?? ""}}</td>
+                  <td>{{$product->subCategory->name?? ""}}</td>
+                               
+                                  OR
+
+                   <td>{{$product->catgory->name?? "write any text"}}</td>
+                  <td>{{$product->subCategory->name?? "write any text"}}</td>
+
+
+                   
+                   <td>{{$product->catgory->name?? "Not Found"}}</td>
+                  <td>{{$product->subCategory->name?? "Not Found"}}</td>
+
+
+>>>>>>>>>>>>check>>>
+>> http://127.0.0.1:8000/admin/product/list >>> done
+---------------------------------------------------------
+
+
+
