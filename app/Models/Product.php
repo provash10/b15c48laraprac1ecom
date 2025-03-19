@@ -16,7 +16,7 @@ class Product extends Model
     }
 
     public function subCategory(){
-        return $this->belongsTo(SubCategory::class,'cat_id', 'id');
+        return $this->belongsTo(SubCategory::class,'sub_cat_id', 'id');
     }
 
     public function color (){

@@ -76,6 +76,7 @@ For Size copy Color Code For Size
 
 >>>>>>>>>>>Check product >>> add field >>>>ok
 
+*****29.00 min >>>>>>>>
 
 5. For Multiple Image >>> Copy the product image code for multiple image 
 **** no need add more
@@ -101,7 +102,7 @@ For Size copy Color Code For Size
 Now this create.blade.php design k database add korte hobe.....
 ****Database a insert korar jonno got to >>> ProductController.php
 So,
-productStore a kaj korte hove ....Form submite hole 
+productStore a kaj korte hobe ....Form submit hole 
 ******<form action="{{ url('/admin/product/store')}}" method="post" enctype="multipart/form-data">
                                 @csrf
 action="{{ url('/admin/product/store')}}" url a hit korbe and productStore call hobe
@@ -212,6 +213,12 @@ uncomment >>>  ok
 --------------->>>Check phpmyadmin/database >>> products and colors table >>>>ok
 
 50.00min>>>>>>>>>>>
+ $imageName = rand().'-galleryimage-'. '.' .$request->image->extension();
+        $request->image->move('backend/images/galleryImage', $imageName);
+
+$imageName = rand() . '-product-' . '.' . $request->image->extension();
+            $request->image->move('backend/images/product', $imageName);
+
 
 Gallery Image>>>>
 

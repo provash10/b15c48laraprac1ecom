@@ -1,0 +1,145 @@
+Class-69 (Laravel-21)
+========================
+Product Data Table CRUD (Delete & Edit)
+------------------------------------------
+*****Product List  theke kono product delete korle
+sobgulo data table means -oi product ar color, size, image,galleryimage etc o delete korte hobe)
+***** Edit ar jonno 2 ta route hoi.
+
+Route::get('/admin/product/edit/{id}',[ProductController::class, 'productEdit']);
+Route::post('/admin/product/update/{id}',[ProductController::class, 'productUpdate']);
+Route::get('/admin/product/delete/{id}',[ProductController::class, 'productDelete']);
+****linkup url >>>ok
+------------------------------------------------>
+
+*****Delete
+Route::get('/admin/product/delete/{id}',[ProductController::class, 'productDelete']);
+linkup url >>> list.blade.php >>> 
+ {{-- <a href="{{url('/admin/category/delete/{id}')}}" class="btn btn-danger">Delete</a> --}}
+ <a href="{{url('/admin/product/delete/'.$product->id)}}" onclick="return confirm('Are You Sure!!!')" class="btn btn-danger">Delete</a>
+ 
+**** Create Delete function >>>ProductController>>
+
+ // CRUD Delete
+    public function productDelete ($id){
+        $product = Product::find($id);
+        // $color = Color::find($id); -----not right
+        $color = Color::where('product_id',$product->id)->get();
+
+        dd($color);
+    }
+http://127.0.0.1:8000/admin/product/list dd($color); >>>>delete
+http://127.0.0.1:8000/admin/product/delete/10 >>>product id 6 
+>>>  dd($color); check ok..........
+-----------------
+// main/single image delete from CategoryController categoryDelete copy and paste
+        if($category->image && file_exists('backend/images/category/'.$category->image)){
+            unlink('backend/images/category/'.$category->image);
+
+//multple GalleryImage delete
+            if($galleryImage->isNotEnpty()){
+                foreach($galleryImage as $image){
+                    $image->delete();
+                }
+
+*****But Public folder image not delete
+
+----------------------------
+20.00 min
+ProductController.php>>>
+  // CRUD Delete
+    public function productDelete($id)
+    {
+        $product = Product::find($id);
+        // $color = Color::find($id); -----not right
+        $colors = Color::where('product_id', $product->id)->get();
+        // dd($colors);
+        $sizes = Size::where('product_id', $product->id)->get();
+        $galleryImage = GalleryImage::where('product_id', $product->id)->get();
+        $reviews = Review::where('product_id', $product->id)->get();
+
+
+        // main/single image delete from CategoryController categoryDelete copy and paste
+        if ($product->image && file_exists('backend/images/product/' . $product->image)) {
+            unlink('backend/images/product/' . $product->image);
+        }
+
+        $product->delete();
+
+           19.00 min------>>>>
+        //multple Color delete
+        if($colors->isNotEmpty()){
+            foreach($colors as $color){
+                $color->delete();
+            }
+        }
+
+        //multple Size delete
+        if($sizes->isNotEmpty()){
+            foreach($sizes as $size){
+                $size->delete();
+            }
+        }
+
+        //multple Review delete
+        if($reviews->isNotEmpty()){
+            foreach($reviews as $review){
+                $review->delete();
+            }
+        }
+
+        //multple Gallery Image delete 2 way
+        if($galleryImages->isNotEmpty()){
+            foreach($galleryImages as $image){
+                
+                //public folder gallery image delete
+                if ($image->image && file_exists('backend/images/galleryImage/'.$image->image)) {
+                    unlink('backend/images/galleryImage/'.$image->image);
+                }
+
+                $image->delete();
+            }
+        }
+
+
+        return redirect()->back();
+    }
+}
+===================================>>>
+ now check by delete >>> http://127.0.0.1:8000/admin/product/list >>>ok
+
+*******27.00 min ********
+*******CRUD Edit >>>>
+All Data get ar jonno 
+ //for all table get->
+        $product = Product::where('id',$id)->with('color','size','galleryImage')->first();
+
+-----------------------------------------
+//Edit
+    public function productEdit($id){
+        //for all table get->
+        $product = Product::where('id',$id)->with('color','size','galleryImage')->first();
+        // dd($product);
+        return view('backend.product.edit', compact('product'));
+    }
+
+========>
+  //Edit
+    public function productEdit($id){
+        //for all table get->
+        $product = Product::where('id',$id)->with('color','size','galleryImage')->first();
+        // dd($product);
+        $categories = Category::get();
+        $subCategories = SubCategory::get();
+        return view('backend.product.edit', compact('product','categories','subCategories'));
+    }
+
+----------create edit blade file >>>>backend/product/edit.blade.php
+>>> backend/product/create.blade.php copy data and paste >>>backend/product/edit.blade.php
+and edit...........
+<form action="{{url('/admin/product/update'.$product->id)}}" method="post" enctype="multipart/form-data">
+value >> 
+
+All value setup....?>>>>ok
+
+
