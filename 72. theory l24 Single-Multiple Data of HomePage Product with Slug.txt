@@ -1,0 +1,502 @@
+
+Class-72 (Laravel-24)
+========================
+Frontend Home Page>>> Single Product Details
+>>>http://127.0.0.1:8000/product-details
+--------------------
+Q. 1 >>> Previous - Next under Gallery Image
+
+web.php 
+>>> Route::get('/product-details',[FrontendController::class, 'productDetails'])->name('product.details');
+>>> Route::get('/product-details/{id}',[FrontendController::class, 'productDetails'])->name('product.details');
+
+Setup this url >>>all part
+
+//    product details
+*****before****
+public function productDetails(){
+    return view('product-details');
+}
+
+*****after*****
+//    product details
+
+public function productDetails($id){
+    $product = Product::find($id);
+    return view('product-details', compact('product'));
+}
+--------------index.blade.php-------------
+{{-- <a href="{{url('product-details')}}" class="product__item-name"> --}}
+<a href="{{url('product-details/'.$product->id)}}" class="product__item-name">
+
+****Use it all the index.blade.php product-details link 
+>> "{{url('product-details/'.$product->id)}}"
+----------------------------------
+Now check >>> http://127.0.0.1:8000/ >>> any Hot Products >>> click>>>
+>>> http://127.0.0.1:8000/product-details/14 >>> products details....
+
+8.00 min
+*****je product e click koresi sei product ar details dekhate hobe******
+ 
+$product = Product::find($id);
+ dd($product);
+http://127.0.0.1:8000/ >>> click any products >>> dd ok
+--------------
+ public function productDetails($id){
+
+    // $product = Product::find($id);
+    
+    $product = Product::with('color','size','galleryImage','review')->where('id', $id)->first();
+    dd($product);
+    return view('product-details', compact('product'));
+}  >>> relation >>>ok
+>>>>>>ok >>> ai data gulo product-details page a show korate hobe.
+'product-details'>>>resource>>>views>>>product-details.blade.php
+
+*****16.00 min
+>>>>product-details.blade.php---->>>>
+
+class="col-lg-5 col-md-5">
+                            <div class="product-details-content">
+                                <h3 class="product-name">
+                                    {{-- Test Product --}}
+                                    {{$product->name}}
+                                </h3>
+                                <div class="product-price">
+                                    {{-- <span>300 Tk.</span> --}}
+                                    <span>{{$product->discount_price}}</span>
+                                    <span class="" style="color: #f74b81;">
+                                        {{-- <del>400 Tk.</del> --}}
+                                        <del>{{$product->regular_price}}</del>
+                                    </span>
+                                </div>
+18.00 min >>> color, size alada table theke alada vabe dekhate hobe
+
+Description, Review, Product Policy >>>
+Description >>> id="pills-description-tab"
+
+<div class="tab-pane fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
+ {{-- Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis minus, ut unde laudantium accusamus odio nam officia aperiam excepturi quis nesciunt eveniet eligendi, corrupti voluptatibus. Similique doloremque velit optio aliquam. --}}
+ {{-- {{$product->description}} --}}
+  {!!$product->description!!}
+ </div>
+
+***** without html tag use it{!!!!}
+Review >>>  next ..........
+
+
+Product Policy>>> id="pills-policy-tab"
+<div class="tab-pane fade" id="pills-policy" role="tabpanel" aria-labelledby="pills-policy-tab">
+                                {{-- Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis minus,
+                                ut unde laudantium accusamus odio nam officia aperiam excepturi quis nesciunt eveniet eligendi --}}
+                                {{-- {{$product->policy}} --}}
+                                {!!$product->policy!!}  
+                            </div>
+>>>> Single Data Setup ok
+***** without html tag use it{!!!!}
+------------
+
+22.00 min >>> Multiple Data like Gallery Image, color, size...review
+           >>> dd -> relation..........
+
+Gallery Iamge >>>>
+product-details.blade.php >>> Image Part 2 types means have 2 div...
+>>> check link for sure >>> http://127.0.0.1:8000/product-details/14
+
+>>> Use loop for many image.........
+
+****before
+<div class="slider slider-content">
+                                    <div>
+                                        <img src="{{asset('/assets/images/product.png')}}" alt="slider images">
+                                    </div>
+                                </div>
+******after
+<div class="slider slider-content">
+                                    @foreach ($product->galleryImage as $image )
+                                    <div>
+                                        {{-- <img src="{{asset('/assets/images/product.png')}}" alt="slider images"> --}}
+                                        <img src="{{asset('backend/images/galleryImage/'.$image->image)}}" alt="slider images">
+                                    </div>
+                                    @endforeach
+                                </div>
+==========================================
+*****before 
+div class="slider slider-thumb">
+                                    <div>
+                                        <img src="{{asset('/assets/images/product.png')}}" alt="slider images">
+                                    </div>
+                                </div>
+
+*****after
+<div class="slider slider-thumb">
+                                    @foreach ($product->galleryImage as $image)
+                                    <div>
+                                        {{-- <img src="{{asset('/assets/images/product.png')}}" alt="slider images"> --}}
+                                        <img src="{{asset('backend/images/galleryImage/'.$image->image)}}" alt="slider images">
+                                    </div>
+                                    @endforeach
+                                </div>
+
+====================================
+26.00 >>> Color
+***** jeta database a insert korate hoi seta 
+Kono na kono Form ar vitore thake.
+
+*****use loop for color
+
+before*****
+<div class="product-details-select-item-outer">
+                                            <input type="radio" name="color" id="color" value="Red" class="category-item-radio">
+                                            <label for="color" class="category-item-label">
+                                                Red
+                                            </label>
+                                        </div>
+
+after*****
+
+{{-- Color & size div  --}}
+                                    <div class="product-details-select-items-wrap">
+                                        @foreach ($product->color as $colorName)
+                                        <div class="product-details-select-item-outer">
+                                           {{-- <input type="radio" name="color" id="color" value="Red" class="category-item-radio"> --}}
+                                            <input type="radio" name="color" id="color" value="{{$colorName->color_name}}" class="category-item-radio">
+                                            <label for="color" class="category-item-label">
+                                                {{-- Red --}}
+                                                {{$colorName->color_name}}
+                                            </label>
+                                        </div>
+                                        @endforeach
+                                    </div>
+****change value="{{$colorName->color_name}}"
+===============================================
+29.00 Min Size 
+***** Use loop
+*****Before
+<div class="product-details-select-items-wrap">
+                                        <div class="product-details-select-item-outer">
+                                            <input type="radio" name="size" value="XXl" class="category-item-radio">
+                                            <label for="size" class="category-item-label">XXl</label>
+                                        </div>
+                                    </div>
+***** after
+>>>> Check database sizes for size name  >>>> size_name..
+****change value="{{$sizeName->size_name}}"
+
+<div class="product-details-select-items-wrap">
+                                        @foreach ($product->size as $sizeName )
+                                        <div class="product-details-select-item-outer">
+                                            {{-- <input type="radio" name="size" value="XXl" class="category-item-radio"> --}}
+                                            <input type="radio" name="size" value="{{$sizeName->size_name}}" class="category-item-radio">
+                                            {{-- <label for="size" class="category-item-label">XXl</label> --}}
+                                            <label for="size" class="category-item-label">{{$sizeName->size_name}}</label>
+                                        </div>
+                                        @endforeach
+                                    </div>
+
+=============================================
+31.00 min
+Review
+*****use loop
+*****check database >>>>reviews >>>>customer_name = {{$data->customer_name}}, message {!!$data->message!!}
+*****before 
+<div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
+                                <div class="review-item-wrapper">
+                                    <div class="review-item-left">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="review-item-right">
+                                        <h4 class="review-author-name">
+                                            Saidul Islam 
+                                            <span class=" d-inline bg-danger badge-sm badge text-white">Verified</span>
+                                        </h4>
+                                        <p class="review-item-message">
+                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis minus, ut unde laudantium accusamus odio nam officia aperiam excepturi quis nesciunt eveniet eligendi.
+                                        </p>
+                                        <span class="review-item-rating-stars">
+                                            <i class="fa-star fas"></i>
+                                            <i class="fa-star fas"></i>
+                                            <i class="fa-star fas"></i>
+                                            <i class="fa-star fas"></i>
+                                            <i class="fa-star fas"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+-----------------------------------
+*****after
+
+
+
+
+
+36.00 min Review Rating >>>>
+insert review>> phpmyadmin
+*****before
+                                       <span class="review-item-rating-stars">
+                                            <i class="fa-star fas"></i>
+                                            <i class="fa-star fas"></i>
+                                            <i class="fa-star fas"></i>
+                                            <i class="fa-star fas"></i>
+                                            <i class="fa-star fas"></i>
+                                        </span>
+
+*****after
+<span class="review-item-rating-stars">
+                                            @if ($data->rating == 5)
+                                            <i class="fa-star fas"></i>
+                                            <i class="fa-star fas"></i>
+                                            <i class="fa-star fas"></i>
+                                            <i class="fa-star fas"></i>
+                                            <i class="fa-star fas"></i>
+
+                                            @elseif ($data->rating == 4)
+                                            <i class="fa-star fas"></i>
+                                            <i class="fa-star fas"></i>
+                                            <i class="fa-star fas"></i>
+                                            <i class="fa-star fas"></i>
+
+                                            @elseif ($data->rating == 3)
+                                            <i class="fa-star fas"></i>
+                                            <i class="fa-star fas"></i>
+                                            <i class="fa-star fas"></i>
+
+                                            @elseif ($data->rating == 2)
+                                            <i class="fa-star fas"></i>
+                                            <i class="fa-star fas"></i>
+
+                                            @elseif ($data->rating == 1)
+                                            <i class="fa-star fas"></i>
+                                            @endif
+                                        </span>
+=========================================================
+40.00 >>>>Review >>> icon
+
+                                   <div class="review-item-wrapper">
+                                    {{-- icon --}}
+                                    <div class="review-item-left">
+                                        {{-- <i class="fas fa-user"></i> --}}
+                                        <img src="{{asset('backend/images/galleryImage/'.$data->image)}}" height="100" width="100">
+                                    </div>  
+==============================================
+44.00 min
+******Products url a ***id na dia ***slug dite hobe
+
+********http://127.0.0.1:8000/product-details/14 url SEO friendly with slug
+**********index.blade.php >>>> use slug to id 
+
+http://127.0.0.1:8000/product-details/14 >>>>http://127.0.0.1:8000/product-details/slug
+Route::get('/product-details/{id}',[FrontendController::class, 'productDetails'])->name('product.details');
+
+*****Function change korte hobe
+//    product details  use slug >>> $id
+
+public function productDetails($slug){
+
+    // $product = Product::find($id);
+    
+    $product = Product::with('color','size','galleryImage','review')->where('slug', $slug)->first();
+    // dd($product);
+    return view('product-details', compact('product'));
+}
+
+//    product details  use slug >>> $id
+
+public function productDetails($id){
+
+    // $product = Product::find($id);
+    
+    $product = Product::with('color','size','galleryImage','review')->where('id', $id)->first();
+    // dd($product);
+    return view('product-details', compact('product'));
+
+********http://127.0.0.1:8000/product-details/14 url SEO friendly with slug
+**********index.blade.php >>>> use slug to id 
+***********       .$product->id  changed >>> .$product->slug
+
+>> <a href="{{url('product-details/'.$product->id)}}" class="product__item-image-inner">
+
+Route::get('/product-details/{slug}',[FrontendController::class, 'productDetails'])->name('product.details');
+
+
+
+<div class="product__item-image-outer">
+						{{-- <a href="{{url('product-details/'.$product->id)}}" class="product__item-image-inner"> --}}
+							<a href="{{url('product-details/'.$product->slug)}}" class="product__item-image-inner">
+							{{-- <img src="{{asset('/assets/images/product.png')}}" alt="Product Image" /> --}}
+							<img src="{{asset('backend/images/product/'.$product->image)}}" alt="Product Image" />
+						</a>
+
+
+
+.$product->id  changed >>> .$product->slug
+http://127.0.0.1:8000/product-details/14 >>> changed
+>>>>http://127.0.0.1:8000/product-details/beauty
+http://127.0.0.1:8000/product-details/beauty-700
+http://127.0.0.1:8000/product-details/beauty-700
+
+****Note: jodi slug na ase tahole new product add korte hobe.
+         Or ager product delete kore new product add korte hobe.
+--------------------------------------------------------------------
+*****problem: GalleryImage >>> edit korle image add hosse with ager  image 
+fixed it from funtion >>>> productEdit >>>> galleryImage >>>>ok
+
+***** 55.00 min 
+Product-details page Right Side Category List >>>>
+
+*****FrontendController.php>>> public function productDetails($slug){
+$categories = category::get();
+  return view('product-details', compact('product', 'categories'));
+
+*****use loop
+
+product-details.blade.php >>> 
+<a href="#" class="category-item-outer">
+                            <img src="{{asset('/assets/images/product.png')}}" alt="category image">
+                            Test Category
+                        </a>
+----------------------------------
+
+
+*****FrontendController.php>>> public function productDetails($slug){
+$categories = Category::get();
+  return view('product-details', compact('product', 'categories'));
+
+*****use loop
+****url >>> http://127.0.0.1:8000/category-products >>> category-products
+****category Image>>backend>>categoryController.php >>>'backend/category/category/'.$category->image
+*****before
+<div class="product-details-sidebar">
+                    <div class="product-details-categoris">
+                        <h3 class="product-details-title">
+                            Category
+                        </h3>
+                        <a href="#" class="category-item-outer">
+                            <img src="{{asset('/assets/images/product.png')}}" alt="category image">
+                            Test Category
+                        </a>
+                    </div>
+                </div>
+
+*****after
+
+@foreach ($categories as $category)
+                        <a href="{{url('category-products')}}" class="category-item-outer">
+                            {{-- <img src="{{asset('/assets/images/product.png')}}" alt="category image"> --}}
+                            <img src="{{asset('backend/images/category'.$category->image)}}" alt="category image">
+                            {{-- Test Category --}}
+                            {{$category->image}}
+                        </a>
+                        @endforeach
+=============================================
+59.00 min
+***** new product upload showing >>> first position >>>
+FrontendController.php >>>
+class FrontendController extends Controller
+{
+    public function index(){
+        $hotProducts = Product::where('product_type','hot')->get();
+        $newProducts = Product::where('product_type','new')->get();
+        $regularProducts = Product::where('product_type','regular')->get();
+        $discountProducts = Product::where('product_type','discount')->get();
+        
+        return view('index',compact('hotProducts', 'newProducts', 'regularProducts', 'discountProducts'));
+    }
+
+public function productDetails($slug){
+
+    // $product = Product::find($id);
+    
+    $product = Product::with('color','size','galleryImage','review')->where('slug', $slug)->first();
+    // dd($product);
+    $categories = Category::get();
+    return view('product-details', compact('product', 'categories'));
+}
+
+*****after
+ ****** public function index
+>>>$hotProducts = Product::where('product_type','hot')->orderBy('id', 'desc')->get();
+*******public function productDetails($slug) 
+>>>$categories = Category::orderBy('id','desc')->get();
+
+ public function index(){
+        $hotProducts = Product::where('product_type','hot')->orderBy('id','desc')->get();
+        $newProducts = Product::where('product_type','new')->orderBy('id','desc')->get();
+        $regularProducts = Product::where('product_type','regular')->orderBy('id','desc')->get();
+        $discountProducts = Product::where('product_type','discount')->orderBy('id','desc')->get();
+        
+        return view('index',compact('hotProducts', 'newProducts', 'regularProducts', 'discountProducts'));
+    }
+
+public function productDetails($slug){
+
+    // $product = Product::find($id);
+    
+    $product = Product::with('color','size','galleryImage','review')->where('slug', $slug)->first();
+    // dd($product);
+    $categories = Category::orderBy('id','desc')->get();
+    return view('product-details', compact('product', 'categories'));
+}
+
+==============================
+1.04 Min 
+http://127.0.0.1:8000 >>>Categories Showing (under banner image)
+
+FrontendController.php >>> $categories = Category::orderBy('id','desc')->get();
+
+copy from function productDetails and paste in
+function index >>> $categories = Category::orderBy('id','desc')->get();
+*****use loop
+
+class FrontendController extends Controller
+{
+    public function index(){
+        $hotProducts = Product::where('product_type','hot')->orderBy('id','desc')->get();
+        $newProducts = Product::where('product_type','new')->orderBy('id','desc')->get();
+        $regularProducts = Product::where('product_type','regular')->orderBy('id','desc')->get();
+        $discountProducts = Product::where('product_type','discount')->orderBy('id','desc')->get();
+        
+        // from function  productDetails
+        $categories = Category::orderBy('id','desc')->get();
+        return view('index',compact('hotProducts', 'newProducts', 'regularProducts', 'discountProducts', 'categories'));
+    }
+
+index.blade.php >>> Category >>> 
+
+*****before
+<div class="section-title-outer">
+				<h1 class="title">
+					Categories
+				</h1>
+			</div>
+			<div class="categoris-items-wrapper owl-carousel">
+				<a href="{{url('/category-products')}}" class="categoris-item">
+					<img src="{{asset('/assets/images/product.png')}}" alt="category" />
+					<h6 class="categoris-name">
+						Test Category
+					</h6>
+					<span class="items-number">1 items</span>
+				</a>
+			</div>
+******after
+
+<div class="section-title-outer">
+				<h1 class="title">
+					Categories
+				</h1>
+			</div>
+			<div class="categoris-items-wrapper owl-carousel">
+				@foreach ($categories as $category)
+				<a href="{{url('/category-products')}}" class="categoris-item">
+					{{-- <img src="{{asset('/assets/images/product.png')}}" alt="category" /> --}}
+					<img src="{{asset('backend/images/category/'.$category->image)}}" alt="category" />
+					<h6 class="categoris-name">
+						{{-- Test Category --}}
+						{{$category->name}}
+					</h6>
+					{{-- <span class="items-number">8 items</span> --}}
+					<span class="items-number">{{App\Models\Product::where('cat_id',$category->id)->count()}}</span>
+				</a>
+				@endforeach
+			</div>
+--------------------------------------------------

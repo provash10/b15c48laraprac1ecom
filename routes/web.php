@@ -51,7 +51,9 @@ Route::get('/payment-policy',[FrontendController::class, 'paymentPolicy']);
 Route::get('/about-us',[FrontendController::class, 'aboutUs']);
 Route::get('/contact-us',[FrontendController::class, 'contactUs']);
 
-Route::get('/product-details',[FrontendController::class, 'productDetails'])->name('product.details');
+// Route::get('/product-details',[FrontendController::class, 'productDetails'])->name('product.details');
+// Route::get('/product-details/{id}',[FrontendController::class, 'productDetails'])->name('product.details');
+Route::get('/product-details/{slug}',[FrontendController::class, 'productDetails'])->name('product.details');
 
 Route::get('/type-products', [FrontendController::class, 'typeProducts']);
 
