@@ -119,4 +119,50 @@ public function addToCart (Request $request, $id){
     return redirect()->back();
 }
 
+        // Add to Cart Details Page 
+public function addToCartDetails (Request $request, $id){
+    $cartProduct = Cart::where('product_id', $id)->where('ip_address',$request->ip())->orderBy('id', 'desc')->first();
+    // dd($cartProduct);
+    $product = Product::find($id);
+    // dd($product);
+
+    if($cartProduct == null){
+        $cart = new Cart();
+    $cart->ip_address = $request->ip();
+    $cart->product_id = $product->id;
+    // $cart->qty = 1;
+    $cart->qty = $request->qty;
+    $cart->color = $request->color;
+    $cart->size = $request->size;
+
+    // $cart->price = $product->discount_price;
+
+    if($product->discount_price == null){
+        $cart->price = $product->regular_price;
+    }
+    elseif($product->discount_price !== null){
+        $cart->price = $product->discount_price;
+    }
+
+    $cart->save();
+    }
+
+    elseif($cartProduct !== null){
+        // $cartProduct->qty = $cartProduct->qty+1;
+        $cartProduct->qty = $cartProduct->qty + $request->qty;
+        // $cartProduct->qty += 1;
+        $cartProduct->color = $request->color;
+        $cartProduct->size = $request->size;
+        $cartProduct->save();
+    }
+
+    if($request->action =="addToCart"){
+        return redirect()->back();
+    }
+
+    elseif($request->action =="buyNow"){
+        return redirect('/checkout');
+    }
+    // return redirect()->back();
+}
 }

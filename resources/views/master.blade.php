@@ -25,5 +25,7 @@
     {{-- for js script  --}}
 	@include('includes.script')
 	
+	{{-- For Extra Js  --}}
+	@stack('script')
 </body>
 </html>

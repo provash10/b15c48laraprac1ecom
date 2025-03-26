@@ -58,8 +58,10 @@
                                         <label for="size" class="category-item-label">XXl</label>
                                     </div>
                                 </div> --}}
-                                <form action="" method="POST">
-
+                                {{-- <form action="{{url('/add-to-cart-details/{id}')}}" method="POST"> --}}
+                                    {{-- Add to cart url--}}
+                                    <form action="{{url('/add-to-cart-details/'.$product->id)}}" method="POST">
+                                        @csrf
                                     {{-- Color & size div  --}}
                                     <div class="product-details-select-items-wrap">
                                         @foreach ($product->color as $colorName)
@@ -90,7 +92,9 @@
                                             <a title="Decrement" class="decrement-btn" style="margin-top: -10px;">
                                                 <i class="fas fa-minus"></i>
                                             </a>
+
                                             <input type="number" readonly name="qty" placeholder="Qty" value="1" min="1" id="qty" style="height: 35px">
+                                            
                                             <a title="Increment" class="increment-btn" style="margin-top: -10px;">
                                                 <i class="fas fa-plus"></i>
                                             </a>
@@ -216,3 +220,30 @@
 </section>
 
 @endsection
+
+@push('script')
+    <script>
+        var qtyInput = document.getElementById('qty');
+
+        var plusBtn = document.querySelector('.increment-btn');
+        var minusBtn = document.querySelector('.decrement-btn');
+
+        plusBtn.addEventListener('click', function(){
+            // qtyInput.value = qtyInput.value+1;
+            qtyInput.value = parseInt(qtyInput.value)+1;
+        })
+        // minusBtn.addEventListener('click', function(){
+        //     // qtyInput.value = qtyInput.value-1;
+        //     qtyInput.value = parseInt(qtyInput.value)-1;
+        // })
+
+        // for -1. -2, -3 -
+        minusBtn.addEventListener('click', function(){
+            if(parseInt(qtyInput.value) > 1){
+                // qtyInput.value = qtyInput.value-1;
+            qtyInput.value = parseInt(qtyInput.value)-1;
+            }
+        })
+
+    </script>
+@endpush

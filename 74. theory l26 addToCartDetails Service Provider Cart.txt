@@ -1,0 +1,274 @@
+Class-74 (Laravel-26)
+=====================
+Working
+after Homepage add to cart >>> 
+
+Product Details Page >>> 
+>>>http://127.0.0.1:8000/product-details/horlicks-500
+-----------------------------------------
+resource >>>views>>>product-details.blade.php
+***** Product Quantity increase or decrease + OR - 
+
+<form tag >>>>>
+***** use js
+***** Frontend a extra js likhar jonno >>>
+     resource >>>views>>>> master.blade.php >>> 	
+{{-- For Extra Js  --}}
+	@stack('script')
+
+***** Frontend a extra js likhar jonno >>>
+     resource >>>views>>>> product-details.blade.php >>>
+@push('script')
+    
+@endpush
+-----------------------------
+product-details.blade.php >>>
+<input type="number" readonly name="qty" placeholder="Qty" value="1" min="1" id="qty" style="height: 35px">
+***** input field ar id dorte hobe (value="1" min="1" id="qty")
+*********before
+<div class="product-incremnt-decrement-outer" style="display: block">
+                                            <a title="Decrement" class="decrement-btn" style="margin-top: -10px;">
+                                                <i class="fas fa-minus"></i>
+                                            </a>
+                                            <input type="number" readonly name="qty" placeholder="Qty" value="1" min="1" id="qty" style="height: 35px">
+                                            <a title="Increment" class="increment-btn" style="margin-top: -10px;">
+                                                <i class="fas fa-plus"></i>
+                                            </a>
+                                        </div>
+*****after
+
+========================8.00 min
+master.blade.php >>> 	
+{{-- For Extra Js  --}}
+	@stack('script')
+-------------->>>
+product-details.blade.php >>>>
+
+
+
+plusBtn.addEventListener >>>addEventListener>>>
+addEventListener amon akti function jodi kono tag er input field a click korle
+segulo track kore.
+
+@endsection
+
+@push('script')
+    <script>
+        var qtyInput = document.getElementById('qty');
+
+        var plusBtn = document.querySelector('.increment-btn');
+        var minusBtn = document.querySelector('.decrement-btn');
+
+        plusBtn.addEventListener('click', function(){
+            // qtyInput.value = qtyInput.value+1;
+            qtyInput.value = parseInt(qtyInput.value)+1;
+        })
+        // minusBtn.addEventListener('click', function(){
+        //     // qtyInput.value = qtyInput.value-1;
+        //     qtyInput.value = parseInt(qtyInput.value)-1;
+        // })
+
+        // for -1. -2, -3 -
+        minusBtn.addEventListener('click', function(){
+            if(parseInt(qtyInput.value) > 1){
+                // qtyInput.value = qtyInput.value-1;
+            qtyInput.value = parseInt(qtyInput.value)-1;
+            }
+        })
+
+    </script>
+@endpush
+=========================================
+24.00 min
+ Add to Cart From Product Details page
+Route::post('/add-to-cart-details/{id}',[FrontendController::class, 'addToCartDetails']);
+link up >>>> product-details.blade.php >>>from action ...ok
+ <form action="{{url('/add-to-cart-details/{id}')}}" method="POST">
+***** <form action="{{url('/add-to-cart-details/'.$product->id)}}" method="POST">
+       @csrf
+
+***** details page >>> add to cart a click korle shudu product ta add to cart hobe.
+And Quick Order a click korle add to cart hobe + Checkout page a chole asbe.
+***** write function >>>> copy from before add tocart and edit.....
+***** check color, size, qty input field name
+30.00 min >>>>>
+
+ // Add to Cart Details Page 
+public function addToCartDetails (Request $request, $id){
+    $cartProduct = Cart::where('product_id', $id)->where('ip_address',$request->ip())->orderBy('id', 'desc')->first();
+    // dd($cartProduct);
+    $product = Product::find($id);
+    // dd($product);
+
+    if($cartProduct == null){
+        $cart = new Cart();
+    $cart->ip_address = $request->ip();
+    $cart->product_id = $product->id;
+    // $cart->qty = 1;
+    $cart->qty = $request->qty;
+    $cart->color = $request->color;
+    $cart->size = $request->size;
+
+    // $cart->price = $product->discount_price;
+
+    if($product->discount_price == null){
+        $cart->price = $product->regular_price;
+    }
+    elseif($product->discount_price !== null){
+        $cart->price = $product->discount_price;
+    }
+
+    $cart->save();
+    }
+
+    elseif($cartProduct !== null){
+        // $cartProduct->qty = $cartProduct->qty+1;
+        $cartProduct->qty = $cartProduct->qty + $request->qty;
+        // $cartProduct->qty += 1;
+        $cartProduct->color = $request->color;
+        $cartProduct->size = $request->size;
+        $cartProduct->save();
+    }
+
+    return redirect()->back();
+}
+===============================
+Check >>> Details page theke add to cart >>> 
+http://127.0.0.1:8000/product-details/beauty >>> ok
+
+**** if quick Order kore .......
+35.00 min
+------------------->>
+// Add to Cart Details Page 
+public function addToCartDetails (Request $request, $id){
+    $cartProduct = Cart::where('product_id', $id)->where('ip_address',$request->ip())->orderBy('id', 'desc')->first();
+    // dd($cartProduct);
+    $product = Product::find($id);
+    // dd($product);
+
+    if($cartProduct == null){
+        $cart = new Cart();
+    $cart->ip_address = $request->ip();
+    $cart->product_id = $product->id;
+    // $cart->qty = 1;
+    $cart->qty = $request->qty;
+    $cart->color = $request->color;
+    $cart->size = $request->size;
+
+    // $cart->price = $product->discount_price;
+
+    if($product->discount_price == null){
+        $cart->price = $product->regular_price;
+    }
+    elseif($product->discount_price !== null){
+        $cart->price = $product->discount_price;
+    }
+
+    $cart->save();
+    }
+
+    elseif($cartProduct !== null){
+        // $cartProduct->qty = $cartProduct->qty+1;
+        $cartProduct->qty = $cartProduct->qty + $request->qty;
+        // $cartProduct->qty += 1;
+        $cartProduct->color = $request->color;
+        $cartProduct->size = $request->size;
+        $cartProduct->save();
+    }
+
+    if($request->action =="addToCart"){
+        return redirect()->back();
+    }
+
+    elseif($request->action =="buyNow"){
+        return redirect('/checkout');
+    }
+    // return redirect()->back();
+}
+=================================================ok====
+40.00 min
+All Cart Showing or viewcart page >>>>>>>
+
+Cart>>> Showing>>> All Cart
+******No Link ... Use Service Provider
+54.00 min
+*****Cart and Product table ar relation korte hobe...
+Model >>> Cart.php
+public function product (){
+        return $this->belongsTo(Product::class,'product_id', 'id');
+    }
+Model >>>Product.php
+public function cart (){
+        return $this->hasMany(Cart::class, 'product_id', 'id');
+    }
+-------------------------------------
+****Cart Option >>>> resources >>>views>>>includes>>>
+header.blade.php >>>(No link) cart , category , subcategory ....ok
+ 
+Vs>>> App>> Providers>>> AppServiceProvider.php >>> 
+ public function boot(): void
+    {
+        View::composer('*', function($view){
+
+        });
+    }
+------------------->>>>>
+public function boot(): void
+    {
+        View::composer('*', function($view){
+            $view->with('cartProducts', Cart::where('ip_address', request()->ip())->with('product')->get());
+            $view->with('cartCount', Cart::where('ip_address', request()->ip())->with('product')->count());
+        });
+    }
+--------------------------------------ok
+1.02 min >>> 
+resources >>>views>>>includes>>>
+header.blade.php >>>> test Product >>> 
+****use loop for multiple product
+******before 
+<div class="cart-item-outer">
+                                <a href="#" class="cart-product-image">
+                                    <img src="./assets/images/product.png" alt="product">
+                                </a>
+                                <div class="cart-product-name-price">
+                                    <a href="#" class="product-name">
+                                        Test Product
+                                    </a>
+                                    <span class="product-price">
+                                        ৳ 300
+                                    </span>
+                                </div>
+                                <div class="cart-item-delete">
+                                    <a href="#" class="delete-btn">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+******after
+<div class="cart-items-outer">
+                            @foreach ($cartProducts as $cart)
+                            <div class="cart-item-outer">
+                                <a href="#" class="cart-product-image">
+                                    {{-- <img src="./assets/images/product.png" alt="product"> --}}
+                                    <img src="{{asset('backend/images/product/'.$cart->product->image)}}" alt="product">
+                                </a>
+                                <div class="cart-product-name-price">
+                                    <a href="#" class="product-name">
+                                        {{-- Test Product --}}
+                                        {{$cart->product->name}}
+                                    </a>
+                                    <span class="product-price">
+                                        {{-- ৳ 300 --}}
+                                        {{$cart->price}}
+                                    </span>
+                                </div>
+                                <div class="cart-item-delete">
+                                    <a href="#" class="delete-btn">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+------------------------------->>>>

@@ -60,6 +60,7 @@ Route::get('/type-products', [FrontendController::class, 'typeProducts']);
 
 // Carts Route >>>Frontend
 Route::get('/add-to-cart/{id}',[FrontendController::class, 'addToCart']);
+Route::post('/add-to-cart-details/{id}',[FrontendController::class, 'addToCartDetails']);
 
 
 
