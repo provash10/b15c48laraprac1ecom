@@ -115,8 +115,11 @@
                                     {{-- Product Discount Price --}}
                                     <div class="form-group">
                                         <label for="name">Product Discount Price</label>
-                                        <input type="number" class="form-control" name="discount_price" id="name"
-                                            placeholder="Enter Product Discount Price" required>
+                                        {{-- <input type="number" class="form-control" name="discount_price" id="name"
+                                            placeholder="Enter Product Discount Price" required> --}}
+                                            {{-- without required --}}
+                                            <input type="number" class="form-control" name="discount_price" id="name"
+                                            placeholder="Enter Product Discount Price">
                                     </div>
 
                                     {{-- Product Description --}}

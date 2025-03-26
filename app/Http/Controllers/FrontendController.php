@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -81,6 +82,41 @@ public function productDetails($slug){
 //view all
 public function typeProducts(){
     return view('type-products');
+}
+
+// Cart Function 
+
+public function addToCart (Request $request, $id){
+    $cartProduct = Cart::where('product_id', $id)->where('ip_address',$request->ip())->orderBy('id', 'desc')->first();
+    // dd($cartProduct);
+    $product = Product::find($id);
+    // dd($product);
+
+    if($cartProduct == null){
+        $cart = new Cart();
+    $cart->ip_address = $request->ip();
+    $cart->product_id = $product->id;
+    $cart->qty = 1;
+
+    // $cart->price = $product->discount_price;
+
+    if($product->discount_price == null){
+        $cart->price = $product->regular_price;
+    }
+    elseif($product->discount_price !== null){
+        $cart->price = $product->discount_price;
+    }
+
+    $cart->save();
+    }
+
+    elseif($cartProduct !== null){
+        $cartProduct->qty = $cartProduct->qty+1;
+        // $cartProduct->qty += 1;
+        $cartProduct->save();
+    }
+
+    return redirect()->back();
 }
 
 }

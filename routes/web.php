@@ -57,6 +57,16 @@ Route::get('/product-details/{slug}',[FrontendController::class, 'productDetails
 
 Route::get('/type-products', [FrontendController::class, 'typeProducts']);
 
+
+// Carts Route >>>Frontend
+Route::get('/add-to-cart/{id}',[FrontendController::class, 'addToCart']);
+
+
+
+
+
+// Backend
+
 // ----------------when composer and bootstrap install by command
 
 //Admin Login

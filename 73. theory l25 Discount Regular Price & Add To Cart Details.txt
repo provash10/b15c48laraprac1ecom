@@ -1,0 +1,249 @@
+Class-73 (Laravel-25)
+=====================
+******if not discount price >>>> use condition 
+*****before 
+<div class="product__item-discount-price">
+								{{-- <del>400 Tk.</del> --}}
+								<del>{{$product->regular_price}}</del>
+							</div>
+							<div class="product__item-regular-price">
+								<span>{{$product->discount_price}}.</span>
+							</div>
+********after
+
+<div class="product__item-price-outer">
+							@if ($product->discount_price != null)
+							<div class="product__item-discount-price">
+								{{-- <del>400 Tk.</del> --}}
+								<del>{{$product->regular_price}}</del>
+							</div>
+
+							<div class="product__item-regular-price">
+								<span>{{$product->discount_price}}.</span>
+							</div>
+							
+							@elseif ($product->discount_price == null)
+							<div class="product__item-regular-price">
+								{{-- <span>{{$product->discount_price}}.</span> --}}
+								<span>{{$product->regular_price}}.</span>
+							</div>
+							@endif
+						</div>
+
+==========================================
+{{-- Product Discount Price --}}
+                                    <div class="form-group">
+                                        <label for="name">Product Discount Price</label>
+                                        <input type="number" class="form-control" name="discount_price" id="name"
+                                            placeholder="Enter Product Discount Price" required>
+<input type="number" class="form-control" name="discount_price" id="name"
+                                            placeholder="Enter Product Discount Price" required>
+                                    </div>
+
+=======================
+2.00 min
+*****Regular
+
+*****Before
+<div class="product__item-discount-price">
+								{{-- <del>400 Tk.</del> --}}
+								<del> {{$product->regular_price}} </del>
+							</div>
+							<div class="product__item-regular-price">
+								{{-- <span>300 Tk.</span> --}}
+								<span>{{$product->discount_price}}</span>
+							</div>
+
+*****after
+@if ($product->discount_price != null)
+							<div class="product__item-discount-price">
+								{{-- <del>400 Tk.</del> --}}
+								<del>{{$product->regular_price}}</del>
+							</div>
+
+							<div class="product__item-regular-price">
+								<span>{{$product->discount_price}}.</span>
+							</div>
+							
+							@elseif ($product->discount_price == null)
+							<div class="product__item-regular-price">
+								{{-- <span>{{$product->discount_price}}.</span> --}}
+								<span>{{$product->regular_price}}.</span>
+							</div>
+							@endif
+
+==================================
+Discount Price >>> Same as  Before New and Regular
+*before
+<div class="product__item-discount-price">
+								{{-- <del>400 Tk.</del> --}}
+								<del> {{$product->regular_price}} </del>
+							</div>
+							<div class="product__item-regular-price">
+								{{-- <span>300 Tk.</span> --}}
+								<span>{{$product->discount_price}}</span>
+							</div>
+--------------------------------
+*****Quick Order e click korle Checkout Page a nia jabe.
+3.40 min >>>>>>>>>>>>
+***** user add to cart korle Cart a joma kore rakte hobe.
+(koto gulo product add to cart korese)
+Cart >>> a. viewcart   b.checkout
+
+*****For Add to Cart of Database/Data Table need a Model >>>> Cart
+
+php artisan make:model Cart -m
+
+Model >>> Cart.php and migration file  carts.table.php
+
+Model >>> Cart.php >>> protected $guarded = [];
+Migration file >>> carts.table.php 
+**** For Add to Cart Track >>> By IP Address.
+ public function up(): void
+    {
+        Schema::create('carts', function (Blueprint $table) {
+            $table->id();
+
+            $table->string('ip_address');
+            $table->unsignedBigInteger('product_id');
+            $table->string('size')->nullable();
+            $table->string('color')->nullable();
+            $table->integer('qty');
+            $table->double('price');
+            
+            $table->timestamps();
+        });
+    }
+------------------->>>>php artisan migrate - database a table upload ok----
+==========>>>>11.000
+****Form ar vitore hole Post Method and Baire hole Get Method 
+Create Route >>>
+Route::get('/add-to-cart/{id}',[FrontendController::class, 'addToCart']);
+******php artisan optimize
+
+linkup every Add To Cart Option Link>>> /add-to-cart/{id} >>>>index.blade.php >>> Add to Cart
+>>>> href="{{url('/add-to-cart/'.$product->id)}}"
+
+<div class="product__item-add-cart-btn-outer">
+							{{-- <a href="{{url('/add-to-cart/{id}')}}" class="product__item-add-cart-btn-inner">
+								Add to Cart
+							</a> --}}
+							<a href="{{url('/add-to-cart/'.$product->id)}}" class="product__item-add-cart-btn-inner">
+								Add to Cart
+							</a>
+						</div>
+
+
+==================15.00 min==================
+Create Function from Route >>> FrontendController 
+******dd >http://127.0.0.1:8000/add-to-cart/19 >>> click add to cart
+public function addToCart (Request $request, $id){
+    $product = Product::find($id);
+    // dd($product);
+    $cart = new Cart();
+    $cart->ip_address = $request->ip();
+    $cart->product_id = $product->id;
+    $cart->qty = 1;
+
+    // $cart->price = $product->discount_price;
+
+    if($product->discount_price == null){
+        $cart->price = $product->regular_price;
+    }
+    elseif($product->discount_price !== null){
+        $cart->price = $product->discount_price;
+    }
+
+    $cart->save();
+    return redirect()->back();
+}
+
+>>>>>>>>>>>database cart check >>> add to cart >>>ok
+====================================================
+22.40 min
+
+24.00 min
+*****Same Product 2 bar add to cart problem
+***** 2nd time add to cart korle double add to cart na hoye jeno qty increase hoi.
+***** first check product ti add to cart kora ase kina 
+***** $cartProduct = Cart::where('product_id', $id)->where('ip_address',$request->ip())->orderBy('id', 'desc')->first();
+***** dd($cartProduct);
+***** http://127.0.0.1:8000/add-to-cart/16 >>> after homepage add to cart >>>Null
+***** jodi kono product age theke add to cart na thake tahole seti k insert korte hobe.
+But jodi age theke add to cart kora thake and oi product ti abar new vabe add to cart kora hoi tahole 
+sei product ti duplicate jeno na hoi se jonno add to cart ar quantity 
+barate hobe....ok
+
+****use if condition >>>>0k
+
+*****Before  >>>> 30.00 min
+
+public function addToCart (Request $request, $id){
+    $cartProduct = Cart::where('product_id', $id)->where('ip_address',$request->ip())->orderBy('id', 'desc')->first();
+    dd($cartProduct);
+    $product = Product::find($id);
+    // dd($product);
+
+    if($cartProduct == null){
+        
+    }
+
+    $cart = new Cart();
+    $cart->ip_address = $request->ip();
+    $cart->product_id = $product->id;
+    $cart->qty = 1;
+
+    // $cart->price = $product->discount_price;
+
+    if($product->discount_price == null){
+        $cart->price = $product->regular_price;
+    }
+    elseif($product->discount_price !== null){
+        $cart->price = $product->discount_price;
+    }
+
+    $cart->save();
+    return redirect()->back();
+}
+
+*****after
+
+// Cart Function 
+
+public function addToCart (Request $request, $id){
+    $cartProduct = Cart::where('product_id', $id)->where('ip_address',$request->ip())->orderBy('id', 'desc')->first();
+    // dd($cartProduct);
+    $product = Product::find($id);
+    // dd($product);
+
+    if($cartProduct == null){
+        $cart = new Cart();
+    $cart->ip_address = $request->ip();
+    $cart->product_id = $product->id;
+    $cart->qty = 1;
+
+    // $cart->price = $product->discount_price;
+
+    if($product->discount_price == null){
+        $cart->price = $product->regular_price;
+    }
+    elseif($product->discount_price !== null){
+        $cart->price = $product->discount_price;
+    }
+
+    $cart->save();
+    }
+
+    elseif($cartProduct !== null){
+        $cartProduct->qty = $cartProduct->qty+1;
+        // $cartProduct->qty += 1;
+        $cartProduct->save();
+    }
+
+    return redirect()->back();
+===========================Testing ok by Homepage add to cart many times. =============
+33.00 Min
+***** add to cart ar data show korate hobe 
+Homepage >>> Cart  a. cart b. into viewcart 
+
+
