@@ -10,19 +10,28 @@
 			<div class="home__slider-sec-wrap">
 				<div class="home__category-outer">
 					<ul class="header__category-list">
+						@foreach ($categoriesGlobal as $category)
 						<li class="header__category-list-item item-has-submenu">
-							<a href="category-product.html" class="header__category-list-item-link">
-								<img src="{{asset('/assets/images/product.png')}}" alt="category">
-								Test Category
+							{{-- <a href="category-product.html" class="header__category-list-item-link"> --}}
+								<a href="{{url('category-products')}}" class="header__category-list-item-link">
+								{{-- <img src="{{asset('/assets/images/product.png')}}" alt="category"> --}}
+								<img src="{{asset('backend/images/category/'.$category->image)}}" alt="category">
+								{{-- Test Category --}}
+								{{$category->image}}
 							</a>
 							<ul class="header__nav-item-category-submenu">
+								@foreach ($category->subCategory as $subCat)
 								<li class="header__category-submenu-item">
-									<a href="sub-category-product.html" class="header__category-submenu-item-link">
-										Test Subcategory
+									{{-- <a href="sub-category-product.html" class="header__category-submenu-item-link"> --}}
+										<a href="{{url('subcategory-products')}}" class="header__category-submenu-item-link">
+										{{-- Test Subcategory --}}
+										{{$subCat->name}}
 									</a>
 								</li>
+								@endforeach
 							</ul>
 						</li>
+						@endforeach
 					</ul>
 				</div>
 				<div class="home__slider-items-wrapper">
@@ -371,7 +380,7 @@
 						<div class="product__item-price-outer">
 							@if ($product->discount_price != null)
 							<div class="product__item-discount-price">
-								{{-- <del>400 Tk.</del> --}}
+							{{-- <del>400 Tk.</del> --}}
 								<del>{{$product->regular_price}}</del>
 							</div>
 

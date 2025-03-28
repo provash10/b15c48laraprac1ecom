@@ -41,29 +41,38 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="checkout-items-wrapper">
+                        @foreach ($cartProducts as $cart)
                         <div class="checkout-item-outer">
                             <div class="checkout-item-left">
                                 <div class="checkout-item-image">
-                                    <img src="./assets/images/product.png" alt="Image"/>
+                                    {{-- <img src="./assets/images/product.png" alt="Image"/> --}}
+                                    <img src="{{asset('backend/images/product/'.$cart->product->image)}}" alt="Image"/>
                                 </div>
                                 <div class="checkout-item-info">
                                     <h6 class="checkout-item-name">
-                                        Test Product
+                                        {{-- Test Product --}}
+                                        {{$cart->product->name}}
                                     </h6>
                                     <p class="checkout-item-price">
-                                        300 Tk.
+                                        {{-- 300 Tk. --}}
+                                        {{$cart->price}} Tk
                                     </p>
                                     <span class="checkout-item-count">
-                                        1 item
+                                        {{-- 1 item --}}
+                                        {{$cart->qty}}
                                     </span>
                                     <br />
                                     <span class="checkout-item-count">
-                                        Size:                                                 
+                                        {{-- Size:  Any Size  --}}
+                                        Size: {{$cart->size ?? "N/A"}}
                                     </span>                                                
                                     <span class="checkout-item-count">
-                                        Color: 
+                                        {{-- Color: Any Color --}}
+                                        Color: {{$cart->color ?? "N/A"}}
                                     </span>
-                                    <div class="checkout-product-incre-decre">
+
+                                    {{-- No Need Button  --}}
+                                    {{-- <div class="checkout-product-incre-decre">
                                         <button type="button" title="Decrement" class="qty-decrement-btn">
                                             <i class="fas fa-minus"></i>
                                         </button>
@@ -71,15 +80,18 @@
                                         <button type="button" title="Increment" class="qty-increment-btn">
                                             <i class="fas fa-plus"></i>
                                         </button>                                                
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                             <div class="checkout-item-right">
-                                <a href="#" class="delete-btn">
+                                {{-- <a href="#" class="delete-btn"> --}}
+                                    <a href="{{url('cart-delete/'.$cart->id)}}" class="delete-btn">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
                             </div>
                         </div>
+                        @endforeach
+                        
                         <div class="sub-total-wrap">
                             <div class="sub-total-item">
                                  <strong>Sub Total</strong>

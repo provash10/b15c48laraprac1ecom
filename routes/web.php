@@ -58,9 +58,10 @@ Route::get('/product-details/{slug}',[FrontendController::class, 'productDetails
 Route::get('/type-products', [FrontendController::class, 'typeProducts']);
 
 
-// Carts Route >>>Frontend
+// Carts Routes >>>Frontend
 Route::get('/add-to-cart/{id}',[FrontendController::class, 'addToCart']);
 Route::post('/add-to-cart-details/{id}',[FrontendController::class, 'addToCartDetails']);
+Route::get('/cart-delete/{id}',[FrontendController::class, 'addToCartDelete']);
 
 
 

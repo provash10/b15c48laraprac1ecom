@@ -1,0 +1,392 @@
+Class-75 (Laravel-27)
+Before Class-74 (Laravel-26)
+=================================
+*****Homepage Cart Details Showing with Service Provider
+----------------------------------------------------
+resource >>>views >>>includes >>>header.blade.php
+>>>Cart >>>  Total Price 
+
+@dd($cartProducts)
+
+<div class="cart-items-wrapper">
+                        <div class="cart-items-outer">
+
+                            @php
+                                $totalCartPrice = 0;
+                            @endphp
+
+                            @foreach ($cartProducts as $cart)
+                            @php
+                                $totalCartPrice = $totalCartPrice+$cart->qty*$cart->price
+                            @endphp
+
+
+<h4>
+    {{-- Total <span>৳ 300</span> --}}
+     Total <span>{{$totalCartPrice}}</span>
+ </h4>
+========================
+10.00 min
+Cart >>> view cart  Details
+---------------------------
+web.php >>> Route::get('/view-cart',[FrontendController::class, 'viewCart']);
+Function >>>
+public function viewCart(){
+        return view('view-cart');
+    }
+Blade Page >>> Resource >>>views>>> view-cart.blade.php
+*****cart ar data gulo function a send korte hobe from AppService Provider
+****Cart::where('ip_address', request()->ip())->with('product')->get();
+***** No need because Appservice provider for all blade page....
+ public function viewCart(){
+        $carts = Cart::where('ip_address', request()->ip())->with('product')->get();
+        return view('view-cart', compact('carts'));
+    }
+---------------------->>>>>
+13.00 Min
+*****view-cart.blade.php >>>>use loop tbody >>> tr part
+
+******before >>
+<tr>
+                        <td class="cart-product-image-outer">
+                            <img src="./assets/images/product.png" height="70" width="120">
+                        </td>
+                        <td class="cart-product-name-outer">
+                            Test Product
+                        </td>
+                        <td class="cart-product-price-outer">
+                            ৳ 300
+                        </td>
+                        <td class="qty-increment-decrement-outer">
+                            <input type="number" name="qty" readonly value="300" min="1" />
+                        </td>
+                        <td>
+                            <a href="#" class="remove-product">Remove</a>
+                        </td>
+                        <td class="cart-product-total-outer">
+                            ৳ 300
+                        </td>
+                    </tr>
+--------------------->>>>
+********Must DD 
+use loop----------> loop cholbe AppServviceProvider >>>> 'cartProducts' ar upore
+******after
+ @foreach ($cartProducts as $cart)
+                   <tr>
+                    <td class="cart-product-image-outer">
+                        {{-- <img src="./assets/images/product.png" height="70" width="120"> --}}
+                        <img src="{{asset('backend/images/product/'.$cart->product->image)}}" height="70" width="120">
+                        
+                    </td>
+                    <td class="cart-product-name-outer">
+                        {{-- Test Product --}}
+                        {{$cart->product->name}}
+                    </td>
+                    <td class="cart-product-price-outer">
+                        {{-- ৳ 300 {{$cart->product->name}} no need  --}}
+                        ৳ {{$cart->price}}
+                    </td>
+                    <td class="qty-increment-decrement-outer">
+                        {{-- <input type="number" name="qty" readonly value="300" min="1" /> --}}
+                        <input type="number" name="qty" readonly value="{{$cart->qty}}" min="1" />
+                    </td>
+                    <td>
+                        <a href="#" class="remove-product">Remove</a>
+                    </td>
+                    <td class="cart-product-total-outer">
+                        {{-- ৳ 300 --}}
+                        ৳ {{$cart->qty*$cart->price}}
+                    </td>
+                </tr>
+                   @endforeach
+---------------->>>>>> Proceed To CheckOut >>> http://127.0.0.1:8000/checkout
+<div class="text-center">
+            {{-- <a href="checkout.html" class="process-checkout-btn"> --}}
+                <a href="{{url('/checkout')}}" class="process-checkout-btn">
+                Proceed To CheckOut
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
+        </div>
+------------------------------------
+18.00 Min  
+*****Continue Shopping Button >>> linkup Homepage 
+view-cart.blade.php >>>> Continue Shopping
+{{-- <a href="index.html" class="continue-shopping-btn"> --}}
+            <a href="{{url('/')}}" class="continue-shopping-btn">
+            <i class="fas fa-long-arrow-alt-left"></i>
+            Continue Shopping
+        </a>
+---------------------------------->>>
+19.00 Min
+CheckOut Page>>>> http://127.0.0.1:8000/checkout 
+Route::get('/checkout',[FrontendController::class, 'checkOut']);
+Function No Need -> AppService Provider
+
+checkOut.blade.php 
+21.00 Min
+before******
+<div class="checkout-item-outer">
+                            <div class="checkout-item-left">
+                                <div class="checkout-item-image">
+                                    <img src="./assets/images/product.png" alt="Image"/>
+                                </div>
+                                <div class="checkout-item-info">
+                                    <h6 class="checkout-item-name">
+                                        Test Product
+                                    </h6>
+                                    <p class="checkout-item-price">
+                                        300 Tk.
+                                    </p>
+                                    <span class="checkout-item-count">
+                                        1 item
+                                    </span>
+                                    <br />
+                                    <span class="checkout-item-count">
+                                        Size:                                                 
+                                    </span>                                                
+                                    <span class="checkout-item-count">
+                                        Color: 
+                                    </span>
+                                    <div class="checkout-product-incre-decre">
+                                        <button type="button" title="Decrement" class="qty-decrement-btn">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <input type="number" readonly name="" placeholder="Qty" min="1" style="height: 35px;" value="1">
+                                        <button type="button" title="Increment" class="qty-increment-btn">
+                                            <i class="fas fa-plus"></i>
+                                        </button>                                                
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checkout-item-right">
+                                <a href="#" class="delete-btn">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+--------------------
+*******after 
+********use loop
+
+<div class="checkout-items-wrapper">
+                        @foreach ($cartProducts as $cart)
+                        <div class="checkout-item-outer">
+                            <div class="checkout-item-left">
+                                <div class="checkout-item-image">
+                                    {{-- <img src="./assets/images/product.png" alt="Image"/> --}}
+                                    <img src="{{asset('backend/images/product/'.$cart->product->image)}}" alt="Image"/>
+                                </div>
+                                <div class="checkout-item-info">
+                                    <h6 class="checkout-item-name">
+                                        {{-- Test Product --}}
+                                        {{$cart->product->name}}
+                                    </h6>
+                                    <p class="checkout-item-price">
+                                        {{-- 300 Tk. --}}
+                                        {{$cart->price}} Tk
+                                    </p>
+                                    <span class="checkout-item-count">
+                                        {{-- 1 item --}}
+                                        {{$cart->qty}}
+                                    </span>
+                                    <br />
+                                    <span class="checkout-item-count">
+                                        {{-- Size:  Any Size  --}}
+                                        Size: {{$cart->size ?? "N/A"}}
+                                    </span>                                                
+                                    <span class="checkout-item-count">
+                                        {{-- Color: Any Color --}}
+                                        Color: {{$cart->color ?? "N/A"}}
+                                    </span>
+
+                                    {{-- No Need Button  --}}
+                                    {{-- <div class="checkout-product-incre-decre">
+                                        <button type="button" title="Decrement" class="qty-decrement-btn">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <input type="number" readonly name="" placeholder="Qty" min="1" style="height: 35px;" value="1">
+                                        <button type="button" title="Increment" class="qty-increment-btn">
+                                            <i class="fas fa-plus"></i>
+                                        </button>                                                
+                                    </div> --}}
+                                </div>
+                            </div>
+                            <div class="checkout-item-right">
+                                <a href="#" class="delete-btn">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        @endforeach
+--------------------------------------------------->>>>>>
+
+ 26.00 Min
+*****Cart Delete 
+need Route: Url
+// Carts Routes >>>Frontend 
+Route::get('/cart-delete/{id}',[FrontendController::class, 'addToCartDelete']);
+
+linkup and create function>>>>
+****Delete/Remove Button header Page
+heade.blade.php >>> /cart-delete/{id} >>> "{{url('cart-delete/'.$cart->id}}"
+ <div class="cart-item-delete">
+                                    {{-- <a href="#" class="delete-btn"> --}}
+                                    {{-- <a href="{{url('cart-delete/{id}')}}" class="delete-btn"> --}}
+                                        <a href="{{url('cart-delete/'.$cart->id)}}" class="delete-btn">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </div>
+
+--------------
+****Delete/Remove Button view-Cart Page
+view-cart.blade.php >>> /cart-delete/{id} >>> "{{url('cart-delete/'.$cart->id}}"
+ <td>
+                        {{-- <a href="#" class="remove-product">Remove</a> --}}
+                        <a href="{{url('cart-delete/'.$cart->id)}}" class="remove-product">Remove</a>
+                    </td>
+---------------------------->>>
+****Delete/Remove Button CheckOut Page
+
+<div class="checkout-item-right">
+                                {{-- <a href="#" class="delete-btn"> --}}
+                                    <a href="{{url('cart-delete/'.$cart->id)}}" class="delete-btn">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </div>
+-----------------------------------
+29.00 Min
+need Route: Url
+// Carts Routes >>>Frontend 
+Route::get('/cart-delete/{id}',[FrontendController::class, 'addToCartDelete']);
+Function >>>
+// AddToCartDelete
+public function addToCartDelete ($id){
+    $cart = Cart::find($id);
+    $cart->delete();
+
+    return redirect()->back();
+}
+------------->>>
+31.00 Min
+HomePage >>>> Categories >>>
+Data send korte hobe AppService Provider theke....ok
+header.blade.php >>> Categories >>> 
+a. Test Category
+b. Test Subcategory
+
+AppServiceProvider >>>>
+$view->wwith('categoriesGlobal', Category::with('subCategory')->get());
+Check DD in header.blade.php ... @dd($categoriesGlobal)
+header.blade.php >>> Categories >>> 
+***** 2 position of Categories a. Home Page >>> index.blade.php b. header.blade.php
+***** li a loop chalate hobe
+
+b. header.blade.php 
+
+***** Subcategory teo new vabe loop chalete hobe
+@foreach( as )
+li > 
+@foreach( as )
+li
+@endforeach
+@endforeach
+
+*****before
+<li class="header__category-list-item item-has-submenu">
+                                    <a href="{{url('/category-products')}}" class="header__category-list-item-link">
+                                        <img src="{{asset('/assets/images/product.png')}}" alt="category">
+                                        Test Category
+                                    </a>
+                                    <ul class="header__nav-item-category-submenu">
+                                        <li class="header__category-submenu-item">
+                                            <a href="{{url('/subcategory-products')}}" class="header__category-submenu-item-link">
+                                                Test Subcategory
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+*****after
+
+<div class="header__category-items-outer">
+                            <ul class="header__category-list">
+                                @foreach ($categoriesGlobal as $category)
+                                <li class="header__category-list-item item-has-submenu">
+                                    <a href="{{url('/category-products')}}" class="header__category-list-item-link">
+                                        {{-- <img src="{{asset('/assets/images/product.png')}}" alt="category"> --}}
+                                        <img src="{{asset('backend/images/category/'.$category->image)}}" alt="category">
+                                        {{-- Test Category --}}
+                                        {{$category->name}}
+                                    </a>
+                                    <ul class="header__nav-item-category-submenu">
+                                        @foreach ($category->subCategory as $subCat)
+                                        <li class="header__category-submenu-item">
+                                            <a href="{{url('/subcategory-products')}}" class="header__category-submenu-item-link">
+                                                {{-- Test Subcategory --}}
+                                                {{$subCat->name}}
+                                            </a>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div>
+========================
+***** 2 position of Categories 
+a. Home Page >>> index.blade.php
+*****Find/search >>> test category
+------------->>>
+linkup >>>> http://127.0.0.1:8000/category-products
+>>>><a href="{{url('category-products')}}" class="header__category-list-item-link">
+
+linkup >>>http://127.0.0.1:8000/subcategory-products
+>>> <a href="{{url('subcategory-products')}}" class="header__category-submenu-item-link">
+
+*****li ar upore loop cholbe
+
+******before
+<li class="header__category-list-item item-has-submenu">
+							<a href="category-product.html" class="header__category-list-item-link">
+								<img src="{{asset('/assets/images/product.png')}}" alt="category">
+								Test Category
+							</a>
+							<ul class="header__nav-item-category-submenu">
+								<li class="header__category-submenu-item">
+									<a href="sub-category-product.html" class="header__category-submenu-item-link">
+										Test Subcategory
+									</a>
+								</li>
+							</ul>
+						</li>
+-----------
+*****after
+
+<div class="home__category-outer">
+					<ul class="header__category-list">
+						@foreach ($categoriesGlobal as $category)
+						<li class="header__category-list-item item-has-submenu">
+							{{-- <a href="category-product.html" class="header__category-list-item-link"> --}}
+								<a href="{{url('category-products')}}" class="header__category-list-item-link">
+								{{-- <img src="{{asset('/assets/images/product.png')}}" alt="category"> --}}
+								<img src="{{asset('backend/images/category/'.$category->image)}}" alt="category">
+								{{-- Test Category --}}
+								{{$category->image}}
+							</a>
+							<ul class="header__nav-item-category-submenu">
+								@foreach ($category->subCategory as $subCat)
+								<li class="header__category-submenu-item">
+									{{-- <a href="sub-category-product.html" class="header__category-submenu-item-link"> --}}
+										<a href="{{url('subcategory-products')}}" class="header__category-submenu-item-link">
+										{{-- Test Subcategory --}}
+										{{$subCat->name}}
+									</a>
+								</li>
+								@endforeach
+							</ul>
+						</li>
+						@endforeach
+					</ul>
+				</div>
+==========================================ok===========================
+
+

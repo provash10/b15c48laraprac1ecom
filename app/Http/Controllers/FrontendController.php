@@ -35,6 +35,11 @@ class FrontendController extends Controller
         return view('subcategory-products');
     }
 
+    // public function viewCart(){
+    //     $carts = Cart::where('ip_address', request()->ip())->with('product')->get();
+    //     return view('view-cart', compact('carts'));
+    // }
+
     public function viewCart(){
         return view('view-cart');
     }
@@ -164,5 +169,13 @@ public function addToCartDetails (Request $request, $id){
         return redirect('/checkout');
     }
     // return redirect()->back();
+}
+
+// AddToCartDelete
+public function addToCartDelete ($id){
+    $cart = Cart::find($id);
+    $cart->delete();
+
+    return redirect()->back();
 }
 }
