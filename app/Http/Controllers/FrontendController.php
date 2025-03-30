@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -20,19 +21,35 @@ class FrontendController extends Controller
         return view('index',compact('hotProducts', 'newProducts', 'regularProducts', 'discountProducts', 'categories'));
     }
     public function shop(){
-        return view('shop');
+        //No Need $cateories and $subCategories->AppServiceProvider 
+        // $categories = Category::get();
+
+        $products = Product::orderBy('id', 'desc')->get();
+        $productsCount = Product::orderBy('id','desc')->count();
+        return view('shop', compact('products', 'productsCount'));
     }
 
     public function returnProcess(){
         return view('return-process');
     }
 
-    public function categoryProducts(){
-        return view('category-products');
+    public function categoryProducts ($id){
+
+        $products = Product::where('cat_id',$id)->get();
+        // $products = Product::where('cat_id',$id)->with('category')->get();
+        // dd($products);
+        $productsCount = Product::where('cat_id',$id)->count();
+        $category = Category::find($id);
+        return view('category-products', compact('products','category','productsCount'));
     }
 
-    public function subcategoryProducts(){
-        return view('subcategory-products');
+    public function subcategoryProducts($id){
+        $products = Product::where('sub_cat_id',$id)->get();
+        // $products = Product::where('cat_id',$id)->with('category')->get();
+        // dd($products);
+        $productsCount = Product::where('sub_cat_id',$id)->count();
+        $subCategory = SubCategory::find($id);
+        return view('subcategory-products', compact('products', 'subCategory','productsCount'));
     }
 
     // public function viewCart(){
@@ -85,8 +102,11 @@ public function productDetails($slug){
 }
 
 //view all
-public function typeProducts(){
-    return view('type-products');
+public function typeProducts($type){
+    $products = Product::where('product_type', $type)->get();
+    // dd($products);
+    $productsCount = Product::where('product_type', $type)->count();
+    return view('type-products', compact('products', 'type', 'productsCount'));
 }
 
 // Cart Function 

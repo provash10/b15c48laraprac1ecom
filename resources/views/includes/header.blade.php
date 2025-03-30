@@ -93,7 +93,9 @@
                             <ul class="header__category-list">
                                 @foreach ($categoriesGlobal as $category)
                                 <li class="header__category-list-item item-has-submenu">
-                                    <a href="{{url('/category-products')}}" class="header__category-list-item-link">
+                                    {{-- <a href="{{url('/category-products')}}" class="header__category-list-item-link"> --}}
+                                        <a href="{{url('category-products/'.$category->id)}}" class="header__category-list-item-link">
+
                                         {{-- <img src="{{asset('/assets/images/product.png')}}" alt="category"> --}}
                                         <img src="{{asset('backend/images/category/'.$category->image)}}" alt="category">
                                         {{-- Test Category --}}
@@ -102,7 +104,8 @@
                                     <ul class="header__nav-item-category-submenu">
                                         @foreach ($category->subCategory as $subCat)
                                         <li class="header__category-submenu-item">
-                                            <a href="{{url('/subcategory-products')}}" class="header__category-submenu-item-link">
+                                            {{-- <a href="{{url('/subcategory-products')}}" class="header__category-submenu-item-link"> --}}
+                                                <a href="{{url('subcategory-products/'.$subCat->id)}}" class="header__category-submenu-item-link">
                                                 {{-- Test Subcategory --}}
                                                 {{$subCat->name}}
                                             </a>
