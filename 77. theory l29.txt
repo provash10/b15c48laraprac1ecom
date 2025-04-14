@@ -1,0 +1,167 @@
+Class-77 (Laravel-29)
+==============================
+Place An Order
+--------------
+2 types of data... create 2 table...
+-----------------------------------------
+For Table>>> Create a Model >>>phpmyadmin 
+>>>>gitbase >>>> php artisan make:model Order -m
+Check >>>vs >>> migration >>>order table...
+
+Model >>>Order.php
+
+Create another Table >>>Model >>> php artisan make:model OrderDetails -m
+
+
+Model >>>OrderDetails.php
+-----------------------
+Now work >>>>vs >>> migration >>>order table
+Now work >>>>vs >>> migration >>>OrderDetails table
+---------------------------------------------------
+10.30 Min 
+Now work >>>>vs >>> migration >>>order table
+public function up(): void
+    {
+        Schema::create('orders', function (Blueprint $table) {
+            $table->id();
+
+            $table->string('invoiceID');
+            $table->string('c_name');
+            $table->string('c_phone');
+            $table->text('address');
+            $table->integer('area');
+            $table->double('price');
+            $table->string('status')->default('pending');
+            $table->string('courier_name')->nullable;
+
+
+            $table->timestamps();
+        });
+------------------------------------------------17.30 min
+
+Now work >>>>vs >>> migration >>>OrderDetails table
+public function up(): void
+    {
+        Schema::create('order_details', function (Blueprint $table) {
+            $table->id();
+
+            $table->unsignedBigInteger('order_id');
+            $table->unsignedBigInteger('product_id');
+            $table->string('size')->nullable();
+            $table->string('color')->nullable();
+            $table->integer('qty');
+            $table->double('price');
+            
+            $table->timestamps();
+        });
+    }
+--------------------------------Migrate now------------
+22.00 min
+
+Thank you page.......Order Complete korle Thank you page a send korte hobe customer k....
+
+web.php >>>> //Order Confirmation
+//Order Confirmation
+Route::post('/confirm-order',[FrontendController::class, 'confirmOrder']);
+// Route::get('/order-confirmed',[FrontendController::class, 'thankyou']);
+Route::get('/order-confirmed/{invoiceID}',[FrontendController::class, 'thankyou']);
+
+----------------optimize
+
+url >>>'/confirm-order setup >>> http://127.0.0.1:8000/checkout page>>>
+Go To CheckOut Function >>>  
+public function checkOut (){
+        return view('checkout');
+    }
+
+-----> resources >>>>views>>> checkout.blade.php >>>
+
+<section class="checkout-section">
+    <div class="container">
+        {{-- <form action="" method="post" class="form-group billing-address-form" enctype="multipart/form-data"> --}}
+            <form action="{{url('/confirm-order')}}" method="post" class="form-group billing-address-form" enctype="multipart/form-data">
+                @csrf
+**** Form ar input field name change korte hobe.... depends on phpmyadmin DB.
+
+
+Before ********
+<div class="col-md-12 mt-3">
+                                    <div style="background: lightgrey;padding: 10px;margin-bottom: 10px;">
+                                        <input type="radio" id="inside_dhaka" name="area" value="80"/>
+                                        <label for="inside_dhaka"
+                                            style="font-size: 18px;font-weight: 600;color: #000;">Inside Dhaka (80
+                                            Tk.)</label>
+                                    </div>
+                                    <div style="background: lightgrey;padding: 10px;">
+                                        <input type="radio" id="outside_dhaka" name="area" value="150"/>
+                                        <label for="outside_dhaka"
+                                            style="font-size: 18px;font-weight: 600;color: #000;">Outside Dhaka (150
+                                            Tk.)</label>
+                                    </div>
+                                </div>
+******after
+
+
+
+
+.........
+<?php 
+                             $subTotal = 0;
+                        ?>
+ @foreach ($cartProducts as $cart)
+
+
+--------------
+  <?php 
+                            $subTotal = 0;
+                        ?>
+                        @foreach ($cartProducts as $cart)
+                        <?php 
+                            $subTotal = $subTotal + $cart->qty*$cart->price
+                        ?>
+
+=====================================
+40.00 Min
+Resources >>>views >>> master.blade.php >>>> @stack('script')
+
+*****after >>>
+<div class="col-md-12 mt-3">
+                                    <div style="background: lightgrey;padding: 10px;margin-bottom: 10px;">
+                                        {{-- <input type="radio" id="inside_dhaka" name="area" value="80"/> --}}
+                                        {{-- <input type="radio" id="inside_dhaka" name="area" value="80" checked/> --}}
+                                        <input type="radio" id="inside_dhaka" name="area" value="80" onclick="grandTotal()" checked/>
+                                        <label for="inside_dhaka"
+                                            style="font-size: 18px;font-weight: 600;color: #000;">Inside Dhaka (80
+                                            Tk.)</label>
+                                    </div>
+                                    <div style="background: lightgrey;padding: 10px;">
+                                        {{-- <input type="radio" id="outside_dhaka" name="area" value="150"/> --}}
+                                        <input type="radio" id="outside_dhaka" name="area" value="150" onclick="grandTotal()"/>
+                                        <label for="outside_dhaka"
+                                            style="font-size: 18px;font-weight: 600;color: #000;">Outside Dhaka (150
+                                            Tk.)</label>
+                                    </div>
+                                </div>
+--------------------------
+check.blade.php 
+@push('script')
+    <script>
+        
+    </script>
+@endpush
+..........
+
+
+ <div class="sub-total-item">
+                                <strong>Delivery charge</strong>
+                                <strong id="deliveryCharge">৳ 80</strong>
+                            </div>
+------------------------
+<div class="sub-total-item">
+                                <strong>Delivery charge</strong>
+                                {{-- <strong id="deliveryCharge">৳ 80</strong> --}}
+                                <strong id="deliveryCharge">{{$subTotal+80}}</strong>
+                            </div>
+
+
+

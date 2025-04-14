@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Lecom Website</title>
+	<title>Laravel Ecommerce Website</title>
 	{{-- css cut & paste includes folder for use all pages --}}
 	{{-- for css  --}}
 	@include('includes.style')

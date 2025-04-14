@@ -5,7 +5,8 @@
     <div class="container">
         <div class="header-top-wrapper">
             <a href="{{url('/')}}" class="brand-logo-outer">
-                <img src="{{asset('/assets/images/logo.png')}}" alt="Logo">
+                {{-- <img src="{{asset('/assets/images/logo.png')}}" alt="Logo"> --}}
+                <img src="{{asset('/assets/images/lo.png')}}" alt="Logo" height="100" width="150">
             </a>
             <div class="search-form-outer">
                 <form action="" method="GET" class="form-group search-form">
@@ -39,13 +40,14 @@
                             @endphp
                             <div class="cart-item-outer">
                                 <a href="#" class="cart-product-image">
-                                    {{-- <img src="./assets/images/product.png" alt="product"> --}}
-                                    <img src="{{asset('backend/images/product/'.$cart->product->image)}}" alt="product">
+                                    <img src="./assets/images/product.png" alt="product">
+                                    {{-- <img src="{{asset('backend/images/product/'.$cart->product->image)}}" alt="product"> --}}
                                 </a>
                                 <div class="cart-product-name-price">
                                     <a href="#" class="product-name">
                                         {{-- Test Product --}}
-                                        {{$cart->product->name}}
+                                        {{-- {{$cart->Product->name}} --}}
+                                        {{$cart->Product->name ?? 'Unknown Product'}}
                                     </a>
                                     <span class="product-price">
                                         {{-- ৳ 300 --}}

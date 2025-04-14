@@ -2,7 +2,8 @@
     <div class="footer__top-wrapper">
         <div class="container">
             <a href="index.html" class="footer__brand-logo-outer">
-                <img src="./assets/images/logo.png" class="footer__brand-logo-inner" />
+                {{-- <img src="./assets/images/logo.png" class="footer__brand-logo-inner" /> --}}
+                <img src="{{asset('/assets/images/lo.png')}}" class="footer__brand-logo-inner" height="100" width="150"/>
             </a>
         </div>
     </div>    
@@ -44,29 +45,62 @@
                            Contacts
                         </h4>
                         <ul class="footer__contact-info-list">
-                            <li class="footer__contact-info-list-item">
+                            {{-- <li class="footer__contact-info-list-item">
                                 <p class="footer__contact-info-list-item-label">
                                     Address:                                   
                                 </p>
                                 <p class="footer__contact-info-list-item-value">
                                     Dhaka,Bangladesh                                
                                 </p>
-                            </li>
+                            </li> --}}
                             <li class="footer__contact-info-list-item">
+                                <p class="footer__contact-info-list-item-label">
+                                    <p class="footer__contact-info-list-item-value">
+                                        Address : Dhaka,Bangladesh                                
+                                    </p>                                  
+                                </p>
+                                
+                            </li>
+
+                            {{-- <li class="footer__contact-info-list-item">
                                 <p class="footer__contact-info-list-item-label">
                                     Phone:                                   
                                 </p>
                                 <a href="tel:0123456857" class="footer__contact-info-list-item-value">
-                                    0123456857
+                                    01710490345
                                 </a>
+                            </li> --}}
+                            <li class="footer__contact-info-list-item">
+                                <p class="footer__contact-info-list-item-label">
+                                    <a href="tel:0123456857" class="footer__contact-info-list-item-value">
+                                        Phone : 01710 490 345
+                                    </a>                                
+                                </p>
+                                
                             </li>
                             <li class="footer__contact-info-list-item">
+                                <p class="footer__contact-info-list-item-label">
+                                    <a href="tel:0123456857" class="footer__contact-info-list-item-value">
+                                        Whatsapp : 01710 490 345
+                                    </a>                                
+                                </p>
+                                
+                            </li>
+                            {{-- <li class="footer__contact-info-list-item">
                                 <p class="footer__contact-info-list-item-label">
                                     Email:                                   
                                 </p>
                                 <a href="mailto:info@gmail.com" class="footer__contact-info-list-item-value">
                                     info@gmail.com
                                 </a>
+                            </li> --}}
+                            <li class="footer__contact-info-list-item">
+                                <p class="footer__contact-info-list-item-label">
+                                    <a href="mailto:info@gmail.com" class="footer__contact-info-list-item-value">
+                                        Email : provash20cb@gmail.com
+                                    </a>                                
+                                </p>
+                                
                             </li>
                         </ul>
                     </div>
@@ -135,8 +169,8 @@
     <div class="footer__bottom-wrapper">
         <div class="container">
             <p class="footer__bottom-text">
-                © 2025, All rights reserved !!!
-                <strong class="text-brand">Nitto Mart</strong>
+                © 2025, All Rights Reserved !!!
+                <strong class="text-brand">Laravel Ecommerce Website</strong>
             </p>
         </div>
     </div>

@@ -70,7 +70,10 @@ Route::post('/add-to-cart-details/{id}',[FrontendController::class, 'addToCartDe
 Route::get('/cart-delete/{id}',[FrontendController::class, 'addToCartDelete']);
 
 
-
+//Order Confirmation
+Route::post('/confirm-order',[FrontendController::class, 'confirmOrder']);
+// Route::get('/order-confirmed',[FrontendController::class, 'thankyou']);
+Route::get('/order-confirmed/{invoiceID}',[FrontendController::class, 'thankyou']);
 
 
 // Backend

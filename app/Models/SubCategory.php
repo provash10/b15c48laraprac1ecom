@@ -11,10 +11,10 @@ class SubCategory extends Model
     protected $guarded = [];
 
     public function category (){
-        return $this->belongsTo(category::class, 'cat_id','id');
+        return $this->belongsTo(Category::class, 'cat_id','id');
     }
 
     public function product (){
-        return $this->hasMany(product::class, 'cat_id','id');
+        return $this->hasMany(Product::class, 'cat_id','id');
     }
 }
