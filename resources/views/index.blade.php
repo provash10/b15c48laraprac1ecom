@@ -19,7 +19,7 @@
 								{{-- <img src="{{asset('/assets/images/product.png')}}" alt="category"> --}}
 								<img src="{{asset('backend/images/category/'.$category->image)}}" alt="category">
 								{{-- Test Category --}}
-								{{$category->image}}
+								{{$category->name}}
 							</a>
 							<ul class="header__nav-item-category-submenu">
 								@foreach ($category->subCategory as $subCat)

@@ -1,0 +1,248 @@
+Class-78 (Laravel-30)
+========================
+Use XAMPP Alrenative WAMPP, Laragon...
+*****Laragon Setup
+->Laragon Download from google
+-> Setup from Start All 
+->
+->Projoect Keep in C drive>>>www Folder >>>ok 
+->> Work www Folder like as htdocs...
+---------------
+google >>>localhost/phpmyadmin >>>>use username >>> root and password (no need)
+
+www>> project folder >>> open git bash >>> php artisan serve/ code .
+*****DB >>> .env >>> DB_DATABASE = b15 (name not same)
+Error asle Cash Clear korte hobe
+Cash Clear >>>> by git bash >>> php artisan optimize
+For Table in DB             >>> php artisan migrate
+------------------>>>
+Login Na hole Manually user admin create korte hobe 
+from db >>users >>> inserts...ok  hashpasswoerd google use...
+------------------------------------------------------------->ok
+================================================================
+=======================XAMPP======================================
+http://127.0.0.1:8000
+
+18.00 Min ******
+
+****(Working checkout url Placing Order)
+
+http://127.0.0.1:8000/checkout 
+
+Outside in Dhaka 150 Tk adding Process******
+resources>>>views>>>checkout.blade.php 
+
+
+Before********
+<div class="col-md-12 mt-3">
+                                    {{-- inside_dhaka --}}
+                                    <div style="background: lightgrey;padding: 10px;margin-bottom: 10px;">
+                                        {{-- <input type="radio" id="inside_dhaka" name="area" value="80"/> --}}
+                                        {{-- <input type="radio" id="inside_dhaka" name="area" value="80" checked/> --}}
+                                        <input type="radio" id="inside_dhaka" name="area" value="80" onclick="grandTotal()" checked/>
+                                        <label for="inside_dhaka"
+                                            style="font-size: 18px;font-weight: 600;color: #000;">Inside Dhaka (80
+                                            Tk.)</label>
+                                    </div>
+
+                                    {{-- outside_dhaka --}}
+                                    <div style="background: lightgrey;padding: 10px;">
+                                        {{-- <input type="radio" id="outside_dhaka" name="area" value="150"/> --}}
+                                        <input type="radio" id="outside_dhaka" name="area" value="150" onclick="grandTotal()"/>
+                                        <label for="outside_dhaka"
+                                            style="font-size: 18px;font-weight: 600;color: #000;">Outside Dhaka (150
+                                            Tk.)</label>
+                                    </div>
+                                </div>
+-------------
+onclick="grandTotalIn()"
+onclick="grandTotalOut()"
+After********************
+
+
+
+
+
+-----------------------------
+21.00 Min 
+resources>>>views>>>checkout.blade.php 
+Before******
+@push('script')
+    <script>
+        function grandTotal (){       
+            //akahne kivabe subtotal pabo >>
+            //upore <?php te $subTotal Calculate kora hoyese .
+            // akei dorte hobe
+            //Sub Total ar jonno akta input use korte hobe
+             {{-- Add input file for js  --}}
+              {{-- <input type="text" value="{{$subTotal}}" id="subTotalHidden" name="subTotalHidden"> --}}
+              <input type="hidden" value="{{$subTotal}}" id="subTotalHidden" name="subTotalHidden">
+                 Check >>> http://127.0.0.1:8000/checkout
+                                        
+
+        }
+    </script>
+@endpush
+After********
+
+-----------------------------
+24.00 Min
+
+<div class="sub-total-item">
+                                 <strong>Sub Total</strong>
+                                {{-- <strong id="subTotal">৳ 300</strong> --}}
+                                <strong id="subTotal">{{$subTotal}}</strong>
+                                {{-- Add input file for js  --}}
+                                {{-- <input type="text" value="{{$subTotal}}" id="subTotalHidden" name="subTotalHidden"> --}}
+                                <input type="hidden" value="{{$subTotal}}" id="subTotalHidden" name="subTotalHidden">
+                            </div>
+
+
+
+********<input type="hidden" value="{{$subTotal}}" id="subTotalHidden" name="subTotalHidden">
+
+push('script')
+    <script>
+        function grandTotalIn(){
+            var subTotal = document.getElementByID('subTotalHidden').value;
+        }
+    </script>
+@endpush
+
+------------
+@push('script')
+    <script>
+        function grandTotalIn(){
+            // var subTotal = document.getElementByID('subTotalHidden').value;
+            // Covert Integer
+            var subTotal = parseFloat(document.getElementByID('subTotalHidden').value);
+            var charge = parseFloat(document.getElementByID('inside_dhaka').value);
+
+            var grandTotal = subTotal + charge ;
+            
+             30.00 Min
+            document.getElementByID('grandTotal').innerHTML = grandTotal;
+        }
+        }
+    </script>
+@endpush
+------------>>>>
+
+28.50 min
+Grand Total 
+Before *****
+<div class="sub-total-item grand-total">
+                                 <strong>Grand Total</strong>
+                                 <strong id="grandTotal">৳ 380</strong>
+                            </div>
+
+**********after
+<div class="sub-total-item grand-total">
+                                 <strong>Grand Total</strong>
+                                 {{-- <strong id="grandTotal">৳ 380</strong> --}}
+                                 <strong id="grandTotal">৳ {{$subTotal + 80}}</strong>
+                            </div>
+--------------------------------->>>
+
+use it in script 30.00 min>>>>  inside dhaka 80 tk ok check = http://127.0.0.1:8000/checkout >>> ok
+document.getElementByID('grandTotal').innerHTML = grandTotal;
+        }
+
+==============================================
+34.00 min 
+work  // Copy paste for outside dhaka 150 tk
+
+
+
+===========
+36.00 min use it in js 
+for delivery charge
+            document.getElementById('deliveryCharge').innerHTML = '৳ '+ charge;
+
+
+Check>>> http://127.0.0.1:8000/checkout >>>.ok
+================================================
+37.00 Min 
+http://127.0.0.1:8000/checkout
+ Billing /Shopping Details Fillup / Database Data Insert
+DB>> migration order and order details table....
+Route >>>> confirm order and thank you....
+
+//Order Confirmation
+Route::post('/confirm-order',[FrontendController::class, 'confirmOrder']);
+// Route::get('/order-confirmed',[FrontendController::class, 'thankyou']);
+Route::get('/order-confirmed/{invoiceID}',[FrontendController::class, 'thankyou']);
+*****setup url >>>> resources>>>views>>>checkout.blade.php 
+
+ <form action="{{url('/confirm-order')}}" method="post" class="form-group billing-address-form" enctype="multipart/form-data">
+                @csrf
+
+
+*****after submit form/order 
+FrontendController.php >>> Function create
+
+
+
+*****check DB >>>  orders
+Invoiced ID generate korte hobe...
+track by id invoicedID 1 2 3 4 5 ........n(auto)
+
+
+
+
+50.00 min
+******use >>> {{-- <input type="text" value="{{$subTotal+80}}" name="grandTotalHidden" id="grandTotalHidden"> --}}
+              <input type="hidden" value="{{$subTotal+80}}" name="grandTotalHidden" id="grandTotalHidden">
+*****<div class="sub-total-item grand-total">
+                                 <strong>Grand Total</strong>
+                                 {{-- <strong id="grandTotal">৳ 380</strong> --}}
+                                 <strong id="grandTotal">৳ {{$subTotal + 80}}</strong>
+                            </div>
+
+
+use  js  checkout.blade.php >>>
+ // For Invoiced
+             document.getElementById('grandTotalHidden').value = '৳ '+ grandTotal;
+
+
+http://127.0.0.1:8000/checkout >>>ok
+...
+
+
+ForntendController.php >>>>
+// Confirm Order........Invoiced
+public function confirmOrder (Request $request){
+    $order = new Order();
+
+    $previousOrder = Order::orderBy('id','desc')->first();
+    if($previousOrder == null){
+        $order->invoicedId = "XYZ-1";
+    }
+    // $order->invoicedId = "XYZ-1"
+    else{
+        $order->invoicedId = "XYZ-".$previousOrder->id+1;
+    }
+
+    $order->c_name = $request->c_name;
+    $order->c_phone = $request->c_phone;
+    $order->address = $request->address;
+    $order->area = $request->area;
+    // Total Price
+    $order->price = $request->grandTotalHidden;
+
+    $order->save();
+    return redirect()->back();
+}
+-------------------------------------
+Order Check OK
+**********Most Impotant***********
+DataBase  a  Order Migration>>>  courier_name nullable  korleo  
+>>> $table->string('courier_name')->nullable;
+>>> $table->string('courier_name')->nullable(); change koresi () dia...
+so, Database Order >>> structure >> a manually Null korte hobe...
+	9	courier_name	varchar(255)	utf8mb4_unicode_ci		Yes	NULL			Change Change	Drop Drop	
+>>>Change >>> Default >>> Null
+
+
+
+///
