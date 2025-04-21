@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\OrderDetails;
 use App\Models\Product;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
@@ -206,10 +207,17 @@ public function confirmOrder (Request $request){
 
     $previousOrder = Order::orderBy('id','desc')->first();
     if($previousOrder == null){
-        $order->invoiceID = "XYZ-1";
+        $generateInvoice = "XYZ-1";
+        $order->invoiceID =$generateInvoice;
+
+        // $order->invoiceID = "XYZ-1";
     }
     else{
-        $order->invoiceID = "XYZ-" . $previousOrder->id +1;
+        $generateInvoice = "XYZ-".$previousOrder->id+1;
+        $order->invoiceID = $generateInvoice;
+
+        // $order->invoiceID = "XYZ-" . $previousOrder->id +1;
+
         // $order->invoiceId = ("XYZ-" . $previousOrder->id) + 1;
         // $order->invoiceId = "XYZ-" . ($previousOrder->id + 1);
 
@@ -223,7 +231,37 @@ public function confirmOrder (Request $request){
     // Total Price
     $order->price = $request->grandTotalHidden;
 
-    $order->save();
-    return redirect()->back();
+    $cartProducts = Cart::where('ip_address', $request->ip())->get();
+    // dd($cartProducts);
+    if($cartProducts->isNotEmpty()){
+        $order->save();
+
+        foreach($cartProducts as $cart){
+            $orderDetails = new OrderDetails();
+
+            $orderDetails->order_id = $order->id;
+            $orderDetails->product_id = $cart->product_id;
+            $orderDetails->size = $cart->size;
+            $orderDetails->color = $cart->color;
+            $orderDetails->qty = $cart->qty;
+            $orderDetails->price = $cart->price;
+
+            $orderDetails->save();
+            $cart->delete();
+        }
+    }
+
+    else{
+        return redirect()->back();
+    }
+
+    // return redirect()->back();
+    // return redirect('/order-confirmed/{invoiceId}');
+    return redirect('order-confirmed/'.$generateInvoice);
+}
+
+public function thankyou($invoiceId){
+    // return view('thankyou');
+    return view('thankyou', compact('invoiceId'));
 }
 }

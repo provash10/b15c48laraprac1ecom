@@ -1,0 +1,131 @@
+Class-79 (Laravel-31)
+========================
+OrderDeatils >>>Product Data Insert.......
+------------FrontendController.php
+$cartProducts = Cart::where('ip_address', $request->ip)->get(); >>> wrong way $request->ip () bracket missing
+
+********
+     $cartProducts = Cart::where('ip_address', $request->ip())->get();
+    //dd($cartProducts);
+check>>http://127.0.0.1:8000/confirm-order
+
+Illuminate\Database\Eloquent\Collection {#292 ▼ // app\Http\Controllers\FrontendController.php:227
+  #items: []
+  #escapeWhenCastingToString: false
+}
+
+no  #items: [] ....so
+
+
+$cartProducts = Cart::where('ip_address', $request->ip())->get();
+Illuminate\Database\Eloquent\Collection {#1259 ▼ // app\Http\Controllers\FrontendController.php:227
+  #items: array:1 [▶]
+  #escapeWhenCastingToString: false
+}
+  #items: array:1 [▶] 
+
+===================================FrontendController.php
+
+
+
+
+
+>>>>>Order Complete hole Thank you page a nia jabe>>>>>>>>>>
+*****check demo design thank-you.html >>>ecom-design-develop >>> file:///C:/xampp/htdocs/B15/ecom-design-develop/thank-you.html
+
+//Order Confirmation
+Create Route from web.php>>> 
+Route::get('/order-confirmed/{invoiceId}',[FrontendController::class, 'thankyou']);
+Setup url and function.......ok
+ // return redirect()->back();
+    return redirect('/order-confirmed/{invoiceId}');
+
+*****before
+$previousOrder = Order::orderBy('id','desc')->first();
+
+if($previousOrder == null){
+        $order->invoiceID = "XYZ-1";
+    }
+else{
+        $order->invoiceID = "XYZ-" . $previousOrder->id +1;
+        // $order->invoiceId = ("XYZ-" . $previousOrder->id) + 1;
+        // $order->invoiceId = "XYZ-" . ($previousOrder->id + 1);
+
+    }
+*****after
+$previousOrder = Order::orderBy('id','desc')->first();
+    if($previousOrder == null){
+        $generateInvoice = "XYZ-1";
+        $order->invoiceID =$generateInvoice;
+        
+        // $order->invoiceID = "XYZ-1";
+    }
+
+else{
+        $generateInvoice = "XYZ-" . $previousOrder->id +1;
+        $order->invoiceID = $generateInvoice;
+        
+        // $order->invoiceID = "XYZ-" . $previousOrder->id +1;
+
+    }
+
+-===================
+// return redirect()->back();
+    // return redirect('/order-confirmed/{invoiceId}');
+    return redirect('/order-confirmed/'.$generateInvoice);
+
+
+19.30 Min
+FrontendController.php >>>
+//Confirm Order >>>under
+public function thankyou($invoiceId){
+    return view('thankyou');
+}
+
+*****create thank you blade page >>> 
+resources >>>views >>>thankyou.blade.php 
+
+
+
+----------
+checkout.blade.php 
+***** value te taka symbol hobe na -----
+
+@push('script')
+    <script>
+        function grandTotalIn(){
+            // var subTotal = document.getElementByID('subTotalHidden').value;
+            // Covert Integer
+            var subTotal = parseFloat(document.getElementById('subTotalHidden').value);
+            var charge = parseFloat(document.getElementById('inside_dhaka').value);
+
+            var grandTotal = subTotal + charge;
+
+            // document.getElementById('grandTotal').innerHTML = grandTotal;
+            // for taka symbol 
+            // document.getElementById('grandTotal').innerHTML = '৳ '.grandTotal;   not use dot (.)
+            document.getElementById('grandTotal').innerHTML = '৳ '+ grandTotal;
+
+             // For Invoiced
+             document.getElementById('grandTotalHidden').value = grandTotal;
+
+            // for delivery charge
+            document.getElementById('deliveryCharge').innerHTML = '৳ '+ charge;
+        }
+
+        // Copy paste for outside dhaka 150 tk
+        function grandTotalOut(){
+            var subTotal = parseFloat(document.getElementById('subTotalHidden').value);
+            var charge = parseFloat(document.getElementById('outside_dhaka').value);
+
+            var grandTotal = subTotal + charge;
+            
+            document.getElementById('grandTotal').innerHTML = '৳ '+ grandTotal;
+
+             // For Invoiced
+             document.getElementById('grandTotalHidden').value = grandTotal;
+
+            document.getElementById('deliveryCharge').innerHTML = '৳ '+ charge;
+        }
+    </script>
+@endpush

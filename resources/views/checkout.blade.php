@@ -114,7 +114,7 @@
                             <div class="sub-total-item">
                                  <strong>Sub Total</strong>
                                 {{-- <strong id="subTotal">৳ 300</strong> --}}
-                                <strong id="subTotal">{{$subTotal}}</strong>
+                                <strong id="subTotal">৳ {{$subTotal}}</strong>
                                 {{-- Add input file for js  --}}
                                 {{-- <input type="text" value="{{$subTotal}}" id="subTotalHidden" name="subTotalHidden"> --}}
                                 <input type="hidden" value="{{$subTotal}}" id="subTotalHidden" name="subTotalHidden">
@@ -177,7 +177,7 @@
             document.getElementById('grandTotal').innerHTML = '৳ '+ grandTotal;
 
              // For Invoiced
-             document.getElementById('grandTotalHidden').value = '৳ '+ grandTotal;
+             document.getElementById('grandTotalHidden').value = grandTotal;
 
             // for delivery charge
             document.getElementById('deliveryCharge').innerHTML = '৳ '+ charge;
@@ -193,7 +193,7 @@
             document.getElementById('grandTotal').innerHTML = '৳ '+ grandTotal;
 
              // For Invoiced
-             document.getElementById('grandTotalHidden').value = '৳ '+ grandTotal;
+             document.getElementById('grandTotalHidden').value = grandTotal;
 
             document.getElementById('deliveryCharge').innerHTML = '৳ '+ charge;
         }

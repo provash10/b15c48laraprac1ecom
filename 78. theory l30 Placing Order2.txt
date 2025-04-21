@@ -244,5 +244,29 @@ so, Database Order >>> structure >> a manually Null korte hobe...
 >>>Change >>> Default >>> Null
 
 
-
+============================
+value te bangla taka T add korte hobe
+value="৳ {{$subTotal}}" >>> <input type="hidden" value="৳ {{$subTotal}}" id="subTotalHidden" name="subTotalHidden">
+value="৳ {{$subTotal+80}}" >>> <input type="hidden" value="৳ {{$subTotal+80}}" name="grandTotalHidden" id="grandTotalHidden">
+-------
+<div class="sub-total-item">
+                                 <strong>Sub Total</strong>
+                                {{-- <strong id="subTotal">৳ 300</strong> --}}
+                                <strong id="subTotal">৳ {{$subTotal}}</strong>
+                                {{-- Add input file for js  --}}
+                                {{-- <input type="text" value="{{$subTotal}}" id="subTotalHidden" name="subTotalHidden"> --}}
+                                <input type="hidden" value="৳ {{$subTotal}}" id="subTotalHidden" name="subTotalHidden">
+                            </div>
+                            <div class="sub-total-item">
+                                <strong>Delivery charge</strong>
+                                <strong id="deliveryCharge">৳ 80</strong>
+                                {{-- <strong id="deliveryCharge">{{$subTotal+80}}</strong> --}}
+                            </div>
+                            <div class="sub-total-item grand-total">
+                                 <strong>Grand Total</strong>
+                                 {{-- <strong id="grandTotal">৳ 380</strong> --}}
+                                 <strong id="grandTotal">৳ {{$subTotal + 80}}</strong>
+                                 {{-- <input type="text" value="{{$subTotal+80}}" name="grandTotalHidden" id="grandTotalHidden"> --}}
+                                 <input type="hidden" value="৳ {{$subTotal+80}}" name="grandTotalHidden" id="grandTotalHidden">
+                            </div>
 ///
