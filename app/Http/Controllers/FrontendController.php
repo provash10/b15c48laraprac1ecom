@@ -22,12 +22,30 @@ class FrontendController extends Controller
         $categories = Category::orderBy('id','desc')->get();
         return view('index',compact('hotProducts', 'newProducts', 'regularProducts', 'discountProducts', 'categories'));
     }
-    public function shop(){
+    public function shop(Request $request){
+
+        if(isset($request->cat_id)){
+            $products = Product::orderBy('id', 'desc')->where('cat_id', $request->cat_id)->get();
+        }
+
+        elseif(isset($request->sub_cat_id)){
+            $products = Product::orderBy('id', 'desc')->where('sub_cat_id', $request->sub_cat_id)->get();
+        }
+
+        else{
+            $products = Product::orderBy('id', 'desc')->get();
+        }
+
         //No Need $cateories and $subCategories->AppServiceProvider 
         // $categories = Category::get();
 
-        $products = Product::orderBy('id', 'desc')->get();
-        $productsCount = Product::orderBy('id','desc')->count();
+        // $products = Product::orderBy('id', 'desc')->get();
+        
+        // $productsCount = Product::count();
+        $productsCount = $products->count();
+        // $productsCount = Product::orderBy('id','desc')->count();
+        // $productsCount = $products->orderBy('id','desc')->count();
+
         return view('shop', compact('products', 'productsCount'));
     }
 
@@ -58,6 +76,15 @@ class FrontendController extends Controller
     //     $carts = Cart::where('ip_address', request()->ip())->with('product')->get();
     //     return view('view-cart', compact('carts'));
     // }
+
+    // searchProducts
+    public function searchProducts(Request $request){
+        $products = Product::where('name', 'LIKE', '%'.$request->search.'%')->get();
+
+        // dd ($products); 
+        $productsCount = $products->count();
+        return view('search-products', compact('products','productsCount'));
+    }
 
     public function viewCart(){
         return view('view-cart');

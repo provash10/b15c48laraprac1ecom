@@ -1,0 +1,215 @@
+Class-80 (Laravel-32)
+======================
+
+Categories >>> index.html ar part (Front Page)\
+
+http://127.0.0.1:8000/shop 
+*****Categories and Sub Categories Selection to showing all page
+Categories
+-> Electronics
+-> Health & Beauty
+-> Small Gadgets
+-> Kitchen Tools
+-> Life Style
+-> Furniture & Decor
+-> Computer
+-> Medical
+
+Sub Categories
+-> Personal Care
+-> Hair Care
+-> Panjabi
+-> Hijab
+.-> Jubba
+-> Fan
+-> Watch
+---------------------->>>
+*****Keu Categories >>>lifestyle prduct dekte chaile 
+takon shop page products bad dia shudu 
+life style product gulo show korbe
+
+*****Keu Sub Categories >>>Jubba prduct dekte chaile 
+takon shop page products bad dia shudu 
+Jubba product gulo show korbe
+----------->>>
+http://127.0.0.1:8000/shop   >>>> Shop Page
+Route::get('/shop',[FrontendController::class, 'shop']);
+Function >>>
+******Before
+public function shop(){
+        //No Need $cateories and $subCategories->AppServiceProvider 
+        // $categories = Category::get();
+
+        $products = Product::orderBy('id', 'desc')->get();
+        $productsCount = Product::orderBy('id','desc')->count();
+        return view('shop', compact('products', 'productsCount'));
+    }
+---------------------->>>
+ return view('shop', compact('products', 'productsCount')); 
+>>> shop page
+>>> resources views >>> shop.blade.php   page form ar vitore categories ans sub categories ase.
+Before********
+<form class="filter-items" id="collapseOne" action="" method="GET">                                    
+                            @foreach ($categoriesGlobal as $category)
+                            <div class="item-label">
+                                <label>
+                                    <input type="checkbox" value="" id="" name="" class="checkbox" />
+                                    {{-- <span>Hot Products</span> --}}
+                                    <span>{{$category->name}}</span>
+                                </label>
+                            </div>
+                            @endforeach
+                        </form>
+
+********after     
+>>><form class="filter-items" id="collapseOne" action="{{url('/shop')}}" method="GET">
+      @csrf   
+
+>>>>shop.blade.php >>> input file ar value=""
+>>>> <input type="checkbox" value="{{$category->id}}" id="" name="" class="checkbox" />
+ 
+*****controller a name dia data dorte hoi...........
+<input type="checkbox" value="{{$category->id}}" id="cat_id" name="cat_id" class="checkbox" />
+
+**** same as subcategory of  >>>>shop.blade.php >>> input file ar value=""
+
+{{-- <form class="filter-items" id="collapseTwo" action="" method="GET"> --}}
+                            <form class="filter-items" id="collapseTwo" action="{{url('/shop')}}}" method="GET">
+                                @csrf
+   {{-- <input type="checkbox" value="" id="" name="" class="checkbox" /> --}}
+                                <input type="checkbox" value="{{$subCategory->id}}" id="sub_cat_id" name="sub_cat_id" class="checkbox" />
+                                <span>
+----------------->>> check >> http://127.0.0.1:8000/shop  not working   use js for work (onclick) button select..
+***id dore kaj korte hobe id="collapseOne"
+@push('script')
+    <script>
+        
+    </script>
+@endpush
+=====================>>>
+@push('script')
+    <script>
+        function formSubmitCategory(){
+            document.getElementById('collapseOne').submit();
+        }
+
+        function formSubmitSubCategory(){
+            document.getElementById('collapseTwo').submit();
+        }
+    </script>
+@endpush
+=============check >> http://127.0.0.1:8000/shop  not working 
+>>> Click korar somoy formSubmitCategory Or  formSubmitSubCategory k call korte hobe.
+>>> use onclick in the input file...
+
+<input type="checkbox" value="{{$category->id}}" id="cat_id" onclick="formSubmitCategory()" name="cat_id" class="checkbox" />
+<input type="checkbox" value="{{$subCategory->id}}" id="sub_cat_id" onclick="formSubmitSubCategory()" name="sub_cat_id" class="checkbox" />
+----------> check===http://127.0.0.1:8000/shop  >>>ok  all products akono dekkshe.......
+15.00 Min
+*****je product category/subcategory click kobo segulo dekhabe....
+Shop Function >>>>
+*****before
+public function shop(){
+        //No Need $cateories and $subCategories->AppServiceProvider 
+        // $categories = Category::get();
+
+        $products = Product::orderBy('id', 'desc')->get();
+        $productsCount = Product::orderBy('id','desc')->count();
+        return view('shop', compact('products', 'productsCount'));
+    }
+
+*********after  
+>>>> public function shop(Request $request)
+public function shop(Request $request){
+
+        if(isset($request->cat_id)){
+            $products = Product::orderBy('id', 'desc')->where('cat_id', $request->cat_id)->get();
+        }
+
+         ******if(isset($request->sub_cat_id)) >>>if hobe na. elseif hobe 
+        elseif(isset($request->sub_cat_id)){
+            $products = Product::orderBy('id', 'desc')->where('sub_cat_id', $request->sub_cat_id)->get();
+        }
+
+        else{
+            $products = Product::orderBy('id', 'desc')->get();
+        }
+------------------------->>> not properly work Category ..........ok
+24.50 Min
+******Total Product Count hobe Category and SubCategory wise......
+
+ 
+        // $productsCount = Product::count();
+        // $productsCount = $products->count();
+        // $productsCount = Product::orderBy('id','desc')->count();
+        $productsCount = $products->orderBy('id','desc')->count();
+
+        return view('shop', compact('products', 'productsCount'));
+    }
+------->>> 
+*****Model theke count korle :: symbol hoi. Product::
+*****variable the count korle -> arrow hoi. $products->
+=========================>>>>>
+27.00 Min  search bar
+resources >>>views >>>includes >>> header.blade.php >>>form
+create url from web.php >>>
+// search form 
+Route::get('/search-products',[FrontendController::class, 'searchProducts']);
+ setup function and pages......ok 
+
+// searchProducts
+    public function searchProducts(Request $request){
+        return view('search-products');
+    }
+
+*****working ---->>> '%'.$request->search.'%'
+ // searchProducts
+    public function searchProducts(Request $request){
+        $products = Product::where('name', 'LIKE', '%'.$request->search.'%')->get();
+
+        // dd ($products); 
+        $productsCount = $products->count();
+        return view('search-products', compact('products','productsCount'));
+    }
+******mysql a LIke keyword  and % use korte hobe
+******header input name= search
+
+Create>>> resources>>>views>>>search-products.blade.php >>>ok
+******category-products.blade.php code copy paste for  search-products.blade.php
+
+
+
+
+
+
+
+*****before 
+<div class="search-form-outer">
+                <form action="" method="GET" class="form-group search-form">
+                    <input type="text" name="search" class="form-control" placeholder="Search for items...">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+*****after
+
+*****url header form -> action= setup /search-products
+<form action="{{url('/search-products')}}" method="GET" class="form-group search-form">
+                    @csrf
+
+
+ <div class="search-form-outer">
+                <form action="{{url('/search-products')}}" method="GET" class="form-group search-form">
+                    @csrf
+                    <input type="text" name="search" class="form-control" placeholder="Search for items...">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+======
+
+
+
+
+
+
+
+

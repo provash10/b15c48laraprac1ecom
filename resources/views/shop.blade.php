@@ -15,11 +15,13 @@
                             <span>categories</span>
                             <i class="fas fa-angle-down"></i>
                         </div>
-                        <form class="filter-items" id="collapseOne" action="" method="GET">                                    
+                        <form class="filter-items" id="collapseOne" action="{{url('/shop')}}" method="GET">
+                            @csrf                                    
                             @foreach ($categoriesGlobal as $category)
                             <div class="item-label">
                                 <label>
-                                    <input type="checkbox" value="" id="" name="" class="checkbox" />
+                                    {{-- <input type="checkbox" value="" id="" name="" class="checkbox" /> --}}
+                                    <input type="checkbox" value="{{$category->id}}" id="cat_id" onclick="formSubmitCategory()" name="cat_id" class="checkbox" />
                                     {{-- <span>Hot Products</span> --}}
                                     <span>{{$category->name}}</span>
                                 </label>
@@ -32,11 +34,14 @@
                             <span>sub categories</span>
                             <i class="fas fa-angle-down"></i>
                         </div>
-                        <form class="filter-items" id="collapseTwo" action="" method="GET">
+                        {{-- <form class="filter-items" id="collapseTwo" action="" method="GET"> --}}
+                            <form class="filter-items" id="collapseTwo" action="{{url('/shop')}}" method="GET">
+                                @csrf
                            @foreach ($subCategoriesGlobal as $subCategory)
                            <div class="item-label">
                             <label>
-                                <input type="checkbox" value="" id="" name="" class="checkbox" />
+                                {{-- <input type="checkbox" value="" id="" name="" class="checkbox" /> --}}
+                                <input type="checkbox" value="{{$subCategory->id}}" id="sub_cat_id" onclick="formSubmitSubCategory()" name="sub_cat_id" class="checkbox" />
                                 <span>
                                     {{-- Test Subcategory --}}
                                     {{$subCategory->name}}
@@ -123,3 +128,15 @@
 </section> 
 
 @endsection
+
+@push('script')
+    <script>
+        function formSubmitCategory(){
+            document.getElementById('collapseOne').submit();
+        }
+
+        function formSubmitSubCategory(){
+            document.getElementById('collapseTwo').submit();
+        }
+    </script>
+@endpush
