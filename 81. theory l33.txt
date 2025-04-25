@@ -1,0 +1,298 @@
+Class-81 (Laravel-33)
+=======================
+Front Page >>>
+
+****Logo Setup/Change 
+****Database a system rakte hobe
+**** Use Sider (Permanent/Fixed Option hole Sider use korte hobe)
+Example >>> Logo and Footer Policy gulo fixed
+***** all update hoi...
+=----------------------------
+FrontPage Return Process Option
+*** edit return-process url from web.php
+Route::get('/return-process', [FrontendController::class, 'returnProcess']);
+Function >>ok
+page...>>
+resources>>>views >>>return-process.blade.php >>> form (ata remove kore dibo)
+Check >>>> http://127.0.0.1:8000/return-process >>>ok
+@extends('master')
+
+@section('content')
+
+<section class="return-process-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 m-auto">
+                {{-- Remove Return Process Form --}}
+                {{-- <form action="" method="POST" class="return-process-form form-group" enctype="multipart/form-data">
+                    <div class="text-center">
+                        <h3 class="return-process-form-title">Product Return Process</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-item-wrapper">
+                                <label for="name">Name</label>
+                                <input type="text" name="name" value="" placeholder="Name*" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-item-wrapper">
+                                <label for="phone">Phone</label>
+                                <input type="number" name="phone" value="" placeholder="Phone*" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-item-wrapper">
+                                <label for="address">Address</label>
+                                <input type="text" name="address" value="" placeholder="Address*" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-item-wrapper">
+                                <label for="order_id">Order Id</label>
+                                <input type="text" name="order_id" value="" placeholder="Order Id*" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-item-wrapper">
+                                <label for="issue">Define issues</label>
+                                <textarea name="issues" cols="50" rows="5" class="form-control" required></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input-item-wrapper">
+                                <label for="images">Image</label>
+                                <input type="file" id="images" name="images" accept="image/*" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="return-process-btn-outer">
+                        <button type="submit" id="productReturnProcess" class="return-process-btn-inner">
+                            Submit
+                        </button>
+                    </div>
+                </form>                 --}}
+                
+            </div>
+        </div>
+    </div>
+</section> 
+
+@endsection
+======================================= Remove return process code==========
+9.21 min >>>>
+Copy terms and condition page and paste it in return process page and edit
+
+10.00 Min >>>
+11.00 Min >>> Create Sider
+*****Logo,Phone Number, Email, Address,Policy Pages, Social Media.....
+*****Agulo akta website ar general Data....
+Agulo akta Database a rakte hobe.....
+
+11.40 Min >>> Create Database
+ php artisan make:model SiteSetting -m
+
+App >>> Model >>> SiteSetting 
+protected $guarded = [];
+
+App >>> Model >>> database >>> Migration File >>> SiteSetting >>>
+public function up(): void
+    {
+        Schema::create('site_settings', function (Blueprint $table) {
+            $table->id();
+
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->text('address')->nullable();
+            $table->string('whatsapp')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('youtube')->nullable();
+            $table->string('logo')->nullable();
+            //add
+            $table->string('banner')->nullable();   
+            
+            $table->timestamps();
+        });
+
+php artisan migrate >>>ok 
+check db >>>>localhost>>>phpmyadmin SiteSetting >>>ok
+-----------
+16.00 Min >>>>
+17.00 Min >>> Create seeder
+php artisan make:seeder SiteSettingSeeder
+
+Check vs>>>database >>> seeder >>>> SiteSettingSeeder
+***** $setting >>> it is a variable >>>ok
+
+public function run(): void
+    {
+        $setting = [
+            [
+                'phone'    => '01710490345',
+                'email'    => 'provash20cb@gmail.com',
+                'address'  => 'Hazaribag,Dhaka',
+                'whatsapp' => '01710490345',
+                'facebook' => 'https://www.facebook.com/',
+                'twitter'  => 'https://www.x.com/',
+                'instagram' => 'https://www.instagram.com/',
+                'youtube'   => 'https://www.youtube.com/',
+                'logo'      => 'logo.png',
+                //add
+                'banner'   =>'banner.png',
+
+            ]
+            ];
+               
+              SiteSetting::insert($setting);
+    }
+
+****after 30.00 min >>>add new dara vs banner  and db manually 
+vs >>>>>> $table->string('banner')->nullable();
+$ php artisan migrate
+
+   INFO  Nothing to migrate.
+
+db>>> manuall process >>>
+
+DB >>>Data Table>>> structure >>> add >>> 1..2...3..n
+
+add >> 1>>> banner >>> after logo >>> GO >>>>ok
+
+Name >>> banner
+Type >>> Varchar (String db>varchar)
+Length/Values  >>> 191
+Default >>> NULL 
+>>>>>>>>> Save
+
+===============>>>>
+33.01 Min
+*****Seeder >>> SiteSettingSeeder Data gulo insert korte hobe 
+DB phpmyadmin Site_Setting Table a
+
+SiteSetting::insert($setting); use it in seerder >>> SiteSettingSeeder
+
+35.00 Min >>>>
+SiteSettingSeeder k main Seeder DatabaseSeeder.php te connect korte hobe...
+
+DatabaseSeeder.php >>> $this->call(SiteSettingSeeder::class);
+connected ok .........
+
+Now command >>> php artisan db:seed
+***jodi kono seeder thake tobe tumi database a datagulo seed koro
+All data insert in database site_settings
+
+38.00 Min
+-------->>>>>>Policy and Others Pages ...create a seeder..
+***** Policy pages about ,contact ar jonno alada akta seeder create korbo
+Refund Policy,Payment Policy, About Us,
+
+47.00 Min
+-----
+php artisan make:model Policy -m
+Model >>> Policy.php 
+protected $guarded = [];
+
+48.00 Min
+DB>>>migration >>> Policy >>>
+public function up(): void
+    {
+        Schema::create('policies', function (Blueprint $table) {
+            $table->id();
+
+            $table ->longText('privacy_policy')->nullable();
+            $table ->longText('terms_conditions')->nullable();
+            $table ->longText('refund_policy')->nullable();
+            $table ->longText('payment_policy')->nullable();
+            $table ->longText('about_us')->nullable();
+            $table ->longText('return_process')->nullable();
+            $table->timestamps();
+        });
+
+php artisan migrate >>>>>>>>>>>ok 
+check >>> http://localhost/phpmyadmin/ >>>policy
+
+51.00 min 
+
+now make seeder >>> php artisan make:seeder PolicySeeder
+
+Seeder>>> PolicySeeder.php 
+public function run(): void
+    {
+        $policy = [
+            [
+                'privacy_policy' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis iure earum',
+                'terms_conditions'  => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis iure earum',
+                'refund_policy'  => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis iure earum',
+                'payment_policy'  => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis iure earum',
+                'about_us'  => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis iure earum',
+                'return_process'  => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis iure earum',
+
+            ]
+            ];
+            // for insert db 
+        Policy::insert($policy);
+    }
+
+=============
+
+Database Seeder >>>
+$this->call(SiteSettingSeeder::class);
+ Command >>>> php artisan db:seed
+
+// $this->call(SiteSettingSeeder::class);
+        $this->call(PolicySeeder::class); 
+------------------->>>> 2 ta seeder run hole 1 ta comment korte hobe...
+and Same data delete manually...............
+====================
+57.00 min  new seeder create for small frontpage banner/image
+ php artisan make:model Banner -m
+
+Models >>> Banner.php >>>> protected $guarded =[];
+migration file >>>>
+Schema::create('banners', function (Blueprint $table) {
+            $table->id();
+
+            $table->string('banner_image')->nullable();
+
+            $table->timestamps();
+        });
+====================$ php artisan migrate
+
+>>>>>Create a new seeder >>>
+php artisan make:seeder BannerSeder
+
+Seeders>>> BannerSeeder >>>
+
+public function run(): void
+    {
+        $banner = [
+            [
+               'banner_image' => 'banner1.png' 
+            ],
+            [
+                'banner_image' => 'banner2.png' 
+             ],
+             [
+                'banner_image' => 'banner3.png' 
+             ],
+        ];
+
+        Banner::insert($banner);
+    }
+}
+------------------>>>
+
+DashboardSeeder >>>>
+ // $this->call(SiteSettingSeeder::class);
+        // $this->call(PolicySeeder::class);
+        $this->call(BannerSeder::class);
+
+command >>  php artisan db:seed >>>ok
+http://localhost/phpmyadmin/ >>>.banners >>>> ok data table...
+==========================================
+
+
+
+
