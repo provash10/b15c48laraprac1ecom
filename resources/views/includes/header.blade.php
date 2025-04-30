@@ -1,12 +1,14 @@
 {{-- @dd($cartProducts) --}}
 {{-- @dd($categoriesGlobal) --}}
+{{-- @dd($siteSettings) --}}
 
 <header class="header-section">
     <div class="container">
         <div class="header-top-wrapper">
             <a href="{{url('/')}}" class="brand-logo-outer">
                 {{-- <img src="{{asset('/assets/images/logo.png')}}" alt="Logo"> --}}
-                <img src="{{asset('/assets/images/lo.png')}}" alt="Logo" height="100" width="150">
+                {{-- <img src="{{asset('/assets/images/lo.png')}}" alt="Logo" height="100" width="150"> --}}
+                <img src="{{asset('backend/images/setting/'.$siteSettings->logo)}}" alt="Logo" height="100" width="150">
             </a>
             <div class="search-form-outer">
                 <form action="{{url('/search-products')}}" method="GET" class="form-group search-form">

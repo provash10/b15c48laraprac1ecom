@@ -1,9 +1,13 @@
+{{-- @dd($siteSettings) not work use it header--}}
 <footer class="footer-section">
     <div class="footer__top-wrapper">
         <div class="container">
             <a href="index.html" class="footer__brand-logo-outer">
                 {{-- <img src="./assets/images/logo.png" class="footer__brand-logo-inner" /> --}}
-                <img src="{{asset('/assets/images/lo.png')}}" class="footer__brand-logo-inner" height="100" width="150"/>
+                {{-- <img src="{{asset('/assets/images/lo.png')}}" class="footer__brand-logo-inner" height="100" width="150"/> --}}
+                <img src="{{asset('backend/images/setting/'.$siteSettings->logo)}}" alt="Logo" height="100" width="150">
+            </a>
+
             </a>
         </div>
     </div>    
@@ -56,52 +60,65 @@
                             <li class="footer__contact-info-list-item">
                                 <p class="footer__contact-info-list-item-label">
                                     <p class="footer__contact-info-list-item-value">
-                                        Address : Dhaka,Bangladesh                                
+                                        {{-- Address : Dhaka,Bangladesh --}}
+                                        {{$siteSettings->address}}
                                     </p>                                  
                                 </p>
                                 
                             </li>
 
-                            {{-- <li class="footer__contact-info-list-item">
-                                <p class="footer__contact-info-list-item-label">
-                                    Phone:                                   
-                                </p>
-                                <a href="tel:0123456857" class="footer__contact-info-list-item-value">
-                                    01710490345
-                                </a>
-                            </li> --}}
                             <li class="footer__contact-info-list-item">
+                                <p class="footer__contact-info-list-item-label">
+                                    Phone :                                   
+                                </p>
+                                {{-- <a href="tel:0123456857" class="footer__contact-info-list-item-value">
+                                    01710490345
+                                </a> --}}
+                                <a href="tel:{{$siteSettings->phone}}" class="footer__contact-info-list-item-value">
+                                    {{-- 01710490345 --}}
+                                    {{$siteSettings->phone}}
+                                </a>
+                            </li>
+                            {{-- <li class="footer__contact-info-list-item">
                                 <p class="footer__contact-info-list-item-label">
                                     <a href="tel:0123456857" class="footer__contact-info-list-item-value">
                                         Phone : 01710 490 345
                                     </a>                                
                                 </p>
                                 
-                            </li>
+                            </li> --}}
+
                             <li class="footer__contact-info-list-item">
                                 <p class="footer__contact-info-list-item-label">
-                                    <a href="tel:0123456857" class="footer__contact-info-list-item-value">
-                                        Whatsapp : 01710 490 345
-                                    </a>                                
+                                    Whatsapp :                                   
                                 </p>
-                                
+                                {{-- <a href="tel:0123456857" class="footer__contact-info-list-item-value">
+                                    01710490345
+                                </a> --}}
+                                <a href="tel:{{$siteSettings->whatsapp}}" class="footer__contact-info-list-item-value">
+                                    {{-- 01710490345 --}}
+                                    {{$siteSettings->whatsapp}}
+                                </a>
+                            </li>
+
+                            <li class="footer__contact-info-list-item">
+                                <p class="footer__contact-info-list-item-label">
+                                    Email :                                   
+                                </p>
+                                {{-- <a href="mailto:info@gmail.com" class="footer__contact-info-list-item-value"> --}}
+                                    <a href="mailto:{{$siteSettings->email}}" class="footer__contact-info-list-item-value">
+                                    {{-- info@gmail.com --}}
+                                    {{$siteSettings->email}}
+                                </a>
                             </li>
                             {{-- <li class="footer__contact-info-list-item">
-                                <p class="footer__contact-info-list-item-label">
-                                    Email:                                   
-                                </p>
-                                <a href="mailto:info@gmail.com" class="footer__contact-info-list-item-value">
-                                    info@gmail.com
-                                </a>
-                            </li> --}}
-                            <li class="footer__contact-info-list-item">
                                 <p class="footer__contact-info-list-item-label">
                                     <a href="mailto:info@gmail.com" class="footer__contact-info-list-item-value">
                                         Email : provash20cb@gmail.com
                                     </a>                                
                                 </p>
                                 
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                 </div>                
@@ -141,22 +158,26 @@
                         </h4>
                         <ul class="footer__social-list">
                             <li class="footer__social-list-item">
-                                <a href="#" class="footer__social-list-item-lisk">
+                                {{-- <a href="#" class="footer__social-list-item-lisk"> --}}
+                                    <a href="{{$siteSettings->facebook}}" class="footer__social-list-item-lisk">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
                             </li>
                             <li class="footer__social-list-item">
-                                <a href="#" class="footer__social-list-item-lisk">
+                                {{-- <a href="#" class="footer__social-list-item-lisk"> --}}
+                                    <a href="{{$siteSettings->twitter}}" class="footer__social-list-item-lisk">
                                     <i class="fab fa-twitter"></i>
                                 </a>
                             </li>
                             <li class="footer__social-list-item">
-                                <a href="#" class="footer__social-list-item-lisk">
+                                {{-- <a href="#" class="footer__social-list-item-lisk"> --}}
+                                    <a href="{{$siteSettings->instagram}}" class="footer__social-list-item-lisk">
                                     <i class="fab fa-instagram"></i>
                                 </a>
                             </li>
                             <li class="footer__social-list-item">
-                                <a href="#" class="footer__social-list-item-lisk">
+                                {{-- <a href="#" class="footer__social-list-item-lisk"> --}}
+                                    <a href="{{$siteSettings->youtube}}" class="footer__social-list-item-lisk">
                                     <i class="fab fa-youtube"></i>
                                 </a>
                             </li>

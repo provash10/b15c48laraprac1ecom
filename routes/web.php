@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\FrontendController;
@@ -126,4 +127,8 @@ Route::post('/admin/product/store',[ProductController::class, 'productStore']);
 Route::get('/admin/product/edit/{id}',[ProductController::class, 'productEdit']);
 Route::post('/admin/product/update/{id}',[ProductController::class, 'productUpdate']);
 Route::get('/admin/product/delete/{id}',[ProductController::class, 'productDelete']);
+
+
+// Order Management
+Route::get('/admin/all-order/list',[OrderController::class, 'allOrderList']);
 

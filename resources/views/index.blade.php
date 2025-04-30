@@ -1,4 +1,7 @@
 {{-- @include('master') --}}
+{{-- @dd($topBanners) --}}
+{{-- @dd($termPolicy) --}}
+
 @extends('master')
 
 @section('content')
@@ -39,7 +42,8 @@
 				</div>
 				<div class="home__slider-items-wrapper">
 					<div class="home__slider-item-outer">
-						<img src="{{asset('/assets/images/slider.jpg')}}" alt="image" class="home__slider-item-image">
+						{{-- <img src="{{asset('/assets/images/slider.jpg')}}" alt="image" class="home__slider-item-image"> --}}
+						<img src="{{asset('backend/images/setting/'.$siteSettings->banner)}}" alt="image" class="home__slider-item-image">
 					</div>
 				</div>
 			</div>
@@ -78,12 +82,16 @@
 	<section class="banner-section">
 		<div class="container">
 			<div class="row">
+				@foreach ($topBanners as $banner)
 				<div class="col-lg-4 col-md-6 col-sm-6">
 					<div class="banner-item-outer">
-						<img src="{{asset('/assets/images/banner.jpeg')}}" alt="banner image" />
+						{{-- <img src="{{asset('/assets/images/banner.jpeg')}}" alt="banner image" /> --}}
+						<img src="{{asset('backend/images/banners/'.$banner->banner_image)}}" alt="banner image" />
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-6 col-sm-6">
+				@endforeach
+				{{-- Remove banners and use loop  --}}
+				{{-- <div class="col-lg-4 col-md-6 col-sm-6">
 					<div class="banner-item-outer">
 						<img src="./assets/images/banner.jpeg" alt="banner image" />
 					</div>
@@ -92,7 +100,7 @@
 					<div class="banner-item-outer">
 						<img src="{{asset('/assets/images/banner.jpeg')}}" alt="banner image" />
 					</div>
-				</div>
+				</div> --}}
 			</div>
 		</div>
 	</section>

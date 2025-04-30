@@ -12,7 +12,7 @@
     </div>
     <div class="container">
         <div class="privacy-policy-content">
-            <div class="contant-des">
+            {{-- <div class="contant-des">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis iure earum, eos placeat ratione consequuntur exercitationem rem sunt omnis facilis quam nam ad laborum repellat quae molestiae eligendi qui dignissimos.
                 Quis, hic molestias at commodi quaerat tempore accusantium pariatur necessitatibus. Nobis iusto aut quasi quam ea, voluptas, veniam autem id delectus nam expedita quo architecto tenetur modi repellat. Velit, iste.
                 Magnam minus aperiam molestias. Voluptas voluptatem ad harum ipsa, quod, ipsam illo deserunt sint nesciunt officiis a, expedita quasi soluta. Id, minima autem! Aspernatur, explicabo. Pariatur sed excepturi quod accusamus!
@@ -23,6 +23,10 @@
                 Eligendi deserunt, odio, doloribus blanditiis mollitia quos eum sed, quo recusandae possimus deleniti ea tempora. Quae suscipit inventore sed tempore! Cupiditate debitis harum, velit quibusdam tempora nobis qui nulla animi?
                 Molestiae quisquam aperiam ducimus, magnam provident quos expedita voluptate quas repudiandae eveniet ea totam atque possimus, explicabo reprehenderit incidunt? Quae fuga dignissimos, in distinctio unde officiis commodi repellat inventore enim.
                 Nulla natus officia quam, mollitia esse aut provident quidem consequatur error hic? Nemo iste atque quisquam ipsum cupiditate. Omnis quo vitae eum corporis, mollitia quam necessitatibus et quae? Asperiores, libero.
+            </div> --}}
+            <div class="contant-des">
+                {{-- {{$termPolicy->privacy_policy}} --}}
+                {{!!$termPolicy->privacy_policy!!}}
             </div>
         </div>
     </div>

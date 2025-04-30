@@ -37,3 +37,43 @@ http://127.0.0.1:8000
 >>> Show Laravel Home Page. 
 Laravel installation is ok
 ==========================
+New repository >>>> Add me Read >>> not selected
+Add gitignore >>> gitignore template >>>Select >> Laravel
+******delete gitignore file cause auto laravel install
+--------------------------------------------------------
+*****Composer install thakte hobe.....
+*****node js install
+*****Composer install check >> gitbash>>> composer _v 
+
+Repository ar vitore laravel install korte hole composer command run korte hobe...
+Command in the folder " Composer" Select *****Larvel10x 
+
+https://laravel.com/docs/10.x/installation?fbclid=IwZXh0bgNhZW0CMTAAAR1tj9TpvvbEaqCx3dLaHzuV-zjhaZ2EayM43UsOiwkaifJMF76dTqDz31A_aem_HoEw7rfIsc1RNysc6VGFog
+
+composer create-project "laravel/laravel:^10.0" example-app         
+>>> Copy and paste in git bash
+
+INFO Application key set successfully
+
+Projrct Foldet >>> example-app auto generate
+
+example-add folder >>> Data copy/cut and paste in b15c48laraprac2ecom folder...
+And delete example-app folder... ok..
+
+Laravel open >>>>gitbash >>>php artisan serve
+Laravel optimize (web.php) >>>>gitbash >>> php artisan optimize
+Laravel DB migrate>>>>gitbash >>> >>> php artisan migrate
+Laravel open >>>>gitbash >>> php artisan make:Model .......
+Laravel open >>>>gitbash >>> php artisan make:Controller .......
+
+Laravel => MVC= Model View Controller
+===============================================================================
+save/ update github projectgitbash >>>
+
+git add .
+
+git commit -m"laravel 01 laravel installation"
+
+git push
+
+==============================

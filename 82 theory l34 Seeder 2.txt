@@ -1,0 +1,298 @@
+Class 82 Laravel 34
+========================
+****includes ar vitore jodi database theke data ante chai tahole 
+controller dia ante parbo na
+***** Data ante hoi service provider theke....
+AppServiceProvider.php
+
+// $view->with('siteSettings', SiteSetting::get());
+            $view->with('siteSettings', SiteSetting::first());
+
+header.blade.php >>>> Main logo >>>>  'siteSettings'
+<a href="{{url('/')}}" class="brand-logo-outer">
+                {{-- <img src="{{asset('/assets/images/logo.png')}}" alt="Logo"> --}}
+                {{-- <img src="{{asset('/assets/images/lo.png')}}" alt="Logo" height="100" width="150"> --}}
+                <img src="{{asset('backend/images/setting/'.$siteSettings->logo)}}" alt="Logo" height="100" width="150">
+            </a>
+-------------------->>>
+footer.blade.php >>>> Main logo >>>>  'siteSettings'
+         <a href="index.html" class="footer__brand-logo-outer">
+                {{-- <img src="./assets/images/logo.png" class="footer__brand-logo-inner" /> --}}
+                {{-- <img src="{{asset('/assets/images/lo.png')}}" class="footer__brand-logo-inner" height="100" width="150"/> --}}
+                <img src="{{asset('backend/images/setting/'.$siteSettings->logo)}}" alt="Logo" height="100" width="150">
+            </a>
+
+$siteSettings 
+----------------------->>>
+*****Before  Address****** {{$siteSettings->address}}
+<p class="footer__contact-info-list-item-value">
+                                        Address : Dhaka,Bangladesh                                
+                                    </p>  
+
+================
+<li class="footer__contact-info-list-item">
+                                <p class="footer__contact-info-list-item-label">
+                                    <p class="footer__contact-info-list-item-value">
+                                        {{-- Address : Dhaka,Bangladesh --}}
+                                        {{$siteSettings->address}}
+                                    </p>                                  
+                                </p>
+                                
+                            </li>
+
+                            <li class="footer__contact-info-list-item">
+                                <p class="footer__contact-info-list-item-label">
+                                    Phone :                                   
+                                </p>
+                                {{-- <a href="tel:0123456857" class="footer__contact-info-list-item-value">
+                                    01710490345
+                                </a> --}}
+                                <a href="tel:{{$siteSettings->phone}}" class="footer__contact-info-list-item-value">
+                                    {{-- 01710490345 --}}
+                                    {{$siteSettings->phone}}
+                                </a>
+                            </li>
+                            {{-- <li class="footer__contact-info-list-item">
+                                <p class="footer__contact-info-list-item-label">
+                                    <a href="tel:0123456857" class="footer__contact-info-list-item-value">
+                                        Phone : 01710 490 345
+                                    </a>                                
+                                </p>
+                                
+                            </li> --}}
+
+                            <li class="footer__contact-info-list-item">
+                                <p class="footer__contact-info-list-item-label">
+                                    Whatsapp :                                   
+                                </p>
+                                {{-- <a href="tel:0123456857" class="footer__contact-info-list-item-value">
+                                    01710490345
+                                </a> --}}
+                                <a href="tel:{{$siteSettings->whatsapp}}" class="footer__contact-info-list-item-value">
+                                    {{-- 01710490345 --}}
+                                    {{$siteSettings->whatsapp}}
+                                </a>
+                            </li>
+
+                            <li class="footer__contact-info-list-item">
+                                <p class="footer__contact-info-list-item-label">
+                                    Email :                                   
+                                </p>
+                                {{-- <a href="mailto:info@gmail.com" class="footer__contact-info-list-item-value"> --}}
+                                    <a href="mailto:{{$siteSettings->email}}" class="footer__contact-info-list-item-value">
+                                    {{-- info@gmail.com --}}
+                                    {{$siteSettings->email}}
+                                </a>
+                            </li>
+==================================>>
+Now Social Media >>>>   {{$siteSettings->......}}
+<a href="{{$siteSettings->facebook}}" class="footer__social-list-item-lisk">
+
+<h4 class="footer__item-title">
+                            Follow Us
+                        </h4>
+                        <ul class="footer__social-list">
+                            <li class="footer__social-list-item">
+                                {{-- <a href="#" class="footer__social-list-item-lisk"> --}}
+                                    <a href="{{$siteSettings->facebook}}" class="footer__social-list-item-lisk">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li class="footer__social-list-item">
+                                {{-- <a href="#" class="footer__social-list-item-lisk"> --}}
+                                    <a href="{{$siteSettings->twitter}}" class="footer__social-list-item-lisk">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li class="footer__social-list-item">
+                                {{-- <a href="#" class="footer__social-list-item-lisk"> --}}
+                                    <a href="{{$siteSettings->instagram}}" class="footer__social-list-item-lisk">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </li>
+                            <li class="footer__social-list-item">
+                                {{-- <a href="#" class="footer__social-list-item-lisk"> --}}
+                                    <a href="{{$siteSettings->youtube}}" class="footer__social-list-item-lisk">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </li>
+                        </ul>
+==========================================
+18.00 Min
+Main Banner
+Index.blade.php >>> slider image
+<div class="home__slider-items-wrapper">
+					<div class="home__slider-item-outer">
+						<img src="{{asset('/assets/images/slider.jpg')}}" alt="image" class="home__slider-item-image">
+					</div>
+				</div>
+*********after
+<div class="home__slider-items-wrapper">
+					<div class="home__slider-item-outer">
+						{{-- <img src="{{asset('/assets/images/slider.jpg')}}" alt="image" class="home__slider-item-image"> --}}
+						<img src="{{asset('backend/images/setting/'.$siteSettings->banner)}}" alt="image" class="home__slider-item-image">
+					</div>
+				</div>
+---------------------------------------------------
+20.00 Min 
+Small 3 Banner......
+DB banners check >>>>>ok
+
+AppServiceProvider
+>>>  $view->with('topBanners', Banner::get());
+
+index.blade.php >>
+@dd($topBanners)
+>>>check original >>ok
+-----------
+index.blade.php >>> top banners 
+http://127.0.0.1:8000/ check  top banners  1 image ok
+----------
+******before
+<div class="col-lg-4 col-md-6 col-sm-6">
+					<div class="banner-item-outer">
+						<img src="{{asset('/assets/images/banner.jpeg')}}" alt="banner image" />
+					</div>
+				</div>
+***********after
+<div class="col-lg-4 col-md-6 col-sm-6">
+					<div class="banner-item-outer">
+						{{-- <img src="{{asset('/assets/images/banner.jpeg')}}" alt="banner image" /> --}}
+						<img src="{{asset('backend/images/banners/'.$banner->banner_image)}}" alt="banner image" />
+					</div>
+				</div>
+				@endforeach
+-------------------------
+Check >>>> http://127.0.0.1:8000/ check  top banners   image ok
+
+-------
+////////////////////////
+25.00 min   ******Not Done (problem of video)
+DB >>> policies >>> 
+
+AppServiceProviders
+$view->with('termPolicy', Policy::first());
+
+index.blade.php 
+@dd($termPolicy)
+------>>
+// Policy Pages.......
+Route::get('/privacy-policy',[FrontendController::class, 'privacyPolicy']);
+Route::get('/terms-conditions',[FrontendController::class, 'termsConditions']);
+Route::get('/refund-policy',[FrontendController::class, 'refundPolicy']);
+Route::get('/payment-policy',[FrontendController::class, 'paymentPolicy']);
+Route::get('/about-us',[FrontendController::class, 'aboutUs']);
+Route::get('/contact-us',[FrontendController::class, 'contactUs']);
+
+// policy pages
+    public function privacyPolicy(){
+        return view('privacy-policy');
+    }
+
+
+privacy-policy.blade.php  >>> Lorem text content
+privacy-policy.blade.php  >>> Lorem text content
+
+====
+30.00 min
+35.00 Min
+privacy-policy Content >>>>
+privacy-policy.blade.php  >>> Lorem text content
+privacy-policy.blade.php  >>> {{$termPolicy->privacy_policy}}
+
+<div class="contant-des">
+                {{$termPolicy->privacy_policy}}
+            </div>
+
+***Check >>> http://127.0.0.1:8000/privacy-policy >>>ok 
+
+******
+<div class="contant-des">
+                {{-- {{$termPolicy->privacy_policy}} --}}
+                {{!!$termPolicy->privacy_policy!!}}
+            </div>
+----------------->>>
+
+37.00 Min
+Summer Note
+{{-- {{!!$termPolicy->privacy_policy!!}} --}} 
+=============
+Terms & Conditions >>>>terms-conditions.blade.php
+<div class="contant-des">
+                {{-- {{$termPolicy->terms_conditions}} --}}
+                {{!!$termPolicy->terms_conditions!!}}
+            </div>
+
+http://127.0.0.1:8000/terms-conditions check ok
+
+-------
+40.00 Min 
+Refund Policy
+refund-policy.blade.php>>>
+ <div class="contant-des">
+                {{!!$termPolicy->refund_policy!!}}
+            </div>
+Check >>> http://127.0.0.1:8000/refund-policy >>>ok
+--------
+Payment Policy
+payment-policy.blade.php>>>
+<div class="contant-des">
+                {{!!$termPolicy->payment_policy!!}}
+            </div>
+
+***Check >>> http://127.0.0.1:8000/payment-policy >>>ok
+------------
+41.00 Min
+About US
+about-us.blade.php
+<div class="contant-des">
+                {{!!$termPolicy->about_us!!}}
+            </div>
+
+Check >>> http://127.0.0.1:8000/about-us >>>ok
+
+------------------
+Return Process
+return-process.blade.php
+
+<div class="contant-des">
+                {{!!$termPolicy->return_process!!}}
+            </div>
+
+http://127.0.0.1:8000/return-process >>> ok
+
+
+*********Backend a upload korle all ok hobe 
+********* Order Process korar jonno Management System korte hobe Owner er jonno..
+**********Data Upload by Admin Panel......
+==============
+Laravel Ecommerce এর রিটার্ন ও রিফান্ড পলিসিঃ
+কোন কোন ক্ষেত্রে রিফান্ড প্রযোজ্য হবেঃ </br>
+১। অর্ডার করা পণ্য আমাদের কাছ থেকে ডেলিভারি পাওয়ার পর পণ্যে যদি কোনো ত্রুটি থাকে, ড্যামেজ থাকে অথবা আপনাকে যদি ভুল পণ্য কিংবা অসম্পূর্ণ পণ্য পাঠানো হয় শুধুমাত্র সেই ক্ষেত্রে আমাদের ওয়েবসাইটের রিফান্ড অপশনে যেয়ে ২৪ ঘণ্টার মধ্যে উপযুক্ত প্রমান সহ রিফান্ডের জন্য আবেদন করতে হবে। এর পরে রিফান্ডের জন্য আবেদন করলে তা গ্রহণ করা হবে না। </br>
+২। আমাদের এখানে পণ্য এক্সচেঞ্জ করার সিস্টেম নেই। </br>
+
+মিসিং বা হারিয়ে যাওয়া প্রোডাক্ট এর রিফান্ড পলিসি ক্লেইম এর ক্ষেত্রে নির্দেশনাঃ </br>
+১। গ্রাহক যখন তার ডেলিভারিকৃত প্রোডাক্ট গুলো আনবক্সিং করবে ,তখন তার একটি ভিডিও ফুটেজ সংরক্ষণ করতে হবে।</br>
+২ । মিসিং প্রোডাক্টের ক্ষেত্রে ডেলিভারিকৃত প্রোডাক্টের যথাযথ সাইজ /কালার উল্লেখ করে তার মধ্যে থেকে মিসিং প্রোডাক্টের সংখ্যাসহ বিস্তারিত লিখিত এবং ছবিসহ আমাদের জানাতে হবে </br>
+৩। মিসিং প্রোডাক্ট ক্লেইমের ক্ষেত্রে গ্রাহককে অবশ্যই ডেলিভারি হওয়ার ২৪ ঘণ্টার মধ্যে যথাযথ প্রমানগুলো সহ কাস্টমার সাপোর্টে অভিযোগ জানাতে হবে।</br>
+
+রিফান্ড করার সময়সীমাঃ </br>
+আপনি সবগুলো শর্ত মেনে রিফান্ডের জন্য আবেদন করার পর আমাদের টিম আপনার সাথে যোগাযোগ করবে। আপনার আবেদনটি যদি আমাদের রিফান্ড পলিসির মধ্যে পরে সেই ক্ষেত্রে আপনার অর্ডার করা পণ্যের মূল্য ৭ কর্ম দিবসের মধ্যে রিফান্ড করা হবে। ক্ষেত্র বিশেষে,আপনার পেমেন্ট মেথডের ওপর ভিত্তি করে রিফান্ড টাইম কম বা বেশি হতে পারে। </br>
+
+কোন কোন ক্ষেত্রে রিটার্ন প্রযোজ্য হবেঃ</br>
+অর্ডার করা পণ্যের সাথে ডেলিভারি করা পণ্যের কালার কিংবা সাইজের মিল না থাকলে সেই পণ্য রিটার্ন করার ক্ষেত্রে আমাদের ওয়েবসাইটের রিটার্ন অপশনে যেয়ে ২৪ ঘণ্টার মধ্যে উপযুক্ত প্রমান সহ রিফান্ডের জন্য আবেদন করতে হবে। এর পরে আবেদন করলে তা আর গ্রহণযোগ্য হবে না। আমাদের টিম আপনার আবেদনটি বিশ্লেষণ করে আপনার সাথে যোগাযোগ করবে।</br>
+
+কোন কোন ক্ষেত্রে রিটার্ন প্রযোজ্য হবেনাঃ </br>
+১। রিটার্ন করা পণ্যটি অবশ্যই অব্যবহৃত হতে হবে, কোনো ভাবেই পণ্যটি ধৌত/ব্যবহৃত হওয়া যাবেনা। শুধুমাত্র ফ্যাশন প্রোডাক্টের ক্ষেত্রে তা পরে ট্রায়াল দেয়া যাবে তবে তা কোনো ভাবেই ভাজ ফেলা কিংবা ধোঁয়া যাবে না।</br>
+২। পণ্যটিতে অবশ্যই অরিজিনাল ট্যাগ, ইউজার ম্যানুয়াল, ওয়ারেন্টি কার্ড এবং সাথে দেয়া সকল এক্সেসরিজ থাকতে হবে।</br>
+
+কিভাবে রিফান্ড/রিটার্নের জন্য আবেদন করবেন?</br>
+১। প্রথমে আপনাকে আপনার একাউন্টে লগিন করুন। তারপর Return Process পেইজে ক্লিক করুন।</br>
+২। অতঃপর সেখানে দেয়া ফর্মটি সঠিক তথ্য দিয়ে ফিল আপ করুন এবং Submit বাটনটিতে ক্লিক করুন।</br>
+৩। আপনার ঠিকানা যদি ঢাকার মধ্যে হয় সেই ক্ষেত্রে আপনি চাইলে নিজে এসে আমাদের অফিসে পণ্যটি রিটার্ন করে দিতে পারবেন অথবা আমাদের ঠিকানায় কুরিয়ার করে পাঠাতে পারবেন। অন্যদিকে, আপনার ঠিকানা যদি ঢাকার বাইরে হয় সেই ক্ষেত্রে পণ্যটি কুরিয়ার করে আমাদের ঠিকানায় পাঠাতে পারবেন।</br>
+৪। ঢাকা কিংবা ঢাকার বাইরে থেকে পণ্য পাঠানোর আগে অবশ্যই আমাদেরকে আগে ফোনে অথবা ইমেইল করে জানাতে হবে। উভয় ক্ষেত্রে আপনাকে নিজ খরচে ও নিজ দায়িত্বে পণ্যটি কুরিয়ার করতে হবে। কুরিয়ারে পণ্য হারালে বা নষ্ট হলে তা আমাদের দায়বদ্ধতার বাইরে।</br>
+
+যে কুরিয়ার সার্ভিসসমূহের মাধ্যমে পণ্য রিটার্ন করতে পারবেনঃ</br>
+১। ঢাকার ভেতর হলেঃ পাঠাও, রেডেক্স, ই-কুরিয়ার, Steadfast.</br>
+২। ঢাকার বাহিরে হলেঃ সুন্দরবন কুরিয়ার, এস এ পরিবহন Steadfast.
+-------------------------
