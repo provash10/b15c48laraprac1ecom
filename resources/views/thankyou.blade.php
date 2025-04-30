@@ -15,7 +15,8 @@
         <p class="thank-you-message">
             আপনার অর্ডারটি সফলভাবে সম্পন্ন হয়েছে ।আমাদের কল সেন্টার থেকে ফোন করে আপনার অর্ডারটি কনফার্ম করা হবে
         </p>
-        <a href="index.html" class="thank-you-btn-inner">Go To Home</a>
+        {{-- <a href="index.html" class="thank-you-btn-inner">Go To Home</a> --}}
+        <a href="{{'/'}}" class="thank-you-btn-inner">Go To Home</a>
     </div>
 </div>
 
