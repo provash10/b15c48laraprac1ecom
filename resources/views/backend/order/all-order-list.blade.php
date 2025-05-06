@@ -526,7 +526,9 @@
                                                 <a href="#" class="btn btn-danger">Cancel</a>
                                             </td>
                                             <td>
-                                                <a href="#" class="btn btn-primary">Edit</a>
+                                                {{-- <a href="#" class="btn btn-primary">Edit</a> --}}
+                                                {{-- <a href="{{url('/admin/edit-order/{id}')}}" class="btn btn-primary">Edit</a> --}}
+                                                <a href="{{url('/admin/edit-order/'.$order->id)}}" class="btn btn-primary">Edit</a>
                                             </td>
                                         </tr>
                                         @endforeach

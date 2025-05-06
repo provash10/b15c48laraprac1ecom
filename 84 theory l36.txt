@@ -1,0 +1,304 @@
+Class-84 (Laravel-36)
+======================
+http://127.0.0.1:8000/admin/all-order/list >>>>
+All Order List  >>>Working Clickable system
+
+web.php >>>>
+// Order Management
+
+
+Route::get('/admin/edit-order/{id}',[OrderController::class, 'editOrder']);
+Route::post('/admin/update-order/{id}',[OrderController::class, 'updateOrder']);
+
+
+
+/admin/edit-order/{id}
+resources>>>views>>>backend>>>order>>>all-order-list.blade.php
+
+<td>
+     {{-- <a href="#" class="btn btn-primary">Edit</a> --}}
+     {{-- <a href="{{url('/admin/edit-order/{id}')}}" class="btn btn-primary">Edit</a> --}}
+          <a href="{{url('/admin/edit-order/'.$order->id)}}" class="btn btn-primary">Edit</a>
+</td> 
+
+****check >>> http://127.0.0.1:8000/admin/all-order/list >>> Action>> Edit button (Create function)
+
+OrderController.php >>>
+
+
+Create Blade page >>> 
+resource >>>views>>>backend>>>>order>>>edit-order.blade.php
+*****copy paste header footer from all-order-list.blade.php page (editable)
+link >>> http://127.0.0.1:8000/admin/edit-order/3
+
+*****showing customer details and product details
+****akahne order details dekhate hobe
+**** need a form and product details
+**** Use adminLte for design >>> index2.html
+***** index2.html >>> pages >>> use what is need
+*****index2.html >>>Need Pages>>> Project Add/ Project Edit******
+*****Project Edit****** >>>file:///C:/xampp/htdocs/B15/AdminLTE%20v3.2.0/ColorlibHQ-AdminLTE-bd4d9c7/pages/examples/project-edit.html
+*****get code from >>>>pages/examples/project-edit  >>>>open with vs code....
+***** need only main content >>>>
+***** copy and paste edit-order.blade.php main content
+***** http://127.0.0.1:8000/admin/edit-order/3 check link >>>ok
+
+ <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Project Edit</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Project Edit</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">General</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label for="inputName">Project Name</label>
+                <input type="text" id="inputName" class="form-control" value="AdminLTE">
+              </div>
+              <div class="form-group">
+                <label for="inputDescription">Project Description</label>
+                <textarea id="inputDescription" class="form-control" rows="4">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terr.</textarea>
+              </div>
+              <div class="form-group">
+                <label for="inputStatus">Status</label>
+                <select id="inputStatus" class="form-control custom-select">
+                  <option disabled>Select one</option>
+                  <option>On Hold</option>
+                  <option>Canceled</option>
+                  <option selected>Success</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="inputClientCompany">Client Company</label>
+                <input type="text" id="inputClientCompany" class="form-control" value="Deveint Inc">
+              </div>
+              <div class="form-group">
+                <label for="inputProjectLeader">Project Leader</label>
+                <input type="text" id="inputProjectLeader" class="form-control" value="Tony Chicken">
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <div class="col-md-6">
+          <div class="card card-secondary">
+            <div class="card-header">
+              <h3 class="card-title">Budget</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label for="inputEstimatedBudget">Estimated budget</label>
+                <input type="number" id="inputEstimatedBudget" class="form-control" value="2300" step="1">
+              </div>
+              <div class="form-group">
+                <label for="inputSpentBudget">Total amount spent</label>
+                <input type="number" id="inputSpentBudget" class="form-control" value="2000" step="1">
+              </div>
+              <div class="form-group">
+                <label for="inputEstimatedDuration">Estimated project duration</label>
+                <input type="number" id="inputEstimatedDuration" class="form-control" value="20" step="0.1">
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+          <div class="card card-info">
+            <div class="card-header">
+              <h3 class="card-title">Files</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>File Name</th>
+                    <th>File Size</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr>
+                    <td>Functional-requirements.docx</td>
+                    <td>49.8005 kb</td>
+                    <td class="text-right py-0 align-middle">
+                      <div class="btn-group btn-group-sm">
+                        <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                      </div>
+                    </td>
+                  <tr>
+                    <td>UAT.pdf</td>
+                    <td>28.4883 kb</td>
+                    <td class="text-right py-0 align-middle">
+                      <div class="btn-group btn-group-sm">
+                        <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                      </div>
+                    </td>
+                  <tr>
+                    <td>Email-from-flatbal.mln</td>
+                    <td>57.9003 kb</td>
+                    <td class="text-right py-0 align-middle">
+                      <div class="btn-group btn-group-sm">
+                        <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                      </div>
+                    </td>
+                  <tr>
+                    <td>Logo.png</td>
+                    <td>50.5190 kb</td>
+                    <td class="text-right py-0 align-middle">
+                      <div class="btn-group btn-group-sm">
+                        <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                      </div>
+                    </td>
+                  <tr>
+                    <td>Contract-10_12_2014.docx</td>
+                    <td>44.9715 kb</td>
+                    <td class="text-right py-0 align-middle">
+                      <div class="btn-group btn-group-sm">
+                        <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                      </div>
+                    </td>
+
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <a href="#" class="btn btn-secondary">Cancel</a>
+          <input type="submit" value="Save Changes" class="btn btn-success float-right">
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+*****showing customer details and product details
+***** http://127.0.0.1:8000/admin/edit-order/3 check link >>>ok
+13.00 min
+Card edit >>>>>> need only general and budget
+
+***change the design ......
+
+
+
+24.00 min 
+******Product Details >>> img,qty,price etc  (direct get information)
+******No need from of form-group... No need edit...
+****** use dummy image >>> https://placehold.co/ >>>link
+****** color,size, single price and total price showing
+****** Price less much hote pare tai editable rakrar jonno *****form use korte hobe
+ 
+<div class="card-body">
+             <img src="https://placehold.co/100x100">
+             1 X Test Product | Unit Price : 1000 tk| Color : Red | Size : L<br> <br>
+             <img src="https://placehold.co/100x100">
+             2 X Test Product | Unit Price : 1000 tk| Color : Red | Size : L<br> <br>
+             <img src="https://placehold.co/100x100">
+             3 X Test Product | Unit Price : 1000 tk| Color : Red | Size : L<br> <br>
+             
+            </div>
+
+32.00 min
+
+35.00 Min
+<input type="submit" value="Save Changes" class="btn btn-success float-right">
+
+<div class="card-body">
+                              <div class="row">
+                                <div class="col-md-12">
+                                    <img src="https://placehold.co/100x100">
+                                    1 X Test Product | Unit Price : 1000 tk| Color : Red | Size : L<br> <br>
+                                    <img src="https://placehold.co/100x100">
+                                    2 X Test Product | Unit Price : 1000 tk| Color : Red | Size : L<br> <br>
+                                    <img src="https://placehold.co/100x100">
+                                    3 X Test Product | Unit Price : 1000 tk| Color : Red | Size : L<br> <br>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        {{-- <label for="inputDescription">Project Description</label> --}}
+                                        <label for="inputDescription">Order Price</label>
+                                        <input type="text" id="" name="" class="form-control"
+                                            value="3000" required>
+                                    </div>
+                                    <input type="submit" value="Update Order" class="btn btn-success float-right">
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+-----------------
+36.00 Min  >>> use From for both side
+******Ful row soho col md  2 side in into form 
+>>> ok
+
+39.00 min
+
+OrderController.php
+ public function editOrder ($id) {
+        $order = Order::with('orderDetails')->where('id', $id)->first();
+        // dd($order);
+        return view('backend.order.edit-order', compact('order'));
+    }
+}
+--------------->>>>
+
+
+check >>> http://127.0.0.1:8000/admin/edit-order/3
+
+
+
+
+
+
+
+
+

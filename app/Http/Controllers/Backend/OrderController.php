@@ -17,4 +17,10 @@ class OrderController extends Controller
         // return view('backend.order.all-order-list');
         return view('backend.order.all-order-list', compact('orders'));
     }
+
+    public function editOrder ($id) {
+        $order = Order::with('orderDetails')->where('id', $id)->first();
+        // dd($order);
+        return view('backend.order.edit-order', compact('order'));
+    }
 }
