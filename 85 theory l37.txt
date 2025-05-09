@@ -1,0 +1,621 @@
+Class 85 l37
+==========================
+*****Before
+
+@extends('backend.master')
+
+@section('content')
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Order Details</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Order Details</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <from action="" method="">
+              @csrf
+              <div class="row">
+                <div class="col-md-6">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            {{-- <h3 class="card-title">General</h3> --}}
+                            <h3 class="card-title">Customer Details</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="inputName">Invoice Number</label>
+                                {{-- <input type="text" id="inputName" class="form-control" value="AdminLTE"> --}}
+                                <input type="text" id="invoiceID" name="" class="form-control" value="AdminLTE">
+                            </div>
+
+                            <div class="form-group">
+                                {{-- <label for="inputDescription">Project Description</label> --}}
+                                <label for="inputDescription">Customer Name</label>
+                                <input type="text" id="" name="" class="form-control" value="Mr. X"
+                                    required>
+                            </div>
+
+                            <div class="form-group">
+                                {{-- <label for="inputDescription">Project Description</label> --}}
+                                <label for="inputDescription">Customer Phone</label>
+                                <input type="text" id="" name="" class="form-control" value="01710999"
+                                    required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputDescription">Customer Address</label>
+                                <textarea id="inputDescription" name="" class="form-control" rows="4" required>Mirpur, Dhaka.</textarea>
+                            </div>
+
+                            <div class="form-group">
+                                {{-- <label for="inputDescription">Project Description</label> --}}
+                                <label for="inputDescription">Delivery Charge</label>
+                                <input type="text" id="" name="" class="form-control" value="80"
+                                    required>
+                            </div>
+
+                            <div class="form-group">
+                                {{-- <label for="inputStatus">Status</label> --}}
+                                <label for="inputStatus">Select Courier</label>
+                                <select id="inputStatus" class="form-control custom-select">
+                                    <option disabled>Select one</option>
+                                    <option>Steadfast</option>
+                                    <option>Pathao</option>
+                                    <option>Others</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <div class="col-md-6">
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h3 class="card-title">Product Details</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                              <div class="row">
+                                <div class="col-md-12">
+                                    <img src="https://placehold.co/100x100">
+                                    1 X Test Product | Unit Price : 1000 tk| Color : Red | Size : L<br> <br>
+                                    <img src="https://placehold.co/100x100">
+                                    2 X Test Product | Unit Price : 1000 tk| Color : Red | Size : L<br> <br>
+                                    <img src="https://placehold.co/100x100">
+                                    3 X Test Product | Unit Price : 1000 tk| Color : Red | Size : L<br> <br>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        {{-- <label for="inputDescription">Project Description</label> --}}
+                                        <label for="inputDescription">Order Price</label>
+                                        <input type="text" id="" name="" class="form-control"
+                                            value="3000" required>
+                                    </div>
+                                    <input type="submit" value="Update Order" class="btn btn-success float-right">
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+
+                </div>
+            </from>
+                
+            </div>
+            {{-- <div class="row">
+                <div class="col-12">
+                    <a href="#" class="btn btn-secondary">Cancel</a>
+                    <input type="submit" value="Save Changes" class="btn btn-success float-right">
+                </div>
+            </div> --}}
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+@endsection
+
+
+{{-- No Need this *****js couse of it is use in table  --}}
+{{-- @push('script')
+    <!-- Page specific script -->
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+@endpush --}}
+
+****************After*****************
+Class-85 (Laravel-37)
+------------------------->>>
+http://127.0.0.1:8000/admin/dashboard
+http://127.0.0.1:8000/admin/all-order/list>>> Edit >>>
+
+
+edit-order.blade.php >>>Invoice Number
+{{-- <input type="text" id="invoiceID" name="" class="form-control" value="XYZ-1"> --}}
+                                <input type="text" id="invoiceID" name="" class="form-control" value="{{$order->invoiceID}}">
+
+
+7.00 min
+Courier Selection >>> edit-order.blade.php 
+*****Value Sara Database Data jave na courier service a..
+
+before>>********
+                            <div class="form-group">
+                                {{-- <label for="inputStatus">Status</label> --}}
+                                <label for="inputStatus">Select Courier</label>
+                                <select id="inputStatus" class="form-control custom-select">
+                                    <option disabled selected>Select one</option>
+                                    <option>Steadfast</option>
+                                    <option>Pathao</option>
+                                    <option>Others</option>
+                                </select>
+                            </div>
+
+*****after
+  <select id="inputStatus" class="form-control custom-select">
+                                    <option disabled selected>Select one</option>
+                                    <option value="steadfast">Steadfast</option>
+                                    <option value="pathao">Pathao</option>
+                                    <option value="others">Others</option>
+                                </select>
+------------>>>>
+
+Products Details >>>>  use loop
+<div class="col-md-12">
+                                    <img src="https://placehold.co/100x100">
+                                    1 X Test Product | Unit Price : 1000 tk| Color : Red | Size : L<br> <br>
+                                    <img src="https://placehold.co/100x100">
+                                    2 X Test Product | Unit Price : 1000 tk| Color : Red | Size : L<br> <br>
+                                    <img src="https://placehold.co/100x100">
+                                    3 X Test Product | Unit Price : 1000 tk| Color : Red | Size : L<br> <br>
+                                </div>
+
+*****after
+*****loop run hobe >>>> orderDetails a >>>>Order Details ase abar Order ar vitore
+ <h3 class="card-title">Product Details</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                              <div class="row">
+                                <div class="col-md-12">
+                                    {{-- <img src="https://placehold.co/100x100">
+                                    1 X Test Product | Unit Price : 1000 tk| Color : Red | Size : L<br> <br> --}}
+
+                                    @foreach ($order->orderDetails as $details)
+                                    <img src="{{asset('backend/images/product/'.$details->product->image)}}" height="100" width="100">
+                                    {{$details->qty}} X {{$details->product->name}} | Unit Price : {{$details->price}}| Color : {{$details->color}} | Size : {{$details->size}}<br> <br>
+                                    @endforeach
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        {{-- <label for="inputDescription">Project Description</label> --}}
+                                        <label for="inputDescription">Order Price</label>
+                                        {{-- <input type="text" id="" name="" class="form-control" value="3000" required> --}}
+                                        <input type="text" id="" name="price" class="form-control" value="{{$order->price}}" required>
+                                    </div>
+                                    <input type="submit" value="Update Order" class="btn btn-success float-right">
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+================================
+15.30 min
+*****Invoice Number Edit kotre deya jabe na 
+>>>>Use readonly attribute >>>
+<input type="text" id="invoiceID" name="invoiceID" class="form-control" value="{{$order->invoiceID}}" readonly>
+
+------------16.49 min
+Order >>>>Multiple Product order >>>Edit >>>
+ {{$details->qty}} X {{$details->product->name}} | Unit Price : {{$details->price}}| Color : {{$details->color?? 'N.A'}} | Size : {{$details->size?? 'N.A'}}<br> <br>
+
+==================>>>>>>>>>>========
+18.18 Min  >>> update
+Route::post('/admin/update-order/{id}',[OrderController::class, 'updateOrder']);
+Copy link and paste edit-order.blade.php >>>> form action = url >>>ok
+ {{-- <from action="" method=""> --}}
+                {{-- <from action="{{url('/admin/update-order/{id}')}}" method=""> --}}
+                    <from action="{{url('/admin/update-order/'.$order->id)}}" method="POST" enctype="multipart/form-data">
+@csrf
+******enctype="multipart/form-data >>> image upload hobe....
+-----------
+Order Details Edit less taka. etc >>>kore update >>>ok
+-------
+
+Now Create function >>>> OrderController.php
+ public function updateOrder (Request $request, $id){
+        $order = Order::find($id);
+
+        $order->c_name = $request->c_name;
+        $order->c_phone = $request->c_phone;
+        $order->c_address = $request->c_address;
+        $order->area = $request->area;
+        $order->courier_name = $request->courier_name;
+        $order->price = $request->price;
+
+        $order->save();
+        return redirect()->back();
+    }
+}
+
+=============
+Check >>> http://127.0.0.1:8000/admin/edit-order/6
+Edit the form >>>> name, address , less taka
+
+----------
+
+
+Courier If condition >>>> 27.34 Min
+Before******
+<option disabled selected>Select one</option>
+
+
+
+after******
+ {{-- <option disabled selected>Select one</option> --}}
+                                    @if ($order->courier_name == null)
+                                     <option disabled selected>Select One</option>
+                                     <option value="steadfast">Steadfast</option>
+                                     <option value="pathao">Pathao</option>
+                                     <option value="others">Others</option>
+                                     
+
+                                    @elseif ($order->courier_name == "steadfast")
+                                     <option value="steadfast" selected>Steadfast</option>
+                                     <option value="pathao">Pathao</option>
+                                     <option value="others">Others</option>
+
+                                    @elseif ($order->courier_name == "pathao")
+                                     <option value="pathao" selected>Pathao</option>
+                                     <option value="steadfast">Steadfast</option>
+                                     <option value="others">Others</option>
+                                    
+                                    @else 
+                                    <option value="others">Others</option>
+
+                                    @endif
+
+=====================
+**********after
+@extends('backend.master')
+
+@section('content')
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Order Details</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Order Details</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            {{-- <form action="" method=""> --}}
+                {{-- <form action="{{url('/admin/update-order/{id}')}}" method=""> --}}
+            {{-- <form action="{{url('/admin/update-order/'.$order->id)}}" method="POST" enctype="multipart/form-data"> --}}
+            <form action="{{url('/admin/update-order/'.$order->id)}}" method="POST" enctype="multipart/form-data">
+              @csrf
+              <div class="row">
+                <div class="col-md-6">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            {{-- <h3 class="card-title">General</h3> --}}
+                            <h3 class="card-title">Customer Details</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="inputName">Invoice Number</label>
+                                {{-- <input type="text" id="inputName" class="form-control" value="AdminLTE"> --}}
+                                {{-- <input type="text" id="invoiceID" name="" class="form-control" value="XYZ-1"> --}}
+                                <input type="text" id="invoiceID" name="invoiceID" class="form-control" value="{{$order->invoiceID}}" readonly>
+                            </div>
+
+                            <div class="form-group">
+                                {{-- <label for="inputDescription">Project Description</label> --}}
+                                <label for="inputDescription">Customer Name</label>
+                                {{-- <input type="text" id="" name="" class="form-control" value="Mr. X" required> --}}
+                                <input type="text" id="" name="c_name" class="form-control" value="{{$order->c_name}}" required>
+                            </div>
+
+                            <div class="form-group">
+                                {{-- <label for="inputDescription">Project Description</label> --}}
+                                <label for="inputDescription">Customer Phone</label>
+                                {{-- <input type="text" id="" name="" class="form-control" value="01710999" required> --}}
+                                <input type="text" id="" name="c_phone" class="form-control" value="{{$order->c_phone}}" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputDescription">Customer Address</label>
+                                {{-- <textarea id="inputDescription" name="" class="form-control" rows="4" required>Mirpur, Dhaka.</textarea> --}}
+                                <textarea id="inputDescription" name="address" class="form-control" rows="4" required>{{$order->address}}</textarea>
+                            </div>
+
+                            <div class="form-group">
+                                {{-- <label for="inputDescription">Project Description</label> --}}
+                                <label for="inputDescription">Delivery Charge</label>
+                                {{-- <input type="text" id="" name="" class="form-control" value="80" required> --}}
+                                <input type="text" id="area" name="area" class="form-control" value="{{$order->area}}" required>
+                            </div>
+
+                            <div class="form-group">
+                                {{-- <label for="inputStatus">Status</label> --}}
+                                <label for="inputStatus">Select Courier</label>
+                                <select id="inputStatus" name="courier_name" class="form-control custom-select">
+                                    {{-- <option disabled selected>Select one</option> --}}
+                                    @if ($order->courier_name == null)
+                                     <option disabled selected>Select One</option>
+                                     <option value="steadfast">Steadfast</option>
+                                     <option value="pathao">Pathao</option>
+                                     <option value="others">Others</option>
+
+                                    @elseif ($order->courier_name == "steadfast")
+                                     <option value="steadfast" selected>Steadfast</option>
+                                     <option value="pathao">Pathao</option>
+                                     <option value="others">Others</option>
+
+                                    @elseif ($order->courier_name == "pathao")
+                                     <option value="pathao" selected>Pathao</option>
+                                     <option value="steadfast">Steadfast</option>
+                                     <option value="others">Others</option>
+                                    
+                                    @else 
+                                    <option value="others">Others</option>
+                                    @endif
+                                    {{-- <option value="steadfast">Steadfast</option>
+                                    <option value="pathao">Pathao</option>
+                                    <option value="others">Others</option> --}}
+                                </select>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <div class="col-md-6">
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h3 class="card-title">Product Details</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                              <div class="row">
+                                <div class="col-md-12">
+                                    {{-- <img src="https://placehold.co/100x100">
+                                    1 X Test Product | Unit Price : 1000 tk| Color : Red | Size : L<br> <br> --}}
+
+                                    @foreach ($order->orderDetails as $details)
+                                    <img src="{{asset('backend/images/product/'.$details->product->image)}}" height="100" width="100">
+                                    {{$details->qty}} X {{$details->product->name}} | Unit Price : {{$details->price}}| Color : {{$details->color?? 'N.A'}} | Size : {{$details->size?? 'N.A'}}<br> <br>
+                                    @endforeach
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        {{-- <label for="inputDescription">Project Description</label> --}}
+                                        <label for="inputDescription">Order Price</label>
+                                        {{-- <input type="text" id="" name="" class="form-control" value="3000" required> --}}
+                                        <input type="text" id="" name="price" class="form-control" value="{{$order->price}}" required>
+                                    </div>
+                                    <input type="submit" value="Update Order" class="btn btn-success float-right">
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+
+                </div>
+            </form>
+                
+            </div>
+            {{-- <div class="row">
+                <div class="col-12">
+                    <a href="#" class="btn btn-secondary">Cancel</a>
+                    <input type="submit" value="Save Changes" class="btn btn-success float-right">
+                </div>
+            </div> --}}
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+@endsection
+
+
+{{-- No Need this *****js couse of it is use in table  --}}
+{{-- @push('script')
+    <!-- Page specific script -->
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+@endpush --}}
+
+
+==================================================
+35.00 Min  >>> 
+Product Status >>> confirm/Delivered/Cancel korle  Current Status Confirmed/Delivered/Cancel Show korbe.
+Route::get('/admin/update-order-status/{status}/{id}',[OrderController::class, 'updateOrderStatus']);
+
+all-order-list.blade.php 
+link  >>> /admin/update-order-status/{status}/{id}  setup
+
+                                           </td>
+                                            <td>
+                                                {{-- <span class="badge badge-success">Pending</span> --}}
+                                                <span class="badge badge-success">{{$order->status}}</span>
+                                            </td>
+                                            {{-- <td>
+                                                <a href="#" class="btn btn-warning">Pending</a>
+                                                <a href="#" class="btn btn-success">Confirm</a>
+                                                <a href="#" class="btn btn-info">Delivered</a>
+                                                <a href="#" class="btn btn-danger">Cancel</a>
+                                            </td> --}}
+                                            <td>
+                                                {{-- <a href="{{url('/admin/update-order-status/{status}/{id}')}}" class="btn btn-warning">Pending</a> --}}
+                                                <a href="{{url('/admin/update-order-status/{pending}/'.$order->id)}}" class="btn btn-warning">Pending</a>
+
+                                                {{-- <a href="#" class="btn btn-success">Confirm</a> --}}
+                                                <a href="{{url('/admin/update-order-status/{confirm}/'.$order->id)}}" class="btn btn-success">Confirm</a>
+
+                                                {{-- <a href="#" class="btn btn-info">Delivered</a> --}}
+                                                <a href="{{url('/admin/update-order-status/{delivered}/'.$order->id)}}" class="btn btn-info">Delivered</a>
+
+                                                {{-- <a href="#" class="btn btn-danger">Cancel</a> --}}
+                                                <a href="{{url('/admin/update-order-status/{cancel}/'.$order->id)}}" class="btn btn-danger">Cancel</a>
+                                            </td>
+
+----------------------------
+41.00 min
+create function OrderController.php
+
+ public function updateOrderStatus ($status, $id){
+        $order = Order::find($id);
+        $order->status = $status;
+
+        $order->save();
+        return redirect()->back();
+    }
+
+-------Courier Select na hole delivered korte parbe na..
+
+Condition >>>>.
+
+resource >>>views>>>>backend >>> includes >>> sidebar.blade.php
+
+url create korte hobe >>>>> 
+and linkup korte hobe......
+
+==================
+  <p>All Order List</p>
+                    </a>
+                  </li>
+
+                  {{-- for update --}}
+
+                  <li class="nav-item">
+                    {{-- <a href="./index.html" class="nav-link"> --}}
+                      <a href="#" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Pending Orders</p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    {{-- <a href="./index.html" class="nav-link"> --}}
+                      <a href="#" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Confirmed Orders</p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    {{-- <a href="./index.html" class="nav-link"> --}}
+                      <a href="#" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Delivered Orders</p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    {{-- <a href="./index.html" class="nav-link"> --}}
+                      <a href="#" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Cancelled Orders</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+                      
+                           
+
+

@@ -519,11 +519,24 @@
                                                 {{-- <span class="badge badge-success">Pending</span> --}}
                                                 <span class="badge badge-success">{{$order->status}}</span>
                                             </td>
-                                            <td>
+                                            {{-- <td>
                                                 <a href="#" class="btn btn-warning">Pending</a>
                                                 <a href="#" class="btn btn-success">Confirm</a>
                                                 <a href="#" class="btn btn-info">Delivered</a>
                                                 <a href="#" class="btn btn-danger">Cancel</a>
+                                            </td> --}}
+                                            <td>
+                                                {{-- <a href="{{url('/admin/update-order-status/{status}/{id}')}}" class="btn btn-warning">Pending</a> --}}
+                                                <a href="{{url('/admin/update-order-status/{pending}/'.$order->id)}}" class="btn btn-warning">Pending</a>
+
+                                                {{-- <a href="#" class="btn btn-success">Confirm</a> --}}
+                                                <a href="{{url('/admin/update-order-status/{confirm}/'.$order->id)}}" class="btn btn-success">Confirm</a>
+
+                                                {{-- <a href="#" class="btn btn-info">Delivered</a> --}}
+                                                <a href="{{url('/admin/update-order-status/{delivered}/'.$order->id)}}" class="btn btn-info">Delivered</a>
+
+                                                {{-- <a href="#" class="btn btn-danger">Cancel</a> --}}
+                                                <a href="{{url('/admin/update-order-status/{cancel}/'.$order->id)}}" class="btn btn-danger">Cancel</a>
                                             </td>
                                             <td>
                                                 {{-- <a href="#" class="btn btn-primary">Edit</a> --}}

@@ -158,6 +158,14 @@
                     {{-- <a href="./index.html" class="nav-link"> --}}
                       <a href="#" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
+                      <p>Confirmed Orders</p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    {{-- <a href="./index.html" class="nav-link"> --}}
+                      <a href="#" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
                       <p>Delivered Orders</p>
                     </a>
                   </li>
