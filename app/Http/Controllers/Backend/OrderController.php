@@ -45,4 +45,13 @@ class OrderController extends Controller
         $order->save();
         return redirect()->back();
     }
+
+    // public function statusWiseOrder ($status){
+    //     return view('backend.order.status-wise-order-list');
+    // }
+    public function statusWiseOrder ($status){
+        // $orders = Order::where('status', $status)->get();
+        $orders = Order::where('status', $status)->with ('orderDetails')->get();
+        return view('backend.order.status-wise-order-list', compact('orders'));
+    }
 }

@@ -9,7 +9,7 @@ https://laravel.com/docs/10.x/installation
 https://laravel.com/docs/10.x/installation?fbclid=IwZXh0bgNhZW0CMTAAAR1tj9TpvvbEaqCx3dLaHzuV-zjhaZ2EayM43UsOiwkaifJMF76dTqDz31A_aem_HoEw7rfIsc1RNysc6VGFog
 -----------------------------------------------
 1. E-commerce
-2. 
+2. Others
 
 ========
 laravel 10 by default -DB MySQL

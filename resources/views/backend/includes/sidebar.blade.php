@@ -148,7 +148,9 @@
 
                   <li class="nav-item">
                     {{-- <a href="./index.html" class="nav-link"> --}}
-                      <a href="#" class="nav-link">
+                    {{-- <a href="#" class="nav-link"> --}}
+                    {{-- <a href="{{url('/admin/status-wise-order/{status}')}}" class="nav-link"> --}}
+                    <a href="{{url('/admin/status-wise-order/pending')}}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Pending Orders</p>
                     </a>
@@ -156,7 +158,8 @@
 
                   <li class="nav-item">
                     {{-- <a href="./index.html" class="nav-link"> --}}
-                      <a href="#" class="nav-link">
+                      {{-- <a href="#" class="nav-link"> --}}
+                        <a href="{{url('/admin/status-wise-order/confirmed')}}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Confirmed Orders</p>
                     </a>
@@ -164,7 +167,8 @@
 
                   <li class="nav-item">
                     {{-- <a href="./index.html" class="nav-link"> --}}
-                      <a href="#" class="nav-link">
+                      {{-- <a href="#" class="nav-link"> --}}
+                        <a href="{{url('/admin/status-wise-order/delivered')}}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Delivered Orders</p>
                     </a>
@@ -172,7 +176,8 @@
 
                   <li class="nav-item">
                     {{-- <a href="./index.html" class="nav-link"> --}}
-                      <a href="#" class="nav-link">
+                      {{-- <a href="#" class="nav-link"> --}}
+                        <a href="{{url('/admin/status-wise-order/cancelled')}}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Cancelled Orders</p>
                     </a>
@@ -180,6 +185,28 @@
                 </ul>
               </li>
 
+              {{-- Site Setting --}}
+
+               <li class="nav-item menu-open">
+                <a href="#" class="nav-link active">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>
+                    Settings
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    {{-- <a href="./index.html" class="nav-link"> --}}
+                      {{-- <a href="{{url('/admin/logout')}}" class="nav-link"> --}}
+                        <a href="{{url('/admin/general-setting')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      {{-- <p>Edit/Update/General Settings</p> --}}
+                      <p>General Settings</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
 
               {{-- for logout --}}
               <li class="nav-item menu-open">

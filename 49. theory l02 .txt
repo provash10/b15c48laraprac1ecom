@@ -11,7 +11,7 @@ vs code >>> code .
 
 resources >>> views >>> welcome.blade.php >>> Laravel Home page >>>
 Change it >>> this is a Home page
-******write new html code...
+******write new html code... ok
 -----------------------------------------
 MVC Structure / Model / pattern
 MVC = Model View Controller
