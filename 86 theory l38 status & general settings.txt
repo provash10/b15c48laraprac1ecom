@@ -64,7 +64,7 @@ url setup >>> sidebar.blade.php
                     {{-- <a href="./index.html" class="nav-link"> --}}
                     {{-- <a href="#" class="nav-link"> --}}
                     {{-- <a href="{{url('/admin/status-wise-order/{status}')}}" class="nav-link"> --}}
-                    <a href="{{url('/admin/status-wise-order/{pending}')}}" class="nav-link">
+                    <a href="{{url('/admin/status-wise-order/pending')}}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Pending Orders</p>
                     </a>
