@@ -205,6 +205,18 @@
                       <p>General Settings</p>
                     </a>
                   </li>
+
+                  {{-- copy General Settings code li for Top Banner --}}
+                  <li class="nav-item">
+                    {{-- <a href="./index.html" class="nav-link"> --}}
+                      {{-- <a href="{{url('/admin/logout')}}" class="nav-link"> --}}
+                        <a href="{{url('/admin/top-banners')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      {{-- <p>Edit/Update/General Settings</p> --}}
+                      <p>Top Banners</p>
+                    </a>
+                  </li>
+
                 </ul>
               </li>
 

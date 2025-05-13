@@ -142,3 +142,10 @@ Route::get('/admin/status-wise-order/{status}',[OrderController::class, 'statusW
 // Settings
 Route::get('/admin/general-setting',[SettingController::class, 'showSettings']);
 Route::post('/admin/general-setting/update',[SettingController::class, 'updateSettings']);
+
+// Settings top banners
+Route::get('/admin/top-banners',[SettingController::class, 'showBanners']);
+Route::get('/admin/top-banner-edit/{id}',[SettingController::class, 'editBanner']);
+
+// for 3 or more banners use id
+Route::post('/admin/top-banners/update/{id}',[SettingController::class, 'updateBanners']);

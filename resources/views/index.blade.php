@@ -44,6 +44,7 @@
 					<div class="home__slider-item-outer">
 						{{-- <img src="{{asset('/assets/images/slider.jpg')}}" alt="image" class="home__slider-item-image"> --}}
 						<img src="{{asset('backend/images/setting/'.$siteSettings->banner)}}" alt="image" class="home__slider-item-image">
+						
 					</div>
 				</div>
 			</div>
@@ -86,7 +87,8 @@
 				<div class="col-lg-4 col-md-6 col-sm-6">
 					<div class="banner-item-outer">
 						{{-- <img src="{{asset('/assets/images/banner.jpeg')}}" alt="banner image" /> --}}
-						<img src="{{asset('backend/images/banners/'.$banner->banner_image)}}" alt="banner image" />
+						{{-- <img src="{{asset('backend/images/banners/'.$banner->banner_image)}}" alt="banner image" /> --}}
+						<img src="{{asset('backend/images/setting/'.$banner->banner_image)}}" alt="image" class="home__slider-item-image">
 					</div>
 				</div>
 				@endforeach

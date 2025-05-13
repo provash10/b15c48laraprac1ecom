@@ -1,0 +1,219 @@
+Class: 87 (Laravel-39)
+=========================
+Settings >>> General Settings
+-----------------------------
+
+SettingController.php
+public function updateSettings(Request $request){
+        $generalSettings = SiteSetting::first();
+
+        $generalSettings->phone = $request->phone;
+        $generalSettings->phone = $request->email;
+        $generalSettings->phone = $request->address;
+        $generalSettings->phone = $request->facebook;
+        $generalSettings->phone = $request->twitter;
+        $generalSettings->phone = $request->instagram;
+        $generalSettings->phone = $request->youtube;
+    }
+---------
+
+******phpmyadmin >>> site_settings
+
+******general-settings.blade.php 
+>>>> logo 
+
+******Need image update code (copy from(ProductController.php) previous code and edit)
+****(ProductController.php)
+if (isset($request->image)) {
+            // main/single image delete from ProductController (CategoryController categoryDelete copy and paste)
+            if ($product->image && file_exists('backend/images/product/' . $product->image)) {
+                unlink('backend/images/product/' . $product->image);
+            }
+            // single image upload
+            $imageName = rand() . '-product-' . '.' . $request->image->extension();
+            $request->image->move('backend/images/product', $imageName);
+
+            $product->image = $imageName;
+        }
+
+------------------For SettingsController.php
+public function updateSettings(Request $request){
+        $generalSettings = SiteSetting::first();
+
+        $generalSettings->phone = $request->phone;
+        $generalSettings->email = $request->email;
+        $generalSettings->address = $request->address;
+        $generalSettings->facebook = $request->facebook;
+        $generalSettings->twitter = $request->twitter;
+        $generalSettings->instagram = $request->instagram;
+        $generalSettings->youtube = $request->youtube;
+
+        // for logo
+    if(isset($request->logo)){
+            // main/single image delete from ProductController (CategoryController categoryDelete copy and paste)
+            if ($generalSettings->logo && file_exists('backend/images/setting/'.$generalSettings->logo)) {
+                unlink('backend/images/setting/'.$generalSettings->logo);
+            }
+            // single image upload
+            $imageName = rand() . '-logo-' . '.' . $request->logo->extension();
+            $request->logo->move('backend/images/setting', $imageName);
+
+            $generalSettings->logo = $imageName;
+        }
+
+        // for banner 
+        if (isset($request->banner)){
+            // main/single image delete from ProductController (CategoryController categoryDelete copy and paste)
+            if ($generalSettings->banner && file_exists('backend/images/setting/'.$generalSettings->banner)){
+                unlink('backend/images/setting/'.$generalSettings->banner);
+            }
+            // single image upload
+            $imageName = rand() . '-logo-' . '.' . $request->banner->extension();
+            $request->banner->move('backend/images/setting', $imageName);
+
+            $generalSettings->banner = $imageName;
+
+            $generalSettings->save();
+            return redirect()->back();
+        }
+
+-------------->>>>> http://127.0.0.1:8000/admin/general-setting 
+15.00 Min
+Check it >>>>>>>>for update... ok
+
+****************************************************
+18.00 Min 
+
+
+
+http://127.0.0.1:8000/admin/top-banners
+
+Sider For Banner, privacy policy, return process>>>>
+
+Web.php >>> Settings
+// Settings top banners
+Route::get('/admin/top-banners',[SettingController::class, 'showBanners']);
+Route::post('/admin/top-banners/update',[SettingController::class, 'updateBanners']);
+
+resource>>>views>>>backend >>>includes >>> sidebar.blade.php  >>>
+<li class="nav-item">
+                    {{-- <a href="./index.html" class="nav-link"> --}}
+                      {{-- <a href="{{url('/admin/logout')}}" class="nav-link"> --}}
+                        <a href="{{url('/admin/general-setting')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      {{-- <p>Edit/Update/General Settings</p> --}}
+                      <p>General Settings</p>
+                    </a>
+                  </li>
+
+{{-- copy General Settings code li for Top Banner --}}
+                  <li class="nav-item">
+                    {{-- <a href="./index.html" class="nav-link"> --}}
+                      {{-- <a href="{{url('/admin/logout')}}" class="nav-link"> --}}
+                        <a href="{{url('/admin/top-banners')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      {{-- <p>Edit/Update/General Settings</p> --}}
+                      <p>Top Banners</p>
+                    </a>
+                  </li>
+--------------------
+Web.php >>> Settings
+// Settings top banners
+Route::get('/admin/top-banners',[SettingController::class, 'showBanners']);
+Route::post('/admin/top-banners/update',[SettingController::class, 'updateBanners']);
+
+http://127.0.0.1:8000/admin/top-banners >>> checkc>>> and create all function setup....
+
+Crete backend>>>setting>>>> banners.blade.php 
+****need a small table >>> copy from category >>>list.blade.php and paste and edit in>>> banners.blade.php 
+
+****http://localhost/phpmyadmin/index.php?route=/sql&pos=0&db=b15c48laraprac1ecom&table=banners 
+>>>banners (banner multiple so create list table) 
+
+SettingController.php
+// Top Banners
+        public function showBanners(){
+            $banners = Banner::get();
+            return view('backend.settings.banners', compact('banners'));
+        }
+
+>>>banners.blade.php
+ {{-- /admin/top-banner-edit/{id} --}}
+                    {{-- <a href="{{url('/admin/category/edit/{id}')}}" class="btn btn-primary">Edit</a> --}}
+                    <a href="{{url('/admin/top-banner-edit/'.$banner->id)}}" class="btn btn-primary">Edit</a>
+
+================>>>>>check http://127.0.0.1:8000/admin/top-banners >>>ok
+
+27.00 Min 
+Banner Edit 
+>>> http://127.0.0.1:8000/admin/top-banners
+
+Route::get('/admin/top-banner-edit/{id}',[SettingController::class, 'editBanner']);
+
+function SettingController.php 
+public function editBanner ($id){
+            $banner = Banner::find($id);
+            return view('backend.settings.banner-edit', compact('banner'));
+        }
+
+Create Page >>> settings >>> banner-edit.blade.php 
+***** need form  >>>> copy from general settings.blade.php
+
+
+
+// for 3 or more banners use id
+Route::post('/admin/top-banners/update/{id}',[SettingController::class, 'updateBanners']);
+
+
+******banner-edit.blade.php 
+  <form action="{{url('/admin/top-banners/update/'.$banner->id)}}" method="POST" enctype="multipart/form-data">
+              @csrf
+
+--->>>ok
+http://127.0.0.1:8000/admin/top-banners >>> edit 
+http://127.0.0.1:8000/admin/top-banner-edit/1 >>ok
+
+SettingController.php
+public function updateBanners (Request $request,$id){
+            $banner = Banner::find($id);
+
+            // dd($banner);
+            if (isset($request->banner_image)){
+                // dd("condition");
+            // main/single image delete from ProductController (CategoryController categoryDelete copy and paste)
+            if ($banner->banner_image && file_exists('backend/images/setting/'.$banner->banner_image)){
+                unlink('backend/images/setting/'.$banner->banner_image);
+            }
+            // single image upload
+            $bannerName = rand() . '-banner-' . '.' . $request->banner_image->extension();
+            $request->banner_image->move('backend/images/setting', $bannerName);
+
+            $banner->banner_image = $bannerName;
+
+            $banner->save();
+            // return redirect()->back();
+            return redirect('admin/top-banners');
+        }
+-----------
+45.00 min 
+Frontpage  a image passe na...
+
+****use Provider
+resource>>> index.blade.php
+>>>> 
+@foreach ($topBanners as $banner)
+<div class="col-lg-4 col-md-6 col-sm-6">
+ <div class="banner-item-outer">
+	{{-- <img src="{{asset('/assets/images/banner.jpeg')}}" alt="banner image" /> --}}
+	{{-- <img src="{{asset('backend/images/banners/'.$banner->banner_image)}}" alt="banner image" /> --}}
+	<img src="{{asset('backend/images/setting/'.$banner->banner_image)}}" alt="image" class="home__slider-item-image">
+					</div>
+ </div>
+</div>
+@endforeach
+>>> ok
+
+----->>>> problem again >>> Property [banner_image] does not exist on this collection instance.
+
+all ok 
+<
