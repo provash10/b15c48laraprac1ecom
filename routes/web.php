@@ -149,3 +149,7 @@ Route::get('/admin/top-banner-edit/{id}',[SettingController::class, 'editBanner'
 
 // for 3 or more banners use id
 Route::post('/admin/top-banners/update/{id}',[SettingController::class, 'updateBanners']);
+
+// Policies & Process
+Route::get('/admin/policies-process',[SettingController::class, 'showPolicyProcess']);
+Route::post('/admin/policies-process/update',[SettingController::class, 'updatePolicyProcess']);

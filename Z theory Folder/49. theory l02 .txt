@@ -67,7 +67,7 @@ Route::get('/',[HomeController::class,'index']);
 
 [] third bracket use korte hobe
 
-git bese >>> php artisan optimize
+git bash >>> php artisan optimize
 
 ***this command for keep update data
 
@@ -98,8 +98,8 @@ contact us ar jonno akta page korte hobe views theke.>>>>
 
 
 ==================git hub====================
-git bese >>> command
-gig status
+git bash >>> command
+git status
 git add 
 git commit -m"Laravel Life Cycle"
 git push

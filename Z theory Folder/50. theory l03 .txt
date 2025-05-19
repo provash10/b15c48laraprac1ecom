@@ -1,0 +1,73 @@
+Class 50 (Laravel-3)
+-----------------------
+Note:
+
+*****Now (Basic Structure)
+
+New Cotroller make (like -FrontendController)
+
+FrontendController
+Create Route   
+Create Function
+Create index.blade.php file...............
+
+Route    >>>url + controller (function) + hit function(index)
+         >>> url setup blade page   + function create (blade file) + blade file coding
+----------------------------------------------------------------------------------------
+
+###Mastering 
+
+*****copy #assets of the design zip file and paste in the laravel project
+>>> public folder (b15c48Lara-ecom public folder)
+
+*****Note: All assets file public folder a rakte hobe.
+keep mouse in index + ctrl click >>> HomeController.php
+
+Copy Assets >>> css, fonts, images, js, plugins folder and paste 
+laravel project public folder as assets folder.
+------------------------------------------
+*****Delete
+
+Delete >>> HomeController.php
+Create a controller from git bese 
+$ php artisan make:controller FrontendController
+
+Delete Welcome and contact blade file...
+------------>>>>
+
+*****Now (Basic Structure)
+New Cotroller make (like -FrontendController)
+
+FrontendController
+Create Route   
+Create Function
+Create index.blade.php file...............
+
+Route    >>>url + controller (function) + hit function(index)
+         >>> url setup blade page   + function create (blade file) + blade file coding
+----------------------------------------------------------------------------------------
+
+web.php 
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+Route::get('/',[FrontendController::class, 'index']);
+/*
+---------From Laravel Pack ------
+<?php
+
+use App\Http\Controllers\FrontendController;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/',[FrontendController])  
+
+resources >>. Views >> index.blade.php
+
+Route Change hole Command this git bash>>>> php artisan optimize
+
+*****use the design folder code to practice....
+copy the index.html code and paste it project resources >>> views >>> index.blade.php file.
+>>> ok
+
+------------------------------------------------------------------

@@ -217,6 +217,17 @@
                     </a>
                   </li>
 
+                  {{-- Policies 6 table  copy from top banners <li>--}}
+                  <li class="nav-item">
+                    {{-- <a href="./index.html" class="nav-link"> --}}
+                      {{-- <a href="{{url('/admin/logout')}}" class="nav-link"> --}}
+                        <a href="{{url('/admin/policies-process')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      {{-- <p>Edit/Update/General Settings</p> --}}
+                      <p>Policies & Process</p>
+                    </a>
+                  </li>
+
                 </ul>
               </li>
 

@@ -1,0 +1,88 @@
+Class-88 (Laravel-40)
+=====================
+
+Third Party API Integration like Steadfast.......
+
+https://www.postman.com/
+Create account 
+>>>>provash20cb@gmail.com 
+>>>>user >>>provash
+>>>>password >>>ok
+Download >>>https://www.postman.com/downloads/
+Download and install >>>ok
+
+And login from app....ok
+============================================
+10.00 Min
+http://127.0.0.1:8000/admin/dashboard
+>>>
+Settings >>> General Settings >>>
+
+***** Policy Pages Edit/Update Option****
+Privacy Policy, Terms & Conditions, Refund Policy, Payment Policy,
+Return Process, About Us >>>> keep one table for Edit/Update
+-----------------
+Check phpmyadmin>>>project>>>policies 
+
+vs >>> resource>>>views>>>backend>>>include>>>sidebar.blade.php
+
+copy top banners <li> and paste under it and edit name >>> Policies & Process
+
+// Policies & Process
+Route::get('/admin/policies-process',[SettingController::class, 'showPolicyProcess']);
+Route::post('/admin/policies-process/update',[SettingController::class, 'updatePolicyProcess']);
+
+
+blade page >>> 
+vs >>> resource>>>views>>>backend>>> settings 
+>>>policy-process.blade.php
+
+use summer note .....copy from product>>>create.blade.php copy and paste 
+vs >>> resource>>>views>>>backend>>> settings 
+>>>policy-process.blade.php and edit....ok
+
+check>>> http://127.0.0.1:8000/admin/policies-process ok
+*****js code copy paste .....ok
+ <!-- Page specific script summernote -->
+    <script>
+        $(function() {
+            // Summernote
+            $('#summernote2').summernote()
+
+            // CodeMirror
+            CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+                mode: "htmlmixed",
+                theme: "monokai"
+            });
+        })
+    </script>
+
+*****Setup Value .... {{$policy->privacy_policy}}
+
+----------------
+
+
+
+
+35.00 Min 
+Update Policy Function >>
+ // Policies & Process
+    public function showPolicyProcess(){
+        $policy =Policy::first();
+        // dd($policy);
+
+        return view('backend.settings.policy-process',compact('policy'));
+    }
+
+    public function updatePolicyProcess(Request $request){
+        $policy =Policy::first();
+        // dd($policy);
+        $policy->privacy_policy = $request->privacy_policy;
+        $policy->terms_conditions = $request->terms_conditions;
+        $policy->refund_policy = $request->refund_policy ;
+        $policy->payment_policy = $request->payment_policy;
+        $policy->return_process = $request->return_process;
+
+        $policy->save();
+        return redirect()->back();
+    }
