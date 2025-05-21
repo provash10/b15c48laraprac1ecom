@@ -86,7 +86,137 @@ http://127.0.0.1:8000/admin/all-order/list >>> All Order List
 Amon akta button e click korbo jate steadfast ar API call /url hit hobe and all order list data 
 automatically steadfast a chole jabe...
 
-*****Deliverd Button a click korle seti Steadfast API call kore chole jabe...
+*****Deliverd Button a click korle seti Steadfast API call kore Entry hobe/chole jabe...
+
+29.50 Min ................>>>>
+
+VS Code >>
+web.php
+// Order Management
+Route::get('/admin/update-order-status/{status}/{id}',[OrderController::class, 'updateOrderStatus']);
+***** courier company Select ase kina dekte hobe...
+phpmyadmin >>>>orders 
+courirer_name
+
+Function Setup for API Integration
+public function updateOrderStatus ($status, $id){
+        $order = Order::find($id);
+        $order->status = $status;
+
+        // for Steadfast API 
+        if($status == "delivered"){
+            if($order->courier_name == "steadfast"){
+                // return "Sent To Courier";
+            }
+            else{
+                return "Select Courier";
+            }
+        }
+
+        $order->save();
+        return redirect()->back();
+    }
+-------------------------->>>>>
+Call by url-----
+For POST******Base Url + Path === https://portal.packzy.com/api/v1/create_order
+
+****Need 
+1. url 
+2. Api key
+3. secret key
+4. content Type
+http://127.0.0.1:8000/admin/update-order-status/delivered/3
+check dd($order);
+
+public function updateOrderStatus ($status, $id){
+        $order = Order::find($id);
+        // dd($order);
+        $order->status = $status;
+
+        // for Steadfast API 
+        if($status == "delivered"){
+            if($order->courier_name == "steadfast"){
+                // return "Sent To Courier";
+                //API EndPoint
+                $endPoint = "https://portal.packzy.com/api/v1/create_order";
+
+                //Auth Parameters
+                $apiKey = "sl4xb4fhx4xefuodes3gjoh6uuktl3vl";
+                $secretKey ="lwp49erccevuglcxzjlfb0hk";
+                $contentType = "application/json";
+
+                //Body Parameters
+                $invoiceID = $order->invoiceID;
+                $customerName = $order-> c_name;
+                $customerPhone = $order-> c_phone;
+                $customerAddress = $order-> address;
+                $orderPrice = $order->price;
+            }
+            else{
+                return "Select Courier";
+            }
+        }
+
+        $order->save();
+        return redirect()->back();
+---------------->>>>46.00 Min
+Now Call API --------------
+
+public function updateOrderStatus ($status, $id){
+        $order = Order::find($id);
+        // dd($order);
+        $order->status = $status;
+
+        // for Steadfast API 
+        if($status == "delivered"){
+            if($order->courier_name == "steadfast"){
+                // return "Sent To Courier";
+                //API EndPoint
+                $endPoint = "https://portal.packzy.com/api/v1/create_order";
+
+                //Auth Parameters
+                $apiKey = "sl4xb4fhx4xefuodes3gjoh6uuktl3vl";
+                $secretKey ="lwp49erccevuglcxzjlfb0hk";
+                $contentType = "application/json";
+
+                //Body Parameters
+                $invoiceID = $order->invoiceID;
+                $customerName = $order-> c_name;
+                $customerPhone = $order-> c_phone;
+                $customerAddress = $order-> address;
+                $orderPrice = $order->price;
+
+                // The Header Array
+                $header = [
+                    'Api-Key' => $apiKey,
+                    'Secret-Key' => $secretKey,
+                    'Content-Type' => $contentType,
+                ];
+
+                //The Payload
+                $payload = [
+                    'invoice' => $invoiceID,
+                    'recipient_name' => $customerName,
+                    'recipient_phone' => $customerPhone,
+                    'recipient_address' => $customerAddress,
+                    'cod_amount' => $orderPrice,
+                ];
+                    
+                //For Call API
+                $response = Http::withHeaders($header)->post($endPoint, $payload);
+                // dd($response);
+
+                $responseData = $response->json();
+                // dd($responseData);
 
 
+            }
+            else{
+                return "Select Courier";
+            }
+        }
 
+        $order->save();
+        return redirect()->back();
+    }
+=================================================okkkkk
