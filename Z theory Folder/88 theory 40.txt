@@ -86,3 +86,6 @@ Update Policy Function >>
         $policy->save();
         return redirect()->back();
     }
+
+
+Welcome to ecomart.com, where creativity meets convenience in the world of e-commerce. We are passionate about helping businesses and individuals showcase their products in the best light, quite literally! Our journey began with a simple yet powerful idea: to combine top-tier e-commerce photography with a seamless online shopping experience.

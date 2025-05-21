@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class OrderController extends Controller
 {
@@ -40,7 +41,57 @@ class OrderController extends Controller
 
     public function updateOrderStatus ($status, $id){
         $order = Order::find($id);
+        // dd($order);
         $order->status = $status;
+
+        // for Steadfast API 
+        if($status == "delivered"){
+            if($order->courier_name == "steadfast"){
+                // return "Sent To Courier";
+                //API EndPoint
+                $endPoint = "https://portal.packzy.com/api/v1/create_order";
+
+                //Auth Parameters
+                $apiKey = "sl4xb4fhx4xefuodes3gjoh6uuktl3vl";
+                $secretKey ="lwp49erccevuglcxzjlfb0hk";
+                $contentType = "application/json";
+
+                //Body Parameters
+                $invoiceID = $order->invoiceID;
+                $customerName = $order-> c_name;
+                $customerPhone = $order-> c_phone;
+                $customerAddress = $order-> address;
+                $orderPrice = $order->price;
+
+                // The Header Array
+                $header = [
+                    'Api-Key' => $apiKey,
+                    'Secret-Key' => $secretKey,
+                    'Content-Type' => $contentType,
+                ];
+
+                //The Payload
+                $payload = [
+                    'invoice' => $invoiceID,
+                    'recipient_name' => $customerName,
+                    'recipient_phone' => $customerPhone,
+                    'recipient_address' => $customerAddress,
+                    'cod_amount' => $orderPrice,
+                ];
+                    
+                //For Call API
+                $response = Http::withHeaders($header)->post($endPoint, $payload);
+                // dd($response);
+
+                $responseData = $response->json();
+                // dd($responseData);
+
+
+            }
+            else{
+                return "Select Courier";
+            }
+        }
 
         $order->save();
         return redirect()->back();
@@ -49,6 +100,7 @@ class OrderController extends Controller
     // public function statusWiseOrder ($status){
     //     return view('backend.order.status-wise-order-list');
     // }
+
     public function statusWiseOrder ($status){
         // $orders = Order::where('status', $status)->get();
         $orders = Order::where('status', $status)->with ('orderDetails')->get();

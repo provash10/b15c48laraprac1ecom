@@ -1,0 +1,92 @@
+Class-89 (Laravel-41) - Courier Integration
+============================================
+Steadfast Courier Service
+
+Login Steadfast Merchant Account  >>> Prov565@cb
+
+Check >>> Consignments >>> All Parcel >>> ok
+
+Documentation >>> More >>> API 
+Create API key and Secret Key >>>ok
+
+****View API Documentation .....
+
+Need 2. Placing Order
+
+*****Work API before postman.com checking api*****
+
+postman >>> collection >>> new collection >>>blank collection >>>>
+create >>> name >>> Steadfast1_Collection
+
+*****Collection ar vitore Request create korbo....
+*****Akek ta API akek ta Request.....
+----------------*************
+API Documentation >>> Base Url: https://portal.packzy.com/api/v1  
+
+Path: /create_order
+
+        Method: Post
+---------------------*********
+
+Collection >> 3 dot >>> add request >>> name >>> api matching name >>>> Placing an order
+>>> Method-->GET/POST**** >>> url >>> https://portal.packzy.com/api/v1/create_order
+
+For POST******Base Url + Path === https://portal.packzy.com/api/v1/create_order  >>>
+Send >>>>>>ok
+
+Unathorized Access >>>
+*****Authentication parameters are required to be added at the *****header part of each request.
+****Headers>>>>
+Api-Key    - sl4xb4fhx4xefuodes3gjoh6uuktl3vl
+Secret-Key - lwp49erccevuglcxzjlfb0hk
+Content-Type - application/json
+
+Now Send >>> ok
+
+{
+    "status": 400,
+    "errors": {
+        "invoice": [
+            "The invoice field is required."
+        ],
+        "recipient_name": [
+            "The recipient name field is required."
+        ],
+        "recipient_phone": [
+            "The recipient phone field is required."
+        ],
+        "cod_amount": [
+            "The cod amount field is required."
+        ]
+    }
+}
+
+----------------->>>code  ok ..............
+17.00 min 
+
+Body of Postman collection >>> request....
+Body >> Raw>> JSON   >>> (3 part)
+
+{
+    "invoice":"XYZ-121",
+    "recipient_name": "Kotha",
+    "recipient_phone": "01610102030",
+    "recipient_address": "Mirpur-02,Dhaka",
+    "cod_amount": 1550.50
+
+}
+
+-------------- Send Ok for hit.....ok 
+*****Manually OK .....................
+
+Now Code System .........>>>> 23.42 Min
+http://127.0.0.1:8000/admin/dashboard
+http://127.0.0.1:8000/admin/all-order/list >>> All Order List
+
+Amon akta button e click korbo jate steadfast ar API call /url hit hobe and all order list data 
+automatically steadfast a chole jabe...
+
+*****Deliverd Button a click korle seti Steadfast API call kore chole jabe...
+
+
+
